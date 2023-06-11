@@ -2,12 +2,14 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    "cypress/globals": true,
   },
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:cypress/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -17,8 +19,17 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["@typescript-eslint", "react"],
-  rules: { "react/jsx-uses-react": "error", "react/jsx-uses-vars": "error" },
+  plugins: ["@typescript-eslint", "react", "cypress"],
+  rules: {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
+    "cypress/no-async-tests": "error",
+    "cypress/no-pause": "error",
+  },
   settings: {
     react: {
       createClass: "createReactClass", // Regex for Component Factory to use,
