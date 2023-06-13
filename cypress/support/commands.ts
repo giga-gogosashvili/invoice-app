@@ -1,4 +1,9 @@
-/// <reference types="cypress" />
+import "@testing-library/cypress/add-commands";
+
+Cypress.Commands.add("configureCypressTestingLibrary", (config) => {
+  cy.configureCypressTestingLibrary(config);
+});
+/// <reference types="cypress" />;
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite

@@ -15,7 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["cypress"]
+    "types": ["cypress", "@testing-library/cypress", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "support/*": ["cypress/support/*"],
+      "fixtures/*": ["cypress/fixtures/*"]
+    }
   },
   "include": ["src"]
 }
