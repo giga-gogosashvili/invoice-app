@@ -1,17 +1,36 @@
-import { Box, List, ListItem, ListItemText, ListItemIcon } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FileOpenIcon from "@mui/icons-material/FileOpen";
-import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import CircleIcon from "@mui/icons-material/Circle";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import InvoiceItem from "./InvoiceItem";
 
-type InvoiceResponse = {
+export type InvoiceResponse = {
   id: string;
   createdAt: string;
+  paymentDue: string;
+  description: string;
+  paymentTerms: number;
+  clientName: string;
+  clientEmail: string;
+  status: string;
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  items: [
+    {
+      name: string;
+      quantity: number;
+      price: number;
+      total: number;
+    }
+  ];
+  total: number;
 };
 const abc: InvoiceResponse[] = [
   {
@@ -73,12 +92,12 @@ const abc: InvoiceResponse[] = [
         price: 156.0,
         total: 156.0,
       },
-      {
-        name: "Email Design",
-        quantity: 2,
-        price: 200.0,
-        total: 400.0,
-      },
+      // {
+      //   name: "Email Design",
+      //   quantity: 2,
+      //   price: 200.0,
+      //   total: 400.0,
+      // },
     ],
     total: 556.0,
   },
@@ -116,7 +135,7 @@ const abc: InvoiceResponse[] = [
 ];
 //
 
-const getStatusColor = (
+export const getStatusColor = (
   status: string
 ):
   | "success"
@@ -145,51 +164,12 @@ export default function Invoices() {
     //zamiast google static content (JSON), data.json{} wykorzystac w setInvoices
     fetch("www.google.com").then((data) => setInvoices(abc));
   });
+
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        width: 1200,
-        bgcolor: "#F8F8FB",
-      }}
-    >
+    <div>
       <h1>Invoices</h1>
       <p>There are {invoices.length} total invoices</p>
-
-      <List>
-        {invoices.map((invoice, index) => (
-          <ListItem sx={{ "& > :not(style)": { m: 0.5 } }} key={index}>
-            <ListItemText primary={invoice.id} />
-            <ListItemText primary="Due 19 Aug 2021" />
-            <ListItemText primary="Jensen Huang" />
-            <ListItemText primary="£1,800.90" />
-            <Stack direction="row" spacing={2}>
-              <Button
-                variant="contained"
-                color={getStatusColor(invoice.status)}
-                sx={{ mr: 5 }}
-                startIcon={<CircleIcon />}
-              >
-                Paid
-              </Button>
-            </Stack>
-
-            <Link to={`/${invoice.id}`} cy-data="open">
-              <Fab color="primary" aria-label="edit">
-                <FileOpenIcon />
-              </Fab>
-            </Link>
-            <Link to={`/${invoice.id}/edit`} cy-data="edit">
-              <Fab color="primary" aria-label="edit">
-                <EditIcon />
-              </Fab>
-            </Link>
-            <Fab color="primary" aria-label="edit">
-              <DeleteIcon />
-            </Fab>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+      <InvoiceItem test={abc} func={getStatusColor} />
+    </div>
   );
 }
