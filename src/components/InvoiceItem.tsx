@@ -8,11 +8,20 @@ import Stack from "@mui/material/Stack";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link } from "react-router-dom";
 import { InvoiceResponse } from "./Invoices";
+import Chip from "@mui/material/Chip";
 
 interface Props {
   data: InvoiceResponse[];
   func: any;
 }
+
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+const formatingNumbers = (number: number) => {
+  return number.toLocaleString(undefined, { minimumFractionDigits: 2 });
+};
+
 const InvoiceItem = ({ data, func }: Props) => {
   return (
     <div>
@@ -29,24 +38,21 @@ const InvoiceItem = ({ data, func }: Props) => {
               <ListItemText primary={invoice.id} />
               <ListItemText primary={invoice.paymentDue} />
               <ListItemText primary={invoice.clientName} />
-              <ListItemText primary={`£${invoice.total}`} />
+              <ListItemText primary={`£${formatingNumbers(invoice.total)}`} />
               <Stack direction="row" spacing={2}>
-                <Button
-                  variant="contained"
+                <Chip
+                  label={capitalizeFirstLetter(invoice.status)}
                   color={func(invoice.status)}
-                  sx={{ mr: 5 }}
-                  startIcon={<CircleIcon />}
-                >
-                  {invoice.status}
-                </Button>
+                  sx={{ mr: 5, width: 100 }}
+                />
               </Stack>
 
-              <Link to={`/${invoice.id}`} cy-data="open">
+              <Link to={`/${invoice.id}`} cy-data={`open_${invoice.id}`}>
                 <Fab color="primary" aria-label="edit">
                   <FileOpenIcon />
                 </Fab>
               </Link>
-              <Link to={`/${invoice.id}/edit`} cy-data="edit">
+              <Link to={`/${invoice.id}/edit`} cy-data={`edit_${invoice.id}`}>
                 <Fab color="primary" aria-label="edit">
                   <EditIcon />
                 </Fab>
