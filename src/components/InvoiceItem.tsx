@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 import { InvoiceResponse } from "./Invoices";
 
 interface Props {
-  test: InvoiceResponse[];
+  data: InvoiceResponse[];
   func: any;
 }
-const InvoiceItem = ({ test, func }: Props) => {
+const InvoiceItem = ({ data, func }: Props) => {
   return (
     <div>
       <Box
@@ -24,7 +24,7 @@ const InvoiceItem = ({ test, func }: Props) => {
         }}
       >
         <List>
-          {test.map((invoice, index: number) => (
+          {data.map((invoice, index: number) => (
             <ListItem sx={{ "& > :not(style)": { m: 0.5 } }} key={index}>
               <ListItemText primary={invoice.id} />
               <ListItemText primary={invoice.paymentDue} />
@@ -37,7 +37,7 @@ const InvoiceItem = ({ test, func }: Props) => {
                   sx={{ mr: 5 }}
                   startIcon={<CircleIcon />}
                 >
-                  Paid
+                  {invoice.status}
                 </Button>
               </Stack>
 
