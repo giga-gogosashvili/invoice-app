@@ -45,12 +45,18 @@ const InvoiceItem = ({ data, func }: Props) => {
                 />
               </Stack>
 
-              <Link to={`/${invoice.id}`} cy-data={`open_${invoice.id}`}>
+              <Link
+                to={`/invoices/${invoice.id}`}
+                cy-data={`open_${invoice.id}`}
+              >
                 <Fab color="primary" aria-label="edit">
                   <FileOpenIcon />
                 </Fab>
               </Link>
-              <Link to={`/${invoice.id}/edit`} cy-data={`edit_${invoice.id}`}>
+              <Link
+                to={`/invoices/${invoice.id}/edit`}
+                cy-data={`edit_${invoice.id}`}
+              >
                 <Fab color="primary" aria-label="edit">
                   <EditIcon />
                 </Fab>

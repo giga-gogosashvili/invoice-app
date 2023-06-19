@@ -4,23 +4,36 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root";
 import ErrorPage from "./components/Error-page";
 import Invoice from "./components/Invoice";
+import CreateInvoice from "./components/CreateInvoice";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/invoices",
     element: <Root />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/:rt3080",
+    path: "invoices/:id",
     // path: "/:${data.id}",
+
     element: <Invoice />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "invoices/create",
+    element: <CreateInvoice />,
     errorElement: <ErrorPage />,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <RouterProvider router={router}></RouterProvider>
+    </LocalizationProvider>
+  );
 }
 
 export default App;

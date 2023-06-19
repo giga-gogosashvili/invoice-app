@@ -5,11 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export default function BasicSelect() {
-  const [status, setStatus] = React.useState("");
-
+interface Props {
+  setFilterStatus: (a: string) => void;
+  filterStatus: string | undefined;
+}
+export default function FilterButton(props: Props) {
   const handleChange = (event: SelectChangeEvent) => {
-    setStatus(event.target.value as string);
+    props.setFilterStatus(event.target.value as string);
   };
 
   return (
@@ -19,10 +21,11 @@ export default function BasicSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={status}
+          value={props.filterStatus}
           label="Status"
           onChange={handleChange}
         >
+          <MenuItem value={undefined}>All</MenuItem>
           <MenuItem value={"draft"}>Draft</MenuItem>
           <MenuItem value={"pending"}>Pending</MenuItem>
           <MenuItem value={"paid"}>Paid</MenuItem>

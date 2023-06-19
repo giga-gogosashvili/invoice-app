@@ -5,6 +5,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import FilterButton from "./FilterButton";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -64,13 +65,27 @@ export const getStatusColor = (
 
 export default function Invoices() {
   const [invoices, setInvoices] = useState<InvoiceResponse[]>([]);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(
+    undefined
+  );
+  const [allInvoices, setAllInvoices] = useState<InvoiceResponse[]>([]);
 
   useEffect(() => {
     axios
       .get("/db/data.json")
-      .then((res) => setInvoices(res.data))
+      .then((res) => setAllInvoices(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    // alert(filterStatus);
+    setInvoices(allInvoices);
+    if (filterStatus !== undefined) {
+      setInvoices(
+        allInvoices.filter((invoice) => invoice.status == filterStatus)
+      );
+    }
+  }, [filterStatus]);
 
   return (
     <div>
@@ -85,11 +100,15 @@ export default function Invoices() {
           width: 1200,
         }}
       >
-        <FilterButton></FilterButton>
-
-        <Button variant="contained" startIcon={<AddCircleIcon />}>
-          New Invoice
-        </Button>
+        <FilterButton
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
+        />
+        <Link to={`/create`}>
+          <Button variant="contained" startIcon={<AddCircleIcon />}>
+            New Invoice
+          </Button>
+        </Link>
       </Stack>
 
       <InvoiceItem data={invoices} func={getStatusColor} />
