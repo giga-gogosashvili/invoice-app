@@ -13,6 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/:rt3080",
+    // path: "/:${data.id}",
     element: <Invoice />,
     errorElement: <ErrorPage />,
   },

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import InvoiceItem from "./InvoiceItem";
+import Button from "@mui/material/Button";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import FilterButton from "./FilterButton";
+
 import axios from "axios";
 
 export type InvoiceResponse = {
@@ -70,6 +76,22 @@ export default function Invoices() {
     <div>
       <h1>Invoices</h1>
       <p>There are {invoices.length} total invoices</p>
+      <Stack
+        direction="row"
+        display={"flex"}
+        justifyContent="right"
+        sx={{
+          flexGrow: 1,
+          width: 1200,
+        }}
+      >
+        <FilterButton></FilterButton>
+
+        <Button variant="contained" startIcon={<AddCircleIcon />}>
+          New Invoice
+        </Button>
+      </Stack>
+
       <InvoiceItem data={invoices} func={getStatusColor} />
     </div>
   );
