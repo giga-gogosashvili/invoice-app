@@ -16,7 +16,6 @@ const router = createBrowserRouter([
   },
   {
     path: "invoices/:id",
-    // path: "/:${data.id}",
 
     element: <Invoice />,
     errorElement: <ErrorPage />,

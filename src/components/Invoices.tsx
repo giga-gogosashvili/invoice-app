@@ -73,12 +73,14 @@ export default function Invoices() {
   useEffect(() => {
     axios
       .get("/db/data.json")
-      .then((res) => setAllInvoices(res.data))
+      .then((res) => {
+        setAllInvoices(res.data);
+        setInvoices(res.data);
+      })
       .catch((err) => console.log(err));
-  }, []);
+  }, [filterStatus]);
 
   useEffect(() => {
-    // alert(filterStatus);
     setInvoices(allInvoices);
     if (filterStatus !== undefined) {
       setInvoices(
