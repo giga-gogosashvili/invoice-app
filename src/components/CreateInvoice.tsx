@@ -1,11 +1,10 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
-import { List, ListItem, ListItemText, IconButton, Stack } from "@mui/material";
+import { List, ListItem, IconButton, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Chip from "@mui/material/Chip";
 import Fab from "@mui/material/Fab";
@@ -24,6 +23,7 @@ export default function CreateInvoice() {
             sx={{ m: 1 }}
             id="form-street-from"
             label="Street Address"
+            defaultValue=""
           />
           <TextField required id="form-city" label="City" sx={{ m: 1 }} />
           <TextField

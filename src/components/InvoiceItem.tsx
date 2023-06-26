@@ -20,7 +20,7 @@ const formatingNumbers = (number: number) => {
   return number.toLocaleString(undefined, { minimumFractionDigits: 2 });
 };
 
-const InvoiceItem = ({ data, func }: Props) => {
+export default function InvoiceItem({ data, func }: Props) {
   return (
     <div>
       <Box
@@ -70,6 +70,4 @@ const InvoiceItem = ({ data, func }: Props) => {
       </Box>
     </div>
   );
-};
-
-export default InvoiceItem;
+}
