@@ -22,9 +22,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
 
-export interface IInvoiceProps {}
-
-export default function Invoice(props: IInvoiceProps) {
+export default function Invoice() {
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
