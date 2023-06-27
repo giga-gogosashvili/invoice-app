@@ -105,7 +105,7 @@ export default function Invoices() {
           filterStatus={filterStatus}
           setFilterStatus={setFilterStatus}
         />
-        <Link to={`/create`}>
+        <Link to={`/invoices/create`}>
           <Button variant="contained" startIcon={<AddCircleIcon />}>
             New Invoice
           </Button>
