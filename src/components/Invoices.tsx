@@ -71,7 +71,8 @@ export default function Invoices() {
 
   useEffect(() => {
     axios
-      .get("/db/data.json")
+
+      .get("/db/data.json") // localhost:9481/invoices
       .then((res) => {
         setAllInvoices(res.data);
         setInvoices(res.data);

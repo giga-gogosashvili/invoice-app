@@ -6,17 +6,19 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"strconv"
 )
 
+type senderAddress struct {
+	Street string `json:"street"`
+}
 type invoice struct {
-	Id int `json:"id"`
+	Id            string        `json:"id"`
+	CreatedAt     string        `json:"createdAt"`
+	SenderAddress senderAddress `json:"senderAddress"`
 }
 
 var invoices = []invoice{
-	invoice{Id: 1},
-	invoice{Id: 2},
-	invoice{Id: 3},
+	invoice{Id: "RT3080", CreatedAt: "2021-08-18", SenderAddress: senderAddress{Street: "xxx"}},
 }
 
 func main() {
@@ -52,9 +54,8 @@ func main() {
 			fmt.Println("id is missing in parameters")
 		}
 
-		idAsInt, _ := strconv.Atoi(id)
 		for _, inv := range invoices {
-			if inv.Id == idAsInt {
+			if inv.Id == id {
 				json.NewEncoder(w).Encode(inv)
 				return
 			}
@@ -70,9 +71,8 @@ func main() {
 			fmt.Println("id is missing in parameters")
 		}
 
-		idAsInt, _ := strconv.Atoi(id)
 		for i, inv := range invoices {
-			if inv.Id == idAsInt {
+			if inv.Id == id {
 				invoices = append(invoices[:i], invoices[i+1:]...)
 				json.NewEncoder(w).Encode(inv)
 				return
@@ -97,9 +97,8 @@ func main() {
 			fmt.Println("id is missing in parameters")
 		}
 
-		idAsInt, _ := strconv.Atoi(id)
 		for i, inv := range invoices {
-			if inv.Id == idAsInt {
+			if inv.Id == id {
 				invoices = append(append(invoices[:i], newinv), invoices[i+1:]...)
 				json.NewEncoder(w).Encode(newinv)
 				return
