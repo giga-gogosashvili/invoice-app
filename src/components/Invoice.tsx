@@ -26,8 +26,9 @@ export interface IInvoiceProps {}
 
 export default function Invoice(props: IInvoiceProps) {
   const { id } = useParams();
-  const [invoices, setInvoices] = useState<InvoiceResponse[]>([]);
-  const [allInvoices, setAllInvoices] = useState<InvoiceResponse[]>([]);
+  const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     // alert(id);
@@ -37,9 +38,7 @@ export default function Invoice(props: IInvoiceProps) {
     axios
       .get("/db/data.json")
       .then((res) => {
-        setAllInvoices(res.data);
-        setInvoices(res.data);
-        setInvoices(allInvoices.filter((invoice) => invoice.id === id));
+        setInvoice(res.data.filter((inv: InvoiceResponse) => inv.id === id)[0]);
       })
 
       .catch((err) => console.log(err));
@@ -56,8 +55,8 @@ export default function Invoice(props: IInvoiceProps) {
           bgcolor: "#F8F8FB",
         }}
       >
-        {invoices.map((invoice, index: number) => (
-          <Card key={index}>
+        {invoice && (
+          <Card>
             <Link to="/invoices">
               <BottomNavigation
                 sx={{ justifyContent: "left" }}
@@ -208,7 +207,7 @@ export default function Invoice(props: IInvoiceProps) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={index}>
+                  <TableRow>
                     <TableCell>{invoice.items[0].name}</TableCell>
                     <TableCell align="right">
                       {invoice.items[0].quantity}
@@ -241,7 +240,7 @@ export default function Invoice(props: IInvoiceProps) {
               </Table>
             </TableContainer>
           </Card>
-        ))}
+        )}
       </Box>
     </div>
   );

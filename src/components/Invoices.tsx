@@ -77,7 +77,7 @@ export default function Invoices() {
         setInvoices(res.data);
       })
       .catch((err) => console.log(err));
-  }, [filterStatus]);
+  }, []);
 
   useEffect(() => {
     setInvoices(allInvoices);
