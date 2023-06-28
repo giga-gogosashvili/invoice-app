@@ -71,8 +71,8 @@ export default function Invoices() {
 
   useEffect(() => {
     axios
-
-      .get("/db/data.json") // localhost:9481/invoices
+      // ("http://localhost:9481/invoices", { method: "GET", mode: "no-cors" })
+      .get("http://localhost:9481/invoices") //    /db/data.json
       .then((res) => {
         setAllInvoices(res.data);
         setInvoices(res.data);

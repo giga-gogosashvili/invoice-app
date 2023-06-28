@@ -51,13 +51,13 @@ func main() {
 
 	r.HandleFunc("/invoices", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		json.NewEncoder(w).Encode(invoices)
 	}).Methods("GET")
 
 	r.HandleFunc("/invoices", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		decoder := json.NewDecoder(r.Body)
 		var inv invoice
 		err := decoder.Decode(&inv)
@@ -72,6 +72,7 @@ func main() {
 
 	r.HandleFunc("/invoices/{id}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		vars := mux.Vars(r)
 		id, ok := vars["id"]
 		if !ok {
@@ -89,6 +90,7 @@ func main() {
 
 	r.HandleFunc("/invoices/{id}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		vars := mux.Vars(r)
 		id, ok := vars["id"]
 		if !ok {
@@ -107,7 +109,7 @@ func main() {
 
 	r.HandleFunc("/invoices/{id}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		decoder := json.NewDecoder(r.Body)
 		var newinv invoice
 		err := decoder.Decode(&newinv)

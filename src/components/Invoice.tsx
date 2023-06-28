@@ -34,7 +34,7 @@ export default function Invoice() {
 
   useEffect(() => {
     axios
-      .get("/db/data.json") //localhost:9481/invoices/{id}
+      .get(`http://localhost:9481/invoices/${id}`) //   "/db/data.json"
       .then((res) => {
         setInvoice(res.data.filter((inv: InvoiceResponse) => inv.id === id)[0]);
       })
