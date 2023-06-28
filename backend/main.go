@@ -10,16 +10,40 @@ import (
 
 type senderAddress struct {
 	Street string `json:"street"`
+	City string `json:"city"`
+	PostCode string `json:"postCode"`
+	Country string `json:"country"`
+}
+type clientAddress struct {
+	Street string `json:"street"`
+	City string `json:"city"`
+	PostCode string `json:"postCode"`
+	Country string `json:"country"`
+}
+type items struct {
+	Name string `json:"name"`
+	Quantity float64 `json:"quantity"`
+	Price float64 `json:"price"`
+	Total float64 `json:"total"`
 }
 type invoice struct {
 	Id            string        `json:"id"`
 	CreatedAt     string        `json:"createdAt"`
+	PaymentDue  string `json:"paymentDue"`
+	Description  string `json:"description"`
+	PaymentTerms  float64 `json:"paymentTerms"`
+	ClientName  string `json:"clientName"`
+	ClientEmail  string `json:"clientEmail"`
+	Status  string `json:"status"`
 	SenderAddress senderAddress `json:"senderAddress"`
+	ClientAddress clientAddress `json:"clientAddress"`
+	Items items `json:"items"`
+	Total float64 `json:"total"`
+
 }
 
 var invoices = []invoice{
-	invoice{Id: "RT3080", CreatedAt: "2021-08-18", SenderAddress: senderAddress{Street: "xxx"}},
-}
+	invoice{Id: "RT3080", CreatedAt: "2021-08-18", PaymentDue: "2021-08-19", Description: "Re-branding", PaymentTerms: 1, ClientName: "Jensen Huang", ClientEmail: "jensenh@mail.com", Status: "paid", SenderAddress: senderAddress{Street: "19 Union Terrace", City: "London", PostCode: "E1 3EZ", Country: "United Kingdom"}, ClientAddress: clientAddress {Street: "106 Kendell Street", City: "Sharrington", PostCode: "NR24 5WQ", Country: "United Kingdom"}, Items: items {	Name: "Brand Guidelines", Quantity: 1, Price: 1800.9, Total: 1800.9}, Total: 1800.9}}
 
 func main() {
 	port := "9481"
