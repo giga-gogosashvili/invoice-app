@@ -7,6 +7,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
@@ -31,6 +32,8 @@ export default function EditInvoice() {
 
       .catch((err) => console.log(err));
   }, []);
+
+  // const [value, setValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
 
   return (
     <div>
@@ -117,15 +120,20 @@ export default function EditInvoice() {
               defaultValue={invoice.clientAddress.country}
             />
           </div>
-          <DatePicker sx={{ m: 1 }} />
+
+          <DatePicker
+            label="Invoice Date"
+            defaultValue={dayjs(`${invoice.createdAt}`)}
+          />
+
           <FormControl sx={{ m: 1, width: 200 }}>
             <InputLabel variant="standard" htmlFor="uncontrolled-native">
               Payment Terms
             </InputLabel>
             <NativeSelect
-              defaultValue={"Net 30 days"}
+              defaultValue={invoice.paymentTerms}
               inputProps={{
-                name: "payment-due",
+                name: "payment-terms",
                 id: "uncontrolled-native",
               }}
             >
@@ -179,13 +187,13 @@ export default function EditInvoice() {
                     <Chip label="Total: 156.00" />
                   </Stack>
                 </ListItem>
-
-                <Fab variant="extended">
-                  <AddIcon sx={{ mr: 1 }} />
-                  Add New Item
-                </Fab>
               </List>
             ))}
+            <Fab variant="extended">
+              <AddIcon sx={{ mr: 1 }} />
+              Add New Item
+            </Fab>
+
             <div>
               <Fab
                 sx={{ mr: 1 }}
