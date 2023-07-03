@@ -20,13 +20,14 @@ import Fab from "@mui/material/Fab";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Invoice() {
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -51,21 +52,20 @@ export default function Invoice() {
       >
         {invoice && (
           <Card>
-            <Link to="/invoices">
-              <BottomNavigation
-                sx={{ justifyContent: "left" }}
-                showLabels
-                // value={value}
-                // onChange={(event, newValue) => {
-                //   setValue(newValue);
-                // }}
-              >
-                <BottomNavigationAction
-                  label="Go back"
-                  icon={<ArrowBackIosIcon />}
-                />
-              </BottomNavigation>
-            </Link>
+            <BottomNavigation
+              sx={{ justifyContent: "left" }}
+              showLabels
+              onClick={() => navigate(-1)}
+              // value={value}
+              // onChange={(event, newValue) => {
+              //   setValue(newValue);
+              // }}
+            >
+              <BottomNavigationAction
+                label="Go back"
+                icon={<ArrowBackIosIcon />}
+              />
+            </BottomNavigation>
 
             <Stack direction="row" spacing={2}>
               <Chip
@@ -209,18 +209,6 @@ export default function Invoice() {
                       <TableCell align="right">{item.total}</TableCell>
                     </TableRow>
                   ))}
-                  {/* <TableRow key={index}>
-                    <TableCell>{invoice.items[1].name}</TableCell>
-                    <TableCell align="right">
-                      {invoice.items[1].quantity}
-                    </TableCell>
-                    <TableCell align="right">
-                      {invoice.items[1].price}
-                    </TableCell>
-                    <TableCell align="right">
-                      {invoice.items[1].total}
-                    </TableCell>
-                  </TableRow> */}
                   <TableRow>
                     <TableCell rowSpan={3} />
                     <TableCell colSpan={2}>Amount Due</TableCell>
