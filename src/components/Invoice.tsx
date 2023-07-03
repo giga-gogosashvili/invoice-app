@@ -29,18 +29,14 @@ export default function Invoice() {
   );
 
   useEffect(() => {
-    // alert(id);
-  }, []);
-
-  useEffect(() => {
     axios
       .get(`http://localhost:9481/invoices/${id}`) //   "/db/data.json"
       .then((res) => {
-        setInvoice(res.data.filter((inv: InvoiceResponse) => inv.id === id)[0]);
+        setInvoice(res.data);
       })
 
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   // const [value, setValue] = useState(0);
 
