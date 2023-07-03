@@ -201,18 +201,14 @@ export default function Invoice() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>{invoice.items[0].name}</TableCell>
-                    <TableCell align="right">
-                      {invoice.items[0].quantity}
-                    </TableCell>
-                    <TableCell align="right">
-                      {invoice.items[0].price}
-                    </TableCell>
-                    <TableCell align="right">
-                      {invoice.items[0].total}
-                    </TableCell>
-                  </TableRow>
+                  {invoice.items.map((item, index: number) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell align="right">{item.quantity}</TableCell>
+                      <TableCell align="right">{item.price}</TableCell>
+                      <TableCell align="right">{item.total}</TableCell>
+                    </TableRow>
+                  ))}
                   {/* <TableRow key={index}>
                     <TableCell>{invoice.items[1].name}</TableCell>
                     <TableCell align="right">
