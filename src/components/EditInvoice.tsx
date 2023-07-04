@@ -37,7 +37,7 @@ export default function EditInvoice() {
 
   return (
     <div>
-      <h2>New invoice</h2>
+      <h2>Edit {id}</h2>
       {invoice && (
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
