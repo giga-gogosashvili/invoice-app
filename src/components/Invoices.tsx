@@ -46,7 +46,7 @@ export const getStatusColor = (
   | "success"
   | "error"
   | "primary"
-  | "inherit"
+  | "default"
   | "secondary"
   | "info"
   | "warning"

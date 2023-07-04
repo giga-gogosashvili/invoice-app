@@ -21,6 +21,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
+import { getStatusColor } from "./Invoices";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -38,8 +39,6 @@ export default function Invoice() {
 
       .catch((err) => console.log(err));
   }, []);
-
-  // const [value, setValue] = useState(0);
 
   return (
     <div>
@@ -70,7 +69,7 @@ export default function Invoice() {
             <Stack direction="row" spacing={2}>
               <Chip
                 label={capitalizeFirstLetter(invoice.status)}
-                // color={getStatusColor(invoice.status)}
+                color={getStatusColor(invoice.status)}
                 sx={{ mr: 5, width: 100 }}
               />
               <Link to="/invoices/:id/edit">

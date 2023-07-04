@@ -33,8 +33,6 @@ export default function EditInvoice() {
       .catch((err) => console.log(err));
   }, []);
 
-  // const [value, setValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
-
   return (
     <div>
       <h2>Edit {id}</h2>
