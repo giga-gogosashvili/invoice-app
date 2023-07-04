@@ -9,8 +9,25 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Chip from "@mui/material/Chip";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function CreateInvoice() {
+  const [senderStreet, setSenderStreet] = useState<string>("");
+  const [senderCity, setSenderCity] = useState<string>("");
+  const [senderPostCode, setSenderPostCode] = useState<string>("");
+  const [senderCountry, setSenderCountry] = useState<string>("");
+
+  const [clientName, setClientName] = useState<string>("");
+  const [clientEmail, setClientEmail] = useState<string>("");
+
+  const [clientStreet, setClientStreet] = useState<string>("");
+  const [clientCity, setClientCity] = useState<string>("");
+  const [clientPostCode, setClientPostCode] = useState<string>("");
+  const [clientCountry, setClientCountry] = useState<string>("");
+
+  const [description, setDescription] = useState<string>("");
+
   return (
     <div>
       <h2>New invoice</h2>
@@ -23,16 +40,41 @@ export default function CreateInvoice() {
             sx={{ m: 1 }}
             id="form-street-from"
             label="Street Address"
-            defaultValue=""
+            value={senderStreet}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSenderStreet(event.target.value);
+            }}
           />
-          <TextField required id="form-city" label="City" sx={{ m: 1 }} />
+          <TextField
+            required
+            id="form-city"
+            label="City"
+            sx={{ m: 1 }}
+            value={senderCity}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSenderCity(event.target.value);
+            }}
+          />
           <TextField
             required
             id="form-postcode-from"
             label="Post Code"
             sx={{ m: 1 }}
+            value={senderPostCode}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSenderPostCode(event.target.value);
+            }}
           />
-          <TextField required id="form-country" label="Country" sx={{ m: 1 }} />
+          <TextField
+            required
+            id="form-country"
+            label="Country"
+            sx={{ m: 1 }}
+            value={senderCountry}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSenderCountry(event.target.value);
+            }}
+          />
         </div>
         <div>
           <h5>Bill To</h5>
@@ -42,6 +84,10 @@ export default function CreateInvoice() {
             sx={{ m: 1 }}
             id="form-name-to"
             label="Client's Name"
+            value={clientName}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientName(event.target.value);
+            }}
           />
           <TextField
             required
@@ -49,6 +95,10 @@ export default function CreateInvoice() {
             sx={{ m: 1 }}
             id="form-email-to"
             label="Client's Email"
+            value={clientEmail}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientEmail(event.target.value);
+            }}
           />
           <TextField
             required
@@ -56,19 +106,40 @@ export default function CreateInvoice() {
             sx={{ m: 1 }}
             id="form-street-to"
             label="Street Address"
+            value={clientStreet}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientStreet(event.target.value);
+            }}
           />
-          <TextField required id="form-city-to" label="City" sx={{ m: 1 }} />
+          <TextField
+            required
+            id="form-city-to"
+            label="City"
+            sx={{ m: 1 }}
+            value={clientCity}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientCity(event.target.value);
+            }}
+          />
           <TextField
             required
             id="form-postcode-to"
             label="Post Code"
             sx={{ m: 1 }}
+            value={clientPostCode}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientPostCode(event.target.value);
+            }}
           />
           <TextField
             required
             id="form-country-to"
             label="Country"
             sx={{ m: 1 }}
+            value={clientCountry}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setClientCountry(event.target.value);
+            }}
           />
         </div>
         <DatePicker sx={{ m: 1 }} />
@@ -83,8 +154,9 @@ export default function CreateInvoice() {
               id: "uncontrolled-native",
             }}
           >
-            <option value={14}>Net 14 days</option>
-
+            <option value={1}>Net 1 Day</option>
+            <option value={7}>Net 7 Day</option>
+            <option value={14}>Net 14 Days</option>
             <option value={30}>Net 30 days</option>
           </NativeSelect>
         </FormControl>
@@ -94,6 +166,10 @@ export default function CreateInvoice() {
           sx={{ m: 1 }}
           id="form-description"
           label="Project Description"
+          value={description}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setDescription(event.target.value);
+          }}
         />
         <div>
           <h6>Item List</h6>
@@ -158,6 +234,19 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
+              onClick={
+                () =>
+                  axios({
+                    method: "POST",
+                    url: "http://localhost:9481/invoices",
+                    headers: {},
+                    data: {
+                      senderAddress: {
+                        street: senderStreet,
+                      },
+                    },
+                  }).then() //navigate to list of invoices(main)
+              }
             >
               Save & Send
             </Fab>

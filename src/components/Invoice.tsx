@@ -28,6 +28,7 @@ export default function Invoice() {
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
   );
+  const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,9 +38,16 @@ export default function Invoice() {
         setInvoice(res.data);
       })
 
-      .catch((err) => console.log(err));
+      .catch((err) => setError(true)); //useState error
   }, []);
 
+  if (error) {
+    return (
+      <>
+        <p>Invoice did not find</p>
+      </>
+    );
+  }
   return (
     <div>
       <Box
