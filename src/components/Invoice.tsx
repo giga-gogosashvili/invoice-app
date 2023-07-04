@@ -72,7 +72,7 @@ export default function Invoice() {
                 color={getStatusColor(invoice.status)}
                 sx={{ mr: 5, width: 100 }}
               />
-              <Link to="/invoices/:id/edit">
+              <Link to={`/invoices/${invoice.id}/edit`}>
                 <Fab
                   sx={{ mr: 1 }}
                   variant="extended"
