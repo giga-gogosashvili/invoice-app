@@ -93,7 +93,18 @@ export default function Invoice() {
               >
                 Delete
               </Fab>
-              <Fab
+              {invoice.status !== "paid" && (
+                <Fab
+                  sx={{ mr: 1 }}
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  aria-label="add"
+                >
+                  Mark as Paid
+                </Fab>
+              )}
+              {/* <Fab
                 sx={{ mr: 1 }}
                 variant="extended"
                 size="small"
@@ -101,7 +112,7 @@ export default function Invoice() {
                 aria-label="add"
               >
                 Mark as Paid
-              </Fab>
+              </Fab> */}
             </Stack>
             <Stack direction="row" spacing={2}>
               <CardContent>
