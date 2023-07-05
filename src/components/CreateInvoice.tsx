@@ -15,10 +15,10 @@ import { Navigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import dayjs, { Dayjs } from "dayjs";
 
-export default function CreateInvoice() {
-  const unique_id = uuid();
-  const small_id = unique_id.slice(0, 6).toUpperCase();
+const unique_id = uuid();
+const id = unique_id.slice(0, 6).toUpperCase();
 
+export default function CreateInvoice() {
   const [senderStreet, setSenderStreet] = useState<string>("");
   const [senderCity, setSenderCity] = useState<string>("");
   const [senderPostCode, setSenderPostCode] = useState<string>("");
@@ -32,7 +32,6 @@ export default function CreateInvoice() {
   const [clientPostCode, setClientPostCode] = useState<string>("");
   const [clientCountry, setClientCountry] = useState<string>("");
 
-  // const [createdAt, setCreatedAt] = useState<any>("2023-07-05");
   const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(
     dayjs("2022-04-17")
   );
@@ -50,7 +49,7 @@ export default function CreateInvoice() {
       <h2>New invoice</h2>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <div>
-          <h5>Bill From {small_id}</h5>
+          <h5>Bill From {id}</h5>
           <TextField
             required
             fullWidth
@@ -273,19 +272,9 @@ export default function CreateInvoice() {
               color="primary"
               aria-label="add"
               onClick={() =>
-                // axios({
-                //   method: "POST",
-                //   url: "http://localhost:9481/invoices",
-                //   headers: {},
-                //   data: {
-                //     senderAddress: {
-                //       street: senderStreet,
-                //     },
-                //   },
-                // }).then() //navigate to list of invoices(main)
                 axios
                   .post("http://localhost:9481/invoices", {
-                    id: small_id,
+                    id: id,
                     senderAddress: {
                       street: senderStreet,
                       city: senderCity,
