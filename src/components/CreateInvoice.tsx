@@ -17,6 +17,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 const unique_id = uuid();
 const id = unique_id.slice(0, 6).toUpperCase();
+const date = new Date().toISOString().split("T")[0];
 
 export default function CreateInvoice() {
   const [senderStreet, setSenderStreet] = useState<string>("");
@@ -32,9 +33,7 @@ export default function CreateInvoice() {
   const [clientPostCode, setClientPostCode] = useState<string>("");
   const [clientCountry, setClientCountry] = useState<string>("");
 
-  const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(
-    dayjs("2022-04-17")
-  );
+  const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(dayjs(date));
 
   const [paymentTerms, setPaymentTerms] = useState<string>("");
 
@@ -44,12 +43,20 @@ export default function CreateInvoice() {
   const [itemQuantity1, setItemQuantity1] = useState<string>("");
   const [itemPrice1, setItemPrice1] = useState<string>("");
 
+  const [status, setStatus] = useState<string>("paid");
+
+  const paymentDue = "2022-05-17";
+  // const status = "paid";
+  const total = 250;
+
   return (
     <div>
       <h2>New invoice</h2>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <div>
-          <h5>Bill From {id}</h5>
+          <h5>
+            Bill From {id} {date}
+          </h5>
           <TextField
             required
             fullWidth
@@ -262,6 +269,7 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
+              // onClick={() => {}}
             >
               Save as Draft
             </Fab>
@@ -291,12 +299,15 @@ export default function CreateInvoice() {
                     },
                     createdAt: createdAt,
                     paymentTerms: paymentTerms,
+                    paymentDue: paymentDue,
+                    status: status,
                     description: description,
                     items: {
                       name: itemName1,
                       quantity: itemQuantity1,
                       price: itemPrice1,
                     },
+                    total: total,
                   })
                   .then(
                     (response) => {
