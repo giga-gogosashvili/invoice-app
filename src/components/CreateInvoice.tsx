@@ -11,6 +11,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export default function CreateInvoice() {
   const [senderStreet, setSenderStreet] = useState<string>("");
@@ -27,6 +28,10 @@ export default function CreateInvoice() {
   const [clientCountry, setClientCountry] = useState<string>("");
 
   const [description, setDescription] = useState<string>("");
+
+  const [itemName1, setItemName1] = useState<string>("");
+  const [itemQuantity1, setItemQuantity1] = useState<string>("");
+  const [itemPrice1, setItemPrice1] = useState<string>("");
 
   return (
     <div>
@@ -186,18 +191,30 @@ export default function CreateInvoice() {
                 id="form-item-name-1"
                 label="Item Name"
                 sx={{ m: 1 }}
+                value={itemName1}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setItemName1(event.target.value);
+                }}
               />
               <TextField
                 required
                 id="form-item-qty-1"
                 label="Qty."
                 sx={{ m: 1 }}
+                value={itemQuantity1}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setItemQuantity1(event.target.value);
+                }}
               />
               <TextField
                 required
                 id="form-item-price-1"
                 label="Price"
                 sx={{ m: 1 }}
+                value={itemPrice1}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setItemPrice1(event.target.value);
+                }}
               />
               <Stack>
                 {" "}
@@ -234,31 +251,33 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              onClick={() =>
-                // axios({
-                //   method: "POST",
-                //   url: "http://localhost:9481/invoices",
-                //   headers: {},
-                //   data: {
-                //     senderAddress: {
-                //       street: senderStreet,
-                //     },
-                //   },
-                // }).then() //navigate to list of invoices(main)
-                axios
-                  .post("http://localhost:9481/invoices", {
-                    senderAddress: {
-                      street: senderStreet,
-                    },
-                  })
-                  .then(
-                    (response) => {
-                      console.log(response);
-                    },
-                    (error) => {
-                      console.log(error);
-                    }
-                  )
+              onClick={
+                () =>
+                  // axios({
+                  //   method: "POST",
+                  //   url: "http://localhost:9481/invoices",
+                  //   headers: {},
+                  //   data: {
+                  //     senderAddress: {
+                  //       street: senderStreet,
+                  //     },
+                  //   },
+                  // }).then() //navigate to list of invoices(main)
+                  axios
+                    .post("http://localhost:9481/invoices", {
+                      senderAddress: {
+                        street: senderStreet,
+                      },
+                    })
+                    .then(
+                      (response) => {
+                        console.log(response);
+                      },
+                      (error) => {
+                        console.log(error);
+                      }
+                    )
+                // .then(<Navigate to="/invoices"></Navigate>)
               }
             >
               Save & Send
