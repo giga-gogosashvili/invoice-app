@@ -17,9 +17,15 @@ import dayjs, { Dayjs } from "dayjs";
 
 const unique_id = uuid();
 const id = unique_id.slice(0, 6).toUpperCase();
-const date = new Date().toISOString().split("T")[0];
+// const date = new Date().toISOString().split("T")[0];
 
 export default function CreateInvoice() {
+  function addDays(date: Date, days: number) {
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+  const date: Date = new Date();
+
   const [senderStreet, setSenderStreet] = useState<string>("");
   const [senderCity, setSenderCity] = useState<string>("");
   const [senderPostCode, setSenderPostCode] = useState<string>("");
@@ -35,7 +41,7 @@ export default function CreateInvoice() {
 
   const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(dayjs(date));
 
-  const [paymentTerms, setPaymentTerms] = useState<string>("");
+  const [paymentTerms, setPaymentTerms] = useState<number>(14);
 
   const [description, setDescription] = useState<string>("");
 
@@ -43,11 +49,12 @@ export default function CreateInvoice() {
   const [itemQuantity1, setItemQuantity1] = useState<string>("");
   const [itemPrice1, setItemPrice1] = useState<string>("");
 
-  const [status, setStatus] = useState<string>("paid");
+  // const [status, setStatus] = useState<string>("paid");
 
-  const paymentDue = "2022-05-17";
-  // const status = "paid";
+  const status = "paid";
   const total = 250;
+
+  const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
   return (
     <div>
@@ -55,7 +62,7 @@ export default function CreateInvoice() {
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <div>
           <h5>
-            Bill From {id} {date}
+            Bill From {id} {paymentTerms} {paymentDue}
           </h5>
           <TextField
             required
@@ -167,8 +174,6 @@ export default function CreateInvoice() {
         </div>
         <DatePicker
           sx={{ m: 1 }}
-          // value={setCreatedAt}
-          // onChange={(value: TValue, context: FieldChangeHandlerContext<TError>) => void}
           value={createdAt}
           onChange={(newValue) => setCreatedAt(newValue)}
         />
@@ -183,7 +188,7 @@ export default function CreateInvoice() {
             }}
             value={paymentTerms}
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-              setPaymentTerms(event.target.value);
+              setPaymentTerms(Number(event.target.value));
             }}
           >
             <option value={1}>Net 1 Day</option>
