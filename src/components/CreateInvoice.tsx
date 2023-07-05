@@ -267,6 +267,23 @@ export default function CreateInvoice() {
                     .post("http://localhost:9481/invoices", {
                       senderAddress: {
                         street: senderStreet,
+                        city: senderCity,
+                        postCode: senderPostCode,
+                        country: senderCountry,
+                      },
+                      clientName: clientName,
+                      clientEmail: clientEmail,
+                      clientAddress: {
+                        street: clientStreet,
+                        city: clientCity,
+                        postCode: clientPostCode,
+                        country: clientCountry,
+                      },
+                      description: description,
+                      items: {
+                        name: itemName1,
+                        quantity: itemQuantity1,
+                        price: itemPrice1,
                       },
                     })
                     .then(
