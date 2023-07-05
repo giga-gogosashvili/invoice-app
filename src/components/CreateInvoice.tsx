@@ -12,8 +12,12 @@ import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 export default function CreateInvoice() {
+  const unique_id = uuid();
+  const small_id = unique_id.slice(0, 6).toUpperCase();
+
   const [senderStreet, setSenderStreet] = useState<string>("");
   const [senderCity, setSenderCity] = useState<string>("");
   const [senderPostCode, setSenderPostCode] = useState<string>("");
@@ -41,7 +45,7 @@ export default function CreateInvoice() {
       <h2>New invoice</h2>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <div>
-          <h5>Bill From</h5>
+          <h5>Bill From {small_id}</h5>
           <TextField
             required
             fullWidth
@@ -274,6 +278,7 @@ export default function CreateInvoice() {
                 // }).then() //navigate to list of invoices(main)
                 axios
                   .post("http://localhost:9481/invoices", {
+                    id: small_id,
                     senderAddress: {
                       street: senderStreet,
                       city: senderCity,
