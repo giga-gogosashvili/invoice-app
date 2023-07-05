@@ -234,18 +234,31 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              onClick={
-                () =>
-                  axios({
-                    method: "POST",
-                    url: "http://localhost:9481/invoices",
-                    headers: {},
-                    data: {
-                      senderAddress: {
-                        street: senderStreet,
-                      },
+              onClick={() =>
+                // axios({
+                //   method: "POST",
+                //   url: "http://localhost:9481/invoices",
+                //   headers: {},
+                //   data: {
+                //     senderAddress: {
+                //       street: senderStreet,
+                //     },
+                //   },
+                // }).then() //navigate to list of invoices(main)
+                axios
+                  .post("http://localhost:9481/invoices", {
+                    senderAddress: {
+                      street: senderStreet,
                     },
-                  }).then() //navigate to list of invoices(main)
+                  })
+                  .then(
+                    (response) => {
+                      console.log(response);
+                    },
+                    (error) => {
+                      console.log(error);
+                    }
+                  )
               }
             >
               Save & Send
