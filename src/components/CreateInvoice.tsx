@@ -27,6 +27,9 @@ export default function CreateInvoice() {
   const [clientPostCode, setClientPostCode] = useState<string>("");
   const [clientCountry, setClientCountry] = useState<string>("");
 
+  // const [createdAt, setCreatedAt] = useState<any>("2023-07-05");
+  const [paymentTerms, setPaymentTerms] = useState<string>("");
+
   const [description, setDescription] = useState<string>("");
 
   const [itemName1, setItemName1] = useState<string>("");
@@ -147,16 +150,23 @@ export default function CreateInvoice() {
             }}
           />
         </div>
-        <DatePicker sx={{ m: 1 }} />
+        <DatePicker
+          sx={{ m: 1 }}
+          // value={setCreatedAt}
+          // onChange={(value: TValue, context: FieldChangeHandlerContext<TError>) => void}
+        />
         <FormControl sx={{ m: 1, width: 200 }}>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
             Payment Terms
           </InputLabel>
           <NativeSelect
-            defaultValue={"Net 30 days"}
             inputProps={{
               name: "payment-due",
               id: "uncontrolled-native",
+            }}
+            value={paymentTerms}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+              setPaymentTerms(event.target.value);
             }}
           >
             <option value={1}>Net 1 Day</option>
@@ -279,6 +289,7 @@ export default function CreateInvoice() {
                         postCode: clientPostCode,
                         country: clientCountry,
                       },
+                      paymentTerms: paymentTerms,
                       description: description,
                       items: {
                         name: itemName1,
