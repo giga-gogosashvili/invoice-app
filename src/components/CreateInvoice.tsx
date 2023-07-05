@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import dayjs, { Dayjs } from "dayjs";
 
 export default function CreateInvoice() {
   const unique_id = uuid();
@@ -32,6 +33,10 @@ export default function CreateInvoice() {
   const [clientCountry, setClientCountry] = useState<string>("");
 
   // const [createdAt, setCreatedAt] = useState<any>("2023-07-05");
+  const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(
+    dayjs("2022-04-17")
+  );
+
   const [paymentTerms, setPaymentTerms] = useState<string>("");
 
   const [description, setDescription] = useState<string>("");
@@ -158,6 +163,8 @@ export default function CreateInvoice() {
           sx={{ m: 1 }}
           // value={setCreatedAt}
           // onChange={(value: TValue, context: FieldChangeHandlerContext<TError>) => void}
+          value={createdAt}
+          onChange={(newValue) => setCreatedAt(newValue)}
         />
         <FormControl sx={{ m: 1, width: 200 }}>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -293,6 +300,7 @@ export default function CreateInvoice() {
                       postCode: clientPostCode,
                       country: clientCountry,
                     },
+                    createdAt: createdAt,
                     paymentTerms: paymentTerms,
                     description: description,
                     items: {
