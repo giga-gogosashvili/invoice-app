@@ -261,51 +261,52 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              onClick={
-                () =>
-                  // axios({
-                  //   method: "POST",
-                  //   url: "http://localhost:9481/invoices",
-                  //   headers: {},
-                  //   data: {
-                  //     senderAddress: {
-                  //       street: senderStreet,
-                  //     },
-                  //   },
-                  // }).then() //navigate to list of invoices(main)
-                  axios
-                    .post("http://localhost:9481/invoices", {
-                      senderAddress: {
-                        street: senderStreet,
-                        city: senderCity,
-                        postCode: senderPostCode,
-                        country: senderCountry,
-                      },
-                      clientName: clientName,
-                      clientEmail: clientEmail,
-                      clientAddress: {
-                        street: clientStreet,
-                        city: clientCity,
-                        postCode: clientPostCode,
-                        country: clientCountry,
-                      },
-                      paymentTerms: paymentTerms,
-                      description: description,
-                      items: {
-                        name: itemName1,
-                        quantity: itemQuantity1,
-                        price: itemPrice1,
-                      },
-                    })
-                    .then(
-                      (response) => {
-                        console.log(response);
-                      },
-                      (error) => {
-                        console.log(error);
-                      }
-                    )
-                // .then(<Navigate to="/invoices"></Navigate>)
+              onClick={() =>
+                // axios({
+                //   method: "POST",
+                //   url: "http://localhost:9481/invoices",
+                //   headers: {},
+                //   data: {
+                //     senderAddress: {
+                //       street: senderStreet,
+                //     },
+                //   },
+                // }).then() //navigate to list of invoices(main)
+                axios
+                  .post("http://localhost:9481/invoices", {
+                    senderAddress: {
+                      street: senderStreet,
+                      city: senderCity,
+                      postCode: senderPostCode,
+                      country: senderCountry,
+                    },
+                    clientName: clientName,
+                    clientEmail: clientEmail,
+                    clientAddress: {
+                      street: clientStreet,
+                      city: clientCity,
+                      postCode: clientPostCode,
+                      country: clientCountry,
+                    },
+                    paymentTerms: paymentTerms,
+                    description: description,
+                    items: {
+                      name: itemName1,
+                      quantity: itemQuantity1,
+                      price: itemPrice1,
+                    },
+                  })
+                  .then(
+                    (response) => {
+                      console.log(response);
+                    },
+                    (error) => {
+                      console.log(error);
+                    }
+                  )
+                  .then(() => {
+                    <Navigate to="/invoices" />;
+                  })
               }
             >
               Save & Send
