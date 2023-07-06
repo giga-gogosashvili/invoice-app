@@ -17,14 +17,14 @@ import dayjs, { Dayjs } from "dayjs";
 
 const unique_id = uuid();
 const id = unique_id.slice(0, 6).toUpperCase();
-// const date = new Date().toISOString().split("T")[0];
 
 export default function CreateInvoice() {
   function addDays(date: Date, days: number) {
     date.setDate(date.getDate() + days);
     return date;
   }
-  const date: Date = new Date();
+  const date = new Date();
+  const dateJSON = date.toISOString().split("T")[0];
 
   const [senderStreet, setSenderStreet] = useState<string>("");
   const [senderCity, setSenderCity] = useState<string>("");
@@ -46,13 +46,15 @@ export default function CreateInvoice() {
   const [description, setDescription] = useState<string>("");
 
   const [itemName1, setItemName1] = useState<string>("");
-  const [itemQuantity1, setItemQuantity1] = useState<string>("");
-  const [itemPrice1, setItemPrice1] = useState<string>("");
+  const [itemQuantity1, setItemQuantity1] = useState<number>(4);
+  const [itemPrice1, setItemPrice1] = useState<number>(2);
 
   // const [status, setStatus] = useState<string>("paid");
 
   const status = "paid";
-  const total = 250;
+  const totalCalculator = (num1: number, num2: number) => {
+    return num1 * num2;
+  };
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
@@ -235,7 +237,7 @@ export default function CreateInvoice() {
                 sx={{ m: 1 }}
                 value={itemQuantity1}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setItemQuantity1(event.target.value);
+                  setItemQuantity1(event.target.valueAsNumber);
                 }}
               />
               <TextField
@@ -245,12 +247,12 @@ export default function CreateInvoice() {
                 sx={{ m: 1 }}
                 value={itemPrice1}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setItemPrice1(event.target.value);
+                  setItemPrice1(event.target.valueAsNumber);
                 }}
               />
               <Stack>
                 {" "}
-                <Chip label="Total: 156.00" />
+                <Chip label={totalCalculator(itemQuantity1, itemPrice1)} />
               </Stack>
             </ListItem>
             <Fab variant="extended">
@@ -302,7 +304,7 @@ export default function CreateInvoice() {
                       postCode: clientPostCode,
                       country: clientCountry,
                     },
-                    createdAt: createdAt,
+                    createdAt: dateJSON,
                     paymentTerms: paymentTerms,
                     paymentDue: paymentDue,
                     status: status,
@@ -311,8 +313,8 @@ export default function CreateInvoice() {
                       name: itemName1,
                       quantity: itemQuantity1,
                       price: itemPrice1,
+                      total: totalCalculator(itemQuantity1, itemPrice1),
                     },
-                    total: total,
                   })
                   .then(
                     (response) => {
