@@ -14,6 +14,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import dayjs, { Dayjs } from "dayjs";
+import { useEffect } from "react";
 
 const unique_id = uuid();
 const id = unique_id.slice(0, 6).toUpperCase();
@@ -40,21 +41,23 @@ export default function CreateInvoice() {
   const [clientCountry, setClientCountry] = useState<string>("");
 
   const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(dayjs(date));
-
   const [paymentTerms, setPaymentTerms] = useState<number>(14);
-
   const [description, setDescription] = useState<string>("");
 
   const [itemName1, setItemName1] = useState<string>("");
-  const [itemQuantity1, setItemQuantity1] = useState<number>(4);
-  const [itemPrice1, setItemPrice1] = useState<number>(2);
+  const [itemQuantity1, setItemQuantity1] = useState<number>();
+  const [itemPrice1, setItemPrice1] = useState<number>();
+  const [itemTotal1, setItemTotal1] = useState<number>();
 
   // const [status, setStatus] = useState<string>("paid");
 
   const status = "paid";
-  const totalCalculator = (num1: number, num2: number) => {
-    return num1 * num2;
-  };
+
+  useEffect(() => {
+    if (itemPrice1 && itemQuantity1 !== undefined) {
+      setItemTotal1(itemQuantity1 * itemPrice1);
+    }
+  }, [itemPrice1]);
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
@@ -235,6 +238,11 @@ export default function CreateInvoice() {
                 id="form-item-qty-1"
                 label="Qty."
                 sx={{ m: 1 }}
+                type="number"
+                // InputLabelProps={{
+                //   shrink: true,
+                // }}
+                // variant="filled"
                 value={itemQuantity1}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   setItemQuantity1(event.target.valueAsNumber);
@@ -244,6 +252,7 @@ export default function CreateInvoice() {
                 required
                 id="form-item-price-1"
                 label="Price"
+                type="number"
                 sx={{ m: 1 }}
                 value={itemPrice1}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -252,7 +261,7 @@ export default function CreateInvoice() {
               />
               <Stack>
                 {" "}
-                <Chip label={totalCalculator(itemQuantity1, itemPrice1)} />
+                <Chip label={`Total: ${itemTotal1}`} />
               </Stack>
             </ListItem>
             <Fab variant="extended">
@@ -313,7 +322,7 @@ export default function CreateInvoice() {
                       name: itemName1,
                       quantity: itemQuantity1,
                       price: itemPrice1,
-                      total: totalCalculator(itemQuantity1, itemPrice1),
+                      total: itemTotal1,
                     },
                   })
                   .then(
