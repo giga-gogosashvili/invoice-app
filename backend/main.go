@@ -6,6 +6,8 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"math/rand"
+	"strconv"
 )
 
 type senderAddress struct {
@@ -124,6 +126,8 @@ func main() {
 		if err != nil {
 			fmt.Println("bad request")
 		}
+
+		inv.Id = "R" + strconv.Itoa(rand.Intn(10000))
 
 		invoices = append(invoices, inv)
 

@@ -17,8 +17,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
 
-const unique_id = uuid();
-const id = unique_id.slice(0, 6).toUpperCase();
+// const unique_id = uuid();
+// const id = unique_id.slice(0, 6).toUpperCase();
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
@@ -68,9 +68,7 @@ export default function CreateInvoice() {
       <h2>New invoice</h2>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <div>
-          <h5>
-            Bill From {id} {paymentTerms} {paymentDue}
-          </h5>
+          <h5>Bill From</h5>
           <TextField
             required
             fullWidth
@@ -327,7 +325,7 @@ export default function CreateInvoice() {
               onClick={() =>
                 axios
                   .post("http://localhost:9481/invoices", {
-                    id: id,
+                    // id: id,
                     senderAddress: {
                       street: senderStreet,
                       city: senderCity,
