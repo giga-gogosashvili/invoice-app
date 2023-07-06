@@ -11,15 +11,18 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Item } from "./Invoices";
 
 const unique_id = uuid();
 const id = unique_id.slice(0, 6).toUpperCase();
 
 export default function CreateInvoice() {
+  const navigate = useNavigate();
+
   function addDays(date: Date, days: number) {
     date.setDate(date.getDate() + days);
     return date;
@@ -44,20 +47,19 @@ export default function CreateInvoice() {
   const [paymentTerms, setPaymentTerms] = useState<number>(14);
   const [description, setDescription] = useState<string>("");
 
-  const [itemName1, setItemName1] = useState<string>("");
-  const [itemQuantity1, setItemQuantity1] = useState<number>();
-  const [itemPrice1, setItemPrice1] = useState<number>();
-  const [itemTotal1, setItemTotal1] = useState<number>();
+  const [items, setItems] = useState<Item[]>([
+    { name: "", quantity: 0, price: 0, total: 0 },
+  ]);
 
-  // const [status, setStatus] = useState<string>("paid");
+  const [status, setStatus] = useState<string>("pending");
 
-  const status = "paid";
+  // const status = "pending";
 
-  useEffect(() => {
-    if (itemPrice1 && itemQuantity1 !== undefined) {
-      setItemTotal1(itemQuantity1 * itemPrice1);
-    }
-  }, [itemPrice1]);
+  // useEffect(() => {
+  //   if (itemPrice1 && itemQuantity1 !== undefined) {
+  //     setItemTotal1(itemQuantity1 * itemPrice1);
+  //   }
+  // }, [itemPrice1]);
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
@@ -216,55 +218,80 @@ export default function CreateInvoice() {
         <div>
           <h6>Item List</h6>
           <List>
-            <ListItem
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              }
+            {items.map((item, index) => (
+              <ListItem
+                key={index}
+                secondaryAction={
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <TextField
+                  required
+                  id="form-item-name-1"
+                  label="Item Name"
+                  sx={{ m: 1 }}
+                  value={item.name}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    // setItemName1(event.target.value);
+                  }}
+                />
+                <TextField
+                  required
+                  id="form-item-qty-1"
+                  label="Qty."
+                  sx={{ m: 1 }}
+                  type="number"
+                  // InputLabelProps={{
+                  //   shrink: true,
+                  // }}
+                  // variant="filled"
+                  value={item.quantity}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    // setItemQuantity1(event.target.valueAsNumber);
+                  }}
+                />
+                <TextField
+                  required
+                  id="form-item-price-1"
+                  label="Price"
+                  type="number"
+                  sx={{ m: 1 }}
+                  value={item.price}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    // setItemPrice1(event.target.valueAsNumber);
+                    // setItems
+                    const before = items.slice(0, index);
+                    const after = items.slice(index + 1, items.length);
+                    const changed = {
+                      name: item.name,
+                      quantity: item.quantity,
+                      price: event.target.valueAsNumber,
+                      total: item.total,
+                    };
+                    setItems(before.concat(changed).concat(after));
+                  }}
+                />
+                <Stack>
+                  {" "}
+                  <Chip label={`Total: ${item.total}`} />
+                </Stack>
+              </ListItem>
+            ))}
+
+            <Fab
+              variant="extended"
+              onClick={() => {
+                const withNewItem = items.concat({
+                  name: "",
+                  quantity: 0,
+                  price: 0,
+                  total: 0,
+                });
+                setItems(withNewItem);
+              }}
             >
-              <TextField
-                required
-                id="form-item-name-1"
-                label="Item Name"
-                sx={{ m: 1 }}
-                value={itemName1}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setItemName1(event.target.value);
-                }}
-              />
-              <TextField
-                required
-                id="form-item-qty-1"
-                label="Qty."
-                sx={{ m: 1 }}
-                type="number"
-                // InputLabelProps={{
-                //   shrink: true,
-                // }}
-                // variant="filled"
-                value={itemQuantity1}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setItemQuantity1(event.target.valueAsNumber);
-                }}
-              />
-              <TextField
-                required
-                id="form-item-price-1"
-                label="Price"
-                type="number"
-                sx={{ m: 1 }}
-                value={itemPrice1}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setItemPrice1(event.target.valueAsNumber);
-                }}
-              />
-              <Stack>
-                {" "}
-                <Chip label={`Total: ${itemTotal1}`} />
-              </Stack>
-            </ListItem>
-            <Fab variant="extended">
               <AddIcon sx={{ mr: 1 }} />
               Add New Item
             </Fab>
@@ -285,7 +312,9 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              // onClick={() => {}}
+              onClick={() => {
+                setStatus("draft");
+              }}
             >
               Save as Draft
             </Fab>
@@ -318,12 +347,13 @@ export default function CreateInvoice() {
                     paymentDue: paymentDue,
                     status: status,
                     description: description,
-                    items: {
-                      name: itemName1,
-                      quantity: itemQuantity1,
-                      price: itemPrice1,
-                      total: itemTotal1,
-                    },
+
+                    items: items.map((item) => ({
+                      name: item.name,
+                      quantity: item.quantity,
+                      price: item.price,
+                      total: item.total,
+                    })),
                   })
                   .then(
                     (response) => {
@@ -334,7 +364,7 @@ export default function CreateInvoice() {
                     }
                   )
                   .then(() => {
-                    <Navigate to="/invoices" />;
+                    navigate("/invoices");
                   })
               }
             >

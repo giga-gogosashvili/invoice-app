@@ -30,12 +30,14 @@ export default function Invoice() {
   );
   const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [status, setStatus] = useState<string>("pending");
 
   useEffect(() => {
     axios
       .get(`http://localhost:9481/invoices/${id}`) //   "/db/data.json"
       .then((res) => {
         setInvoice(res.data);
+        setStatus(res.data.status);
       })
 
       .catch((err) => setError(true)); //useState error
@@ -76,8 +78,8 @@ export default function Invoice() {
 
             <Stack direction="row" spacing={2}>
               <Chip
-                label={capitalizeFirstLetter(invoice.status)}
-                color={getStatusColor(invoice.status)}
+                label={capitalizeFirstLetter(status)}
+                color={getStatusColor(status)}
                 sx={{ mr: 5, width: 100 }}
               />
               <Link to={`/invoices/${invoice.id}/edit`}>
@@ -108,6 +110,52 @@ export default function Invoice() {
                   size="small"
                   color="primary"
                   aria-label="add"
+                  onClick={() => {
+                    setStatus("paid");
+                    // to do!!!
+                    // axios
+                    //   .put(`http://localhost:9481/invoices/${id}`, {
+                    //     id: id,
+                    //     senderAddress: {
+                    //       street: invoice.senderAddress.street,
+                    //       city: invoice.senderAddress.city,
+                    //       postCode: senderPostCode,
+                    //       country: senderCountry,
+                    //     },
+                    //     clientName: clientName,
+                    //     clientEmail: clientEmail,
+                    //     clientAddress: {
+                    //       street: clientStreet,
+                    //       city: clientCity,
+                    //       postCode: clientPostCode,
+                    //       country: clientCountry,
+                    //     },
+                    //     createdAt: dateJSON,
+                    //     paymentTerms: paymentTerms,
+                    //     paymentDue: paymentDue,
+                    //     status: status,
+                    //     description: description,
+                    //     items: [
+                    //       {
+                    //         name: itemName1,
+                    //         quantity: itemQuantity1,
+                    //         price: itemPrice1,
+                    //         total: itemTotal1,
+                    //       },
+                    //     ],
+                    //   })
+                    //   .then(
+                    //     (response) => {
+                    //       console.log(response);
+                    //     },
+                    //     (error) => {
+                    //       console.log(error);
+                    //     }
+                    //   )
+                    //   .then(() => {
+                    //     <Navigate to="/invoices" />;
+                    //   });
+                  }}
                 >
                   Mark as Paid
                 </Fab>

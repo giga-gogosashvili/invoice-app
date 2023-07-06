@@ -75,7 +75,7 @@ var invoices = []invoice{
 		PaymentTerms: 1,
 		ClientName:   "Jensen Huang",
 		ClientEmail:  "jensenh@mail.com",
-		Status:       "paid",
+		Status:       "pending",
 		SenderAddress: senderAddress{
 			Street:   "19 Union Terrace",
 			City:     "London",

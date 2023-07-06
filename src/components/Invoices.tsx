@@ -29,14 +29,14 @@ export type InvoiceResponse = {
     postCode: string;
     country: string;
   };
-  items: [
-    {
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-    }
-  ];
+  items: Item[];
+  total: number;
+};
+
+export type Item = {
+  name: string;
+  quantity: number;
+  price: number;
   total: number;
 };
 
