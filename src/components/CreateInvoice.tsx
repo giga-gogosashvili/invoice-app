@@ -47,6 +47,7 @@ export default function CreateInvoice() {
   ]);
 
   const [status, setStatus] = useState<string>("pending");
+  const [itemTotal, setItemTotal] = useState<number>(0);
 
   // const status = "pending";
 
@@ -282,7 +283,7 @@ export default function CreateInvoice() {
                 />
                 <Stack>
                   {" "}
-                  <Chip label={`Total: ${item.total}`} />
+                  <Chip label={`Total: ${item.quantity * item.price}`} />
                 </Stack>
               </ListItem>
             ))}
@@ -400,7 +401,7 @@ export default function CreateInvoice() {
                       name: item.name,
                       quantity: item.quantity,
                       price: item.price,
-                      total: item.total,
+                      total: item.quantity * item.price,
                     })),
                   })
                   .then(

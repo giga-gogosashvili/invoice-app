@@ -168,15 +168,6 @@ export default function Invoice() {
                   Mark as Paid
                 </Fab>
               )}
-              {/* <Fab
-                sx={{ mr: 1 }}
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-              >
-                Mark as Paid
-              </Fab> */}
             </Stack>
             <Stack direction="row" spacing={2}>
               <CardContent>
