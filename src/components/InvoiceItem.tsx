@@ -69,16 +69,16 @@ export default function InvoiceItem({ data, func }: Props) {
               <Fab
                 color="primary"
                 aria-label="delete"
-                // onClick={() =>
-                //   axios
-                //     .delete(`http://localhost:9481/invoices/${id}`)
-                //     .then((error) => {
-                //       console.log(error);
-                //     })
-                //     .then(() => {
-                //       navigate("/invoices");
-                //     })
-                // }
+                onClick={() =>
+                  axios
+                    .delete(`http://localhost:9481/invoices/${invoice.id}`)
+                    .then((error) => {
+                      console.log(error);
+                    })
+                    .then(() => {
+                      window.location.reload();
+                    })
+                }
               >
                 <DeleteIcon />
               </Fab>
