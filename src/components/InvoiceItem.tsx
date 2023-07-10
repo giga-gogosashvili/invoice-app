@@ -7,6 +7,8 @@ import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 interface Props {
   data: InvoiceResponse[];
@@ -21,6 +23,9 @@ const formatingNumbers = (number: number) => {
 };
 
 export default function InvoiceItem({ data, func }: Props) {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   return (
     <div>
       <Box
@@ -61,7 +66,20 @@ export default function InvoiceItem({ data, func }: Props) {
                   <EditIcon />
                 </Fab>
               </Link>
-              <Fab color="primary" aria-label="edit">
+              <Fab
+                color="primary"
+                aria-label="delete"
+                // onClick={() =>
+                //   axios
+                //     .delete(`http://localhost:9481/invoices/${id}`)
+                //     .then((error) => {
+                //       console.log(error);
+                //     })
+                //     .then(() => {
+                //       navigate("/invoices");
+                //     })
+                // }
+              >
                 <DeleteIcon />
               </Fab>
             </ListItem>

@@ -179,7 +179,7 @@ func main() {
 			}
 		}
 		w.WriteHeader(404)
-	}).Methods("DELETE")
+	}).Methods("DELETE", "OPTIONS")
 
 	r.HandleFunc("/invoices/{id}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

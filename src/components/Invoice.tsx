@@ -100,6 +100,16 @@ export default function Invoice() {
                 size="small"
                 color="error"
                 aria-label="add"
+                onClick={() =>
+                  axios
+                    .delete(`http://localhost:9481/invoices/${id}`)
+                    .then((error) => {
+                      console.log(error);
+                    })
+                    .then(() => {
+                      navigate("/invoices");
+                    })
+                }
               >
                 Delete
               </Fab>
