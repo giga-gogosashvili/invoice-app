@@ -310,6 +310,9 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
+              onClick={() => {
+                navigate("/invoices");
+              }}
             >
               Discard
             </Fab>
