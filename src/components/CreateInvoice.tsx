@@ -11,14 +11,9 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
 import axios from "axios";
-import { v4 as uuid } from "uuid";
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
-
-// const unique_id = uuid();
-// const id = unique_id.slice(0, 6).toUpperCase();
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
@@ -232,7 +227,15 @@ export default function CreateInvoice() {
                   sx={{ m: 1 }}
                   value={item.name}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    // setItemName1(event.target.value);
+                    const before = items.slice(0, index);
+                    const after = items.slice(index + 1, items.length);
+                    const changed = {
+                      name: event.target.value,
+                      quantity: item.quantity,
+                      price: item.price,
+                      total: item.total,
+                    };
+                    setItems(before.concat(changed).concat(after));
                   }}
                 />
                 <TextField
@@ -247,7 +250,15 @@ export default function CreateInvoice() {
                   // variant="filled"
                   value={item.quantity}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    // setItemQuantity1(event.target.valueAsNumber);
+                    const before = items.slice(0, index);
+                    const after = items.slice(index + 1, items.length);
+                    const changed = {
+                      name: item.name,
+                      quantity: event.target.valueAsNumber,
+                      price: item.price,
+                      total: item.total,
+                    };
+                    setItems(before.concat(changed).concat(after));
                   }}
                 />
                 <TextField
@@ -258,8 +269,6 @@ export default function CreateInvoice() {
                   sx={{ m: 1 }}
                   value={item.price}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    // setItemPrice1(event.target.valueAsNumber);
-                    // setItems
                     const before = items.slice(0, index);
                     const after = items.slice(index + 1, items.length);
                     const changed = {
