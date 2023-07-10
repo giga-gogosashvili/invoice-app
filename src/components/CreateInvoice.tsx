@@ -322,9 +322,48 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              onClick={() => {
-                setStatus("draft");
-              }}
+              onClick={() =>
+                axios
+                  .post("http://localhost:9481/invoices", {
+                    senderAddress: {
+                      street: senderStreet,
+                      city: senderCity,
+                      postCode: senderPostCode,
+                      country: senderCountry,
+                    },
+                    clientName: clientName,
+                    clientEmail: clientEmail,
+                    clientAddress: {
+                      street: clientStreet,
+                      city: clientCity,
+                      postCode: clientPostCode,
+                      country: clientCountry,
+                    },
+                    createdAt: dateJSON,
+                    paymentTerms: paymentTerms,
+                    paymentDue: paymentDue,
+                    status: "draft",
+                    description: description,
+
+                    items: items.map((item) => ({
+                      name: item.name,
+                      quantity: item.quantity,
+                      price: item.price,
+                      total: item.total,
+                    })),
+                  })
+                  .then(
+                    (response) => {
+                      console.log(response);
+                    },
+                    (error) => {
+                      console.log(error);
+                    }
+                  )
+                  .then(() => {
+                    navigate("/invoices");
+                  })
+              }
             >
               Save as Draft
             </Fab>
@@ -337,7 +376,6 @@ export default function CreateInvoice() {
               onClick={() =>
                 axios
                   .post("http://localhost:9481/invoices", {
-                    // id: id,
                     senderAddress: {
                       street: senderStreet,
                       city: senderCity,
