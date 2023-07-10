@@ -123,48 +123,46 @@ export default function Invoice() {
                   onClick={() => {
                     setStatus("paid");
                     // to do!!!
-                    // axios
-                    //   .put(`http://localhost:9481/invoices/${id}`, {
-                    //     id: id,
-                    //     senderAddress: {
-                    //       street: invoice.senderAddress.street,
-                    //       city: invoice.senderAddress.city,
-                    //       postCode: senderPostCode,
-                    //       country: senderCountry,
-                    //     },
-                    //     clientName: clientName,
-                    //     clientEmail: clientEmail,
-                    //     clientAddress: {
-                    //       street: clientStreet,
-                    //       city: clientCity,
-                    //       postCode: clientPostCode,
-                    //       country: clientCountry,
-                    //     },
-                    //     createdAt: dateJSON,
-                    //     paymentTerms: paymentTerms,
-                    //     paymentDue: paymentDue,
-                    //     status: status,
-                    //     description: description,
-                    //     items: [
-                    //       {
-                    //         name: itemName1,
-                    //         quantity: itemQuantity1,
-                    //         price: itemPrice1,
-                    //         total: itemTotal1,
-                    //       },
-                    //     ],
-                    //   })
-                    //   .then(
-                    //     (response) => {
-                    //       console.log(response);
-                    //     },
-                    //     (error) => {
-                    //       console.log(error);
-                    //     }
-                    //   )
-                    //   .then(() => {
-                    //     <Navigate to="/invoices" />;
-                    //   });
+                    axios
+                      .put(`http://localhost:9481/invoices/${id}`, {
+                        id: id,
+                        senderAddress: {
+                          street: invoice.senderAddress.street,
+                          city: invoice.senderAddress.city,
+                          postCode: invoice.senderAddress.postCode,
+                          country: invoice.senderAddress.country,
+                        },
+                        clientName: invoice.clientName,
+                        clientEmail: invoice.clientEmail,
+                        clientAddress: {
+                          street: invoice.clientAddress.street,
+                          city: invoice.clientAddress.city,
+                          postCode: invoice.clientAddress.postCode,
+                          country: invoice.clientAddress.country,
+                        },
+                        createdAt: invoice.createdAt,
+                        paymentTerms: invoice.paymentTerms,
+                        paymentDue: invoice.paymentDue,
+                        status: "paid",
+                        description: invoice.description,
+                        items: invoice.items.map((item) => ({
+                          name: item.name,
+                          quantity: item.quantity,
+                          price: item.price,
+                          total: item.total,
+                        })),
+                      })
+                      .then(
+                        (response) => {
+                          console.log(response);
+                        },
+                        (error) => {
+                          console.log(error);
+                        }
+                      )
+                      .then(() => {
+                        window.location.reload();
+                      });
                   }}
                 >
                   Mark as Paid
