@@ -8,6 +8,9 @@ import (
 	"net/http"
 	"math/rand"
 	"strconv"
+	//ADDED:
+	"github.com/rs/cors"
+
 )
 
 type senderAddress struct {
@@ -96,9 +99,12 @@ var invoices = []invoice{
 	},
 }
 
+
 func main() {
 	port := "9481"
 	r := mux.NewRouter()
+
+	
 
 	r.HandleFunc("/invoices", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -155,7 +161,7 @@ func main() {
 			}
 		}
 		w.WriteHeader(404)
-	}).Methods("GET")
+	}).Methods("GET", "OPTIONS")
 
 	r.HandleFunc("/invoices/{id}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -210,8 +216,24 @@ func main() {
 			}
 		}
 		w.WriteHeader(404)
-	}).Methods("PUT")
+	}).Methods("PUT", "OPTIONS")
 
 	log.Println("listening on", port)
-	log.Fatal(http.ListenAndServe(":"+port, r))
+
+	// ADED
+	c := cors.New(cors.Options{
+		AllowedMethods: []string{"POST", "GET", "OPTIONS", "PUT","DELETE"},
+        AllowedOrigins: []string{
+			"http://localhost:3000", "http://localhost:9481" },
+		AllowCredentials: true,
+		Debug: true,
+
+	})
+		handler := c.Handler(r)
+		log.Fatal(http.ListenAndServe(":"+port, handler))
+
+    http.Handle(":9481", r)
+
+	// log.Fatal(http.ListenAndServe(":"+port, r))
+
 }

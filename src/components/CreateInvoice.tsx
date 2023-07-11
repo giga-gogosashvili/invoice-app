@@ -47,15 +47,6 @@ export default function CreateInvoice() {
   ]);
 
   const [status, setStatus] = useState<string>("pending");
-  const [itemTotal, setItemTotal] = useState<number>(0);
-
-  // const status = "pending";
-
-  // useEffect(() => {
-  //   if (itemPrice1 && itemQuantity1 !== undefined) {
-  //     setItemTotal1(itemQuantity1 * itemPrice1);
-  //   }
-  // }, [itemPrice1]);
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 

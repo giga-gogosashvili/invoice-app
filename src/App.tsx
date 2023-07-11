@@ -14,7 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/invoices" element={<Root />} />
           <Route path="invoices/:id" element={<Invoice />} />
-          <Route path="invoices/create" element={<CreateInvoice />} />
+          <Route path={"invoices/create"} element={<CreateInvoice />} />
           <Route path="invoices/:id/edit" element={<EditInvoice />} />
         </Routes>
       </BrowserRouter>
