@@ -45,7 +45,7 @@ export default function EditInvoice() {
   const date = new Date();
   const dateJSON = date.toISOString().split("T")[0];
 
-  const [senderStreet, setSenderStreet] = useState<string>("");
+  const [senderStreet, setSenderStreet] = useState<string | undefined>("");
   const [senderCity, setSenderCity] = useState<string>("");
   const [senderPostCode, setSenderPostCode] = useState<string>("");
   const [senderCountry, setSenderCountry] = useState<string>("");
@@ -58,7 +58,9 @@ export default function EditInvoice() {
   const [clientPostCode, setClientPostCode] = useState<string>("");
   const [clientCountry, setClientCountry] = useState<string>("");
 
-  const [createdAt, setCreatedAt] = React.useState<Dayjs | null>(dayjs(date));
+  const [createdAt, setCreatedAt] = React.useState<Dayjs | null | string>(
+    dayjs(date)
+  );
   const [paymentTerms, setPaymentTerms] = useState<number>(14);
   const [description, setDescription] = useState<string>("");
 
@@ -66,13 +68,59 @@ export default function EditInvoice() {
     { name: "", quantity: 0, price: 0, total: 0 },
   ]);
 
-  const [status, setStatus] = useState<string>("pending");
+  const [status, setStatus] = useState<string>("");
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
-  // if (invoice) {
-  //   setSenderStreet(invoice.senderAddress.street);
-  // }
+  // const updateInvoice = () => {
+  //   axios
+  //     .put(`http://localhost:9481/invoices/${id}`, {
+  //       id: id,
+  //       senderAddress: {
+  //         street: senderStreet,
+  //         city: senderCity,
+  //         postCode: senderPostCode,
+  //         country: senderCountry,
+  //       },
+  //       clientName: clientName,
+  //       clientEmail: clientEmail,
+  //       clientAddress: {
+  //         street: clientStreet,
+  //         city: clientCity,
+  //         postCode: clientPostCode,
+  //         country: clientCountry,
+  //       },
+  //       createdAt: dateJSON,
+  //       paymentTerms: paymentTerms,
+  //       paymentDue: paymentDue,
+  //       status: "draft",
+  //       description: description,
+
+  //       items: items.map((item) => ({
+  //         name: item.name,
+  //         quantity: item.quantity,
+  //         price: item.price,
+  //         total: item.total,
+  //       })),
+  //     })
+  //     .then(({ data }) => {
+  //       setSenderStreet(data.senderAddress.street);
+  //       setSenderCity(data.senderAddress.city);
+  //       setClientName(data.clientName);
+  //       setClientEmail(data.clientEmail);
+  //     })
+  //     .then(
+  //       (response) => {
+  //         console.log(response);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     )
+  //     .then(() => {
+  //       navigate("/invoices");
+  //     });
+  // };
 
   return (
     <div>
@@ -87,7 +135,8 @@ export default function EditInvoice() {
               sx={{ m: 1 }}
               id="form-street-from"
               label="Street Address"
-              defaultValue={invoice.senderAddress.street}
+              type="text"
+              value={senderStreet || invoice.senderAddress.street}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setSenderStreet(event.target.value);
               }}
@@ -97,7 +146,7 @@ export default function EditInvoice() {
               id="form-city"
               label="City"
               sx={{ m: 1 }}
-              defaultValue={invoice.senderAddress.city}
+              value={senderCity || invoice.senderAddress.city}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setSenderCity(event.target.value);
               }}
@@ -107,7 +156,7 @@ export default function EditInvoice() {
               id="form-postcode-from"
               label="Post Code"
               sx={{ m: 1 }}
-              defaultValue={invoice.senderAddress.postCode}
+              value={senderPostCode || invoice.senderAddress.postCode}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setSenderPostCode(event.target.value);
               }}
@@ -117,7 +166,7 @@ export default function EditInvoice() {
               id="form-country"
               label="Country"
               sx={{ m: 1 }}
-              defaultValue={invoice.senderAddress.country}
+              value={senderCountry || invoice.senderAddress.country}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setSenderCountry(event.target.value);
               }}
@@ -131,7 +180,7 @@ export default function EditInvoice() {
               sx={{ m: 1 }}
               id="form-name-to"
               label="Client's Name"
-              defaultValue={invoice.clientName}
+              value={clientName || invoice.clientName}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientName(event.target.value);
               }}
@@ -142,7 +191,7 @@ export default function EditInvoice() {
               sx={{ m: 1 }}
               id="form-email-to"
               label="Client's Email"
-              defaultValue={invoice.clientEmail}
+              value={clientEmail || invoice.clientEmail}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientEmail(event.target.value);
               }}
@@ -153,7 +202,7 @@ export default function EditInvoice() {
               sx={{ m: 1 }}
               id="form-street-to"
               label="Street Address"
-              defaultValue={invoice.clientAddress.street}
+              value={clientStreet || invoice.clientAddress.street}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientStreet(event.target.value);
               }}
@@ -163,7 +212,7 @@ export default function EditInvoice() {
               id="form-city-to"
               label="City"
               sx={{ m: 1 }}
-              defaultValue={invoice.clientAddress.city}
+              value={clientCity || invoice.clientAddress.city}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientCity(event.target.value);
               }}
@@ -173,7 +222,7 @@ export default function EditInvoice() {
               id="form-postcode-to"
               label="Post Code"
               sx={{ m: 1 }}
-              defaultValue={invoice.clientAddress.postCode}
+              value={clientPostCode || invoice.clientAddress.postCode}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientPostCode(event.target.value);
               }}
@@ -183,7 +232,7 @@ export default function EditInvoice() {
               id="form-country-to"
               label="Country"
               sx={{ m: 1 }}
-              defaultValue={invoice.clientAddress.country}
+              value={clientCountry || invoice.clientAddress.country}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setClientCountry(event.target.value);
               }}
@@ -192,7 +241,7 @@ export default function EditInvoice() {
           <DatePicker
             sx={{ m: 1 }}
             //DO NAPRAWY
-            value={createdAt}
+            value={createdAt || invoice.createdAt}
             onChange={(newValue) => setCreatedAt(newValue)}
           />
           <FormControl sx={{ m: 1, width: 200 }}>
@@ -204,7 +253,7 @@ export default function EditInvoice() {
                 name: "payment-due",
                 id: "uncontrolled-native",
               }}
-              defaultValue={invoice.paymentTerms}
+              value={paymentTerms || invoice.paymentTerms}
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                 setPaymentTerms(Number(event.target.value));
               }}
@@ -221,7 +270,7 @@ export default function EditInvoice() {
             sx={{ m: 1 }}
             id="form-description"
             label="Project Description"
-            defaultValue={invoice.description}
+            value={description || invoice.description}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setDescription(event.target.value);
             }}
@@ -340,47 +389,55 @@ export default function EditInvoice() {
                 size="small"
                 color="primary"
                 aria-label="add"
-                onClick={() =>
-                  axios
-                    .put(`http://localhost:9481/invoices/${id}`, {
-                      senderAddress: {
-                        street: senderStreet,
-                        city: senderCity,
-                        postCode: senderPostCode,
-                        country: senderCountry,
-                      },
-                      clientName: clientName,
-                      clientEmail: clientEmail,
-                      clientAddress: {
-                        street: clientStreet,
-                        city: clientCity,
-                        postCode: clientPostCode,
-                        country: clientCountry,
-                      },
-                      createdAt: dateJSON,
-                      paymentTerms: paymentTerms,
-                      paymentDue: paymentDue,
-                      status: "draft",
-                      description: description,
+                type="submit"
+                onClick={
+                  // updateInvoice
+                  () =>
+                    axios
+                      .put(`http://localhost:9481/invoices/${id}`, {
+                        id: id,
+                        senderAddress: {
+                          street: senderStreet || invoice.senderAddress.street,
+                          city: senderCity || invoice.senderAddress.city,
+                          postCode:
+                            senderPostCode || invoice.senderAddress.postCode,
+                          country:
+                            senderCountry || invoice.senderAddress.country,
+                        },
+                        clientName: clientName || invoice.clientName,
+                        clientEmail: clientEmail || invoice.clientEmail,
+                        clientAddress: {
+                          street: clientStreet || invoice.clientAddress.street,
+                          city: clientCity || invoice.clientAddress.city,
+                          postCode:
+                            clientPostCode || invoice.clientAddress.postCode,
+                          country:
+                            clientCountry || invoice.clientAddress.country,
+                        },
+                        createdAt: dateJSON,
+                        paymentTerms: paymentTerms || invoice.paymentTerms,
+                        paymentDue: paymentDue || invoice.paymentDue,
+                        status: status || invoice.status,
+                        description: description || invoice.description,
 
-                      items: items.map((item) => ({
-                        name: item.name,
-                        quantity: item.quantity,
-                        price: item.price,
-                        total: item.total,
-                      })),
-                    })
-                    .then(
-                      (response) => {
-                        console.log(response);
-                      },
-                      (error) => {
-                        console.log(error);
-                      }
-                    )
-                    .then(() => {
-                      navigate("/invoices");
-                    })
+                        items: items.map((item) => ({
+                          name: item.name,
+                          quantity: item.quantity,
+                          price: item.price,
+                          total: item.total,
+                        })),
+                      })
+                      .then(
+                        (response) => {
+                          console.log(response);
+                        },
+                        (error) => {
+                          console.log(error);
+                        }
+                      )
+                      .then(() => {
+                        navigate("/invoices");
+                      })
                 }
               >
                 Save as Draft
