@@ -290,9 +290,9 @@ export default function EditInvoice() {
                   <TextField
                     required
                     id="form-item-name-1"
-                    label="Item Name"
+                    label={"Item Name"}
                     sx={{ m: 1 }}
-                    value={item.name}
+                    value={item.name || invoice.items[index].name}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                       const before = items.slice(0, index);
                       const after = items.slice(index + 1, items.length);
@@ -315,7 +315,7 @@ export default function EditInvoice() {
                     //   shrink: true,
                     // }}
                     // variant="filled"
-                    value={item.quantity}
+                    value={item.quantity || invoice.items[index].quantity}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                       const before = items.slice(0, index);
                       const after = items.slice(index + 1, items.length);
@@ -334,7 +334,7 @@ export default function EditInvoice() {
                     label="Price"
                     type="number"
                     sx={{ m: 1 }}
-                    value={item.price}
+                    value={item.price || invoice.items[index].price}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                       const before = items.slice(0, index);
                       const after = items.slice(index + 1, items.length);
@@ -349,7 +349,13 @@ export default function EditInvoice() {
                   />
                   <Stack>
                     {" "}
-                    <Chip label={`Total: ${item.quantity * item.price}`} />
+                    <Chip
+                      label={`Total: ${
+                        item.quantity * item.price ||
+                        invoice.items[index].price *
+                          invoice.items[index].quantity
+                      }`}
+                    />
                   </Stack>
                 </ListItem>
               ))}
@@ -370,61 +376,115 @@ export default function EditInvoice() {
                 Add New Item
               </Fab>
             </List>
-            <div>
-              <Fab
-                sx={{ mr: 1 }}
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-                onClick={() => {
-                  navigate("/invoices");
-                }}
-              >
-                Discard
-              </Fab>
-              <Fab
-                sx={{ mr: 1 }}
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-                type="submit"
-                onClick={
-                  // updateInvoice
-                  () =>
+            {items.map((item, index) => (
+              <div key={index}>
+                <Fab
+                  sx={{ mr: 1 }}
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => {
+                    navigate("/invoices");
+                  }}
+                >
+                  Discard
+                </Fab>
+                <Fab
+                  sx={{ mr: 1 }}
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  aria-label="add"
+                  type="submit"
+                  onClick={
+                    // updateInvoice
+                    () =>
+                      axios
+                        .put(`http://localhost:9481/invoices/${id}`, {
+                          id: id,
+                          senderAddress: {
+                            street:
+                              senderStreet || invoice.senderAddress.street,
+                            city: senderCity || invoice.senderAddress.city,
+                            postCode:
+                              senderPostCode || invoice.senderAddress.postCode,
+                            country:
+                              senderCountry || invoice.senderAddress.country,
+                          },
+                          clientName: clientName || invoice.clientName,
+                          clientEmail: clientEmail || invoice.clientEmail,
+                          clientAddress: {
+                            street:
+                              clientStreet || invoice.clientAddress.street,
+                            city: clientCity || invoice.clientAddress.city,
+                            postCode:
+                              clientPostCode || invoice.clientAddress.postCode,
+                            country:
+                              clientCountry || invoice.clientAddress.country,
+                          },
+                          createdAt: dateJSON,
+                          paymentTerms: paymentTerms || invoice.paymentTerms,
+                          paymentDue: paymentDue || invoice.paymentDue,
+                          status: status || invoice.status,
+                          description: description || invoice.description,
+
+                          items: items.map((item) => ({
+                            name: item.name || items[index].name,
+                            quantity: item.quantity || items[index].quantity,
+                            price: item.price || items[index].price,
+                            total: item.total || items[index].total,
+                          })),
+                        })
+                        .then(
+                          (response) => {
+                            console.log(response);
+                          },
+                          (error) => {
+                            console.log(error);
+                          }
+                        )
+                        .then(() => {
+                          navigate("/invoices");
+                        })
+                  }
+                >
+                  Save as Draft
+                </Fab>
+                <Fab
+                  sx={{ mr: 1 }}
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  aria-label="add"
+                  onClick={() =>
                     axios
                       .put(`http://localhost:9481/invoices/${id}`, {
-                        id: id,
                         senderAddress: {
-                          street: senderStreet || invoice.senderAddress.street,
-                          city: senderCity || invoice.senderAddress.city,
-                          postCode:
-                            senderPostCode || invoice.senderAddress.postCode,
-                          country:
-                            senderCountry || invoice.senderAddress.country,
+                          street: senderStreet,
+                          city: senderCity,
+                          postCode: senderPostCode,
+                          country: senderCountry,
                         },
-                        clientName: clientName || invoice.clientName,
-                        clientEmail: clientEmail || invoice.clientEmail,
+                        clientName: clientName,
+                        clientEmail: clientEmail,
                         clientAddress: {
-                          street: clientStreet || invoice.clientAddress.street,
-                          city: clientCity || invoice.clientAddress.city,
-                          postCode:
-                            clientPostCode || invoice.clientAddress.postCode,
-                          country:
-                            clientCountry || invoice.clientAddress.country,
+                          street: clientStreet,
+                          city: clientCity,
+                          postCode: clientPostCode,
+                          country: clientCountry,
                         },
                         createdAt: dateJSON,
-                        paymentTerms: paymentTerms || invoice.paymentTerms,
-                        paymentDue: paymentDue || invoice.paymentDue,
-                        status: status || invoice.status,
-                        description: description || invoice.description,
+                        paymentTerms: paymentTerms,
+                        paymentDue: paymentDue,
+                        status: status,
+                        description: description,
 
                         items: items.map((item) => ({
                           name: item.name,
                           quantity: item.quantity,
                           price: item.price,
-                          total: item.total,
+                          total: item.quantity * item.price,
                         })),
                       })
                       .then(
@@ -438,62 +498,12 @@ export default function EditInvoice() {
                       .then(() => {
                         navigate("/invoices");
                       })
-                }
-              >
-                Save as Draft
-              </Fab>
-              <Fab
-                sx={{ mr: 1 }}
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-                onClick={() =>
-                  axios
-                    .put(`http://localhost:9481/invoices/${id}`, {
-                      senderAddress: {
-                        street: senderStreet,
-                        city: senderCity,
-                        postCode: senderPostCode,
-                        country: senderCountry,
-                      },
-                      clientName: clientName,
-                      clientEmail: clientEmail,
-                      clientAddress: {
-                        street: clientStreet,
-                        city: clientCity,
-                        postCode: clientPostCode,
-                        country: clientCountry,
-                      },
-                      createdAt: dateJSON,
-                      paymentTerms: paymentTerms,
-                      paymentDue: paymentDue,
-                      status: status,
-                      description: description,
-
-                      items: items.map((item) => ({
-                        name: item.name,
-                        quantity: item.quantity,
-                        price: item.price,
-                        total: item.quantity * item.price,
-                      })),
-                    })
-                    .then(
-                      (response) => {
-                        console.log(response);
-                      },
-                      (error) => {
-                        console.log(error);
-                      }
-                    )
-                    .then(() => {
-                      navigate("/invoices");
-                    })
-                }
-              >
-                Save & Send
-              </Fab>
-            </div>
+                  }
+                >
+                  Save & Send
+                </Fab>
+              </div>
+            ))}
           </div>
         </Box>
       )}
