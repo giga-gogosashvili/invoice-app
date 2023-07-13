@@ -61,7 +61,7 @@ export default function EditInvoice() {
   const [createdAt, setCreatedAt] = React.useState<Dayjs | null | string>(
     dayjs(date)
   );
-  const [paymentTerms, setPaymentTerms] = useState<number>(14);
+  const [paymentTerms, setPaymentTerms] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
 
   const [items, setItems] = useState<Item[]>([
