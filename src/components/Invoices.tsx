@@ -5,6 +5,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Stack from "@mui/material/Stack";
 import FilterButton from "./FilterButton";
 import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 import axios from "axios";
 
@@ -91,7 +92,7 @@ export default function Invoices() {
 
   return (
     <div>
-      <h1>Invoices</h1>
+      <Typography variant="h1">Invoices</Typography>
       <p>There are {invoices.length} total invoices</p>
       <Stack
         direction="row"
