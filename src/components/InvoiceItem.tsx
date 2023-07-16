@@ -1,14 +1,17 @@
 import { Box, List, ListItem, ListItemText } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FileOpenIcon from "@mui/icons-material/FileOpen";
-import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 interface Props {
   data: InvoiceResponse[];
@@ -25,6 +28,15 @@ const formatingNumbers = (number: number) => {
 export default function InvoiceItem({ data, func }: Props) {
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div>
@@ -49,39 +61,62 @@ export default function InvoiceItem({ data, func }: Props) {
                   sx={{ mr: 5, width: 100 }}
                 />
               </Stack>
+              <div>
+                <Button
+                  id="fade-button"
+                  aria-controls={open ? "fade-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <NavigateNextIcon></NavigateNextIcon>
+                </Button>
+                {data.map((invoice, index: number) => (
+                  <Menu
+                    key={index}
+                    id="fade-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "fade-button",
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    TransitionComponent={Fade}
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        navigate(`/invoices/${invoice.id}`);
+                      }}
+                    >
+                      Details
+                    </MenuItem>
 
-              <Link
-                to={`/invoices/${invoice.id}`}
-                cy-data={`open_${invoice.id}`}
-              >
-                <Fab color="primary" aria-label="edit">
-                  <FileOpenIcon />
-                </Fab>
-              </Link>
-              <Link
-                to={`/invoices/${invoice.id}/edit`}
-                cy-data={`edit_${invoice.id}`}
-              >
-                <Fab color="primary" aria-label="edit">
-                  <EditIcon />
-                </Fab>
-              </Link>
-              <Fab
-                color="primary"
-                aria-label="delete"
-                onClick={() =>
-                  axios
-                    .delete(`http://localhost:9481/invoices/${invoice.id}`)
-                    .then((error) => {
-                      console.log(error);
-                    })
-                    .then(() => {
-                      window.location.reload();
-                    })
-                }
-              >
-                <DeleteIcon />
-              </Fab>
+                    <MenuItem
+                      onClick={() => {
+                        navigate(`/invoices/${invoice.id}/edit`);
+                      }}
+                    >
+                      Edit
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() =>
+                        axios
+                          .delete(
+                            `http://localhost:9481/invoices/${invoice.id}`
+                          )
+                          .then((error) => {
+                            console.log(error);
+                          })
+                          .then(() => {
+                            window.location.reload();
+                          })
+                      }
+                    >
+                      Delete
+                    </MenuItem>
+                  </Menu>
+                ))}
+              </div>
             </ListItem>
           ))}
         </List>

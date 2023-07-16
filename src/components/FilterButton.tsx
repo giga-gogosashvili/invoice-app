@@ -3,6 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
 
 interface Props {
   setFilterStatus: (a: string) => void;
@@ -14,9 +15,19 @@ export default function FilterButton(props: Props) {
   };
 
   return (
-    <Box sx={{ minWidth: 170 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Filter by status</InputLabel>
+    <Box>
+      <FormControl
+        sx={{
+          width: 117.46,
+          height: 15,
+          border: "none",
+          "& fieldset": { border: "none" },
+        }}
+        fullWidth
+      >
+        <InputLabel id="demo-simple-select-label">
+          <Typography variant="body2"> Filter by status</Typography>
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

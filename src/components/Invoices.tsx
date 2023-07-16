@@ -92,8 +92,12 @@ export default function Invoices() {
 
   return (
     <div>
-      <Typography variant="h1">Invoices</Typography>
-      <p>There are {invoices.length} total invoices</p>
+      <Typography color="gray.900" variant="h1">
+        Invoices
+      </Typography>
+      <Typography color="info.main" variant="body1">
+        There are {invoices.length} total invoices
+      </Typography>
       <Stack
         direction="row"
         display={"flex"}
@@ -108,7 +112,11 @@ export default function Invoices() {
           setFilterStatus={setFilterStatus}
         />
         <Link to={`/invoices/create`}>
-          <Button variant="contained" startIcon={<AddCircleIcon />}>
+          <Button
+            sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
+            variant="contained"
+            startIcon={<AddCircleIcon />}
+          >
             New Invoice
           </Button>
         </Link>
