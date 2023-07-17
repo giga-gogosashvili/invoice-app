@@ -14,6 +14,7 @@ import axios from "axios";
 import dayjs, { Dayjs } from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
+import { useEffect } from "react";
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
@@ -54,6 +55,22 @@ export default function CreateInvoice() {
 
   const [senderStreetError, setSenderStreetError] = useState<boolean>(false);
   const [senderCityError, setSenderCityError] = useState<boolean>(false);
+  const [senderPostCodeError, setSenderPostCodeError] =
+    useState<boolean>(false);
+  const [senderCountryError, setSenderCountryError] = useState<boolean>(false);
+  const [clientNameError, setClientNameError] = useState<boolean>(false);
+  const [clientEmailError, setClientEmailError] = useState<boolean>(false);
+  const [clientStreetError, setClientStreetError] = useState<boolean>(false);
+  const [clientCityError, setClientCityError] = useState<boolean>(false);
+  const [clientPostCodeError, setClientPostCodeError] =
+    useState<boolean>(false);
+  const [clientCountryError, setClientCountryError] = useState<boolean>(false);
+  const [descriptionError, setDescriptionError] = useState<boolean>(false);
+
+  // const [isDraft, setIsDraft] = useState<boolean>();
+  // useEffect(()=>{
+
+  // },[isDraft])
 
   return (
     <div>
@@ -88,6 +105,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={senderPostCodeError}
+            helperText={senderPostCodeError ? "Field can not be empty." : ""}
             id="form-postcode-from"
             label="Post Code"
             sx={{ m: 1 }}
@@ -98,6 +117,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={senderCountryError}
+            helperText={senderCountryError ? "Field can not be empty." : ""}
             id="form-country"
             label="Country"
             sx={{ m: 1 }}
@@ -111,6 +132,8 @@ export default function CreateInvoice() {
           <h5>Bill To</h5>
           <TextField
             required
+            error={clientNameError}
+            helperText={clientNameError ? "Field can not be empty." : ""}
             fullWidth
             sx={{ m: 1 }}
             id="form-name-to"
@@ -122,6 +145,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={clientEmailError}
+            helperText={clientEmailError ? "Field can not be empty." : ""}
             fullWidth
             sx={{ m: 1 }}
             id="form-email-to"
@@ -133,6 +158,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={clientStreetError}
+            helperText={clientStreetError ? "Field can not be empty." : ""}
             fullWidth
             sx={{ m: 1 }}
             id="form-street-to"
@@ -144,6 +171,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={clientCityError}
+            helperText={clientCityError ? "Field can not be empty." : ""}
             id="form-city-to"
             label="City"
             sx={{ m: 1 }}
@@ -154,6 +183,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={clientPostCodeError}
+            helperText={clientPostCodeError ? "Field can not be empty." : ""}
             id="form-postcode-to"
             label="Post Code"
             sx={{ m: 1 }}
@@ -164,6 +195,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={clientCountryError}
+            helperText={clientCountryError ? "Field can not be empty." : ""}
             id="form-country-to"
             label="Country"
             sx={{ m: 1 }}
@@ -200,6 +233,8 @@ export default function CreateInvoice() {
         </FormControl>
         <TextField
           required
+          error={descriptionError}
+          helperText={descriptionError ? "Field can not be empty." : ""}
           fullWidth
           sx={{ m: 1 }}
           id="form-description"
@@ -331,7 +366,26 @@ export default function CreateInvoice() {
                   setSenderStreetError(true);
                 } else if (senderCity == "") {
                   setSenderCityError(true);
+                } else if (senderPostCode == "") {
+                  setSenderPostCodeError(true);
+                } else if (senderCountry == "") {
+                  setSenderCountryError(true);
+                } else if (clientName == "") {
+                  setClientNameError(true);
+                } else if (clientEmail == "") {
+                  setClientEmailError(true);
+                } else if (clientStreet == "") {
+                  setClientStreetError(true);
+                } else if (clientCity == "") {
+                  setClientCityError(true);
+                } else if (clientPostCode == "") {
+                  setClientPostCodeError(true);
+                } else if (clientCountry == "") {
+                  setClientCountryError(true);
+                } else if (description == "") {
+                  setDescriptionError(true);
                 } else {
+                  // setIsDraft(true);
                   axios
                     .post("http://localhost:9481/invoices", {
                       senderAddress: {
