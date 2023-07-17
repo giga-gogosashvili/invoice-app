@@ -50,14 +50,21 @@ export default function CreateInvoice() {
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
+  // VALIDATION
+
+  const [senderStreetError, setSenderStreetError] = useState<boolean>(false);
+  const [senderCityError, setSenderCityError] = useState<boolean>(false);
+
   return (
     <div>
       <h2>New invoice</h2>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }} component="form">
         <div>
           <h5>Bill From</h5>
           <TextField
             required
+            error={senderStreetError}
+            helperText={senderStreetError ? "Field can not be empty." : ""}
             fullWidth
             sx={{ m: 1 }}
             id="form-street-from"
@@ -69,6 +76,8 @@ export default function CreateInvoice() {
           />
           <TextField
             required
+            error={senderCityError}
+            helperText={senderCityError ? "Field can not be empty." : ""}
             id="form-city"
             label="City"
             sx={{ m: 1 }}
@@ -314,48 +323,57 @@ export default function CreateInvoice() {
               size="small"
               color="primary"
               aria-label="add"
-              onClick={() =>
-                axios
-                  .post("http://localhost:9481/invoices", {
-                    senderAddress: {
-                      street: senderStreet,
-                      city: senderCity,
-                      postCode: senderPostCode,
-                      country: senderCountry,
-                    },
-                    clientName: clientName,
-                    clientEmail: clientEmail,
-                    clientAddress: {
-                      street: clientStreet,
-                      city: clientCity,
-                      postCode: clientPostCode,
-                      country: clientCountry,
-                    },
-                    createdAt: dateJSON,
-                    paymentTerms: paymentTerms,
-                    paymentDue: paymentDue,
-                    status: "draft",
-                    description: description,
+              onClick={() => {
+                setSenderStreetError(false);
+                setSenderCityError(false);
 
-                    items: items.map((item) => ({
-                      name: item.name,
-                      quantity: item.quantity,
-                      price: item.price,
-                      total: item.total,
-                    })),
-                  })
-                  .then(
-                    (response) => {
-                      console.log(response);
-                    },
-                    (error) => {
-                      console.log(error);
-                    }
-                  )
-                  .then(() => {
-                    navigate("/invoices");
-                  })
-              }
+                if (senderStreet == "") {
+                  setSenderStreetError(true);
+                } else if (senderCity == "") {
+                  setSenderCityError(true);
+                } else {
+                  axios
+                    .post("http://localhost:9481/invoices", {
+                      senderAddress: {
+                        street: senderStreet,
+                        city: senderCity,
+                        postCode: senderPostCode,
+                        country: senderCountry,
+                      },
+                      clientName: clientName,
+                      clientEmail: clientEmail,
+                      clientAddress: {
+                        street: clientStreet,
+                        city: clientCity,
+                        postCode: clientPostCode,
+                        country: clientCountry,
+                      },
+                      createdAt: dateJSON,
+                      paymentTerms: paymentTerms,
+                      paymentDue: paymentDue,
+                      status: "draft",
+                      description: description,
+
+                      items: items.map((item) => ({
+                        name: item.name,
+                        quantity: item.quantity,
+                        price: item.price,
+                        total: item.total,
+                      })),
+                    })
+                    .then(
+                      (response) => {
+                        console.log(response);
+                      },
+                      (error) => {
+                        console.log(error);
+                      }
+                    )
+                    .then(() => {
+                      navigate("/invoices");
+                    });
+                }
+              }}
             >
               Save as Draft
             </Fab>
