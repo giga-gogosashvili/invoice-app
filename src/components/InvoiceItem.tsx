@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemText } from "@mui/material";
+import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { InvoiceResponse } from "./Invoices";
@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 interface Props {
   data: InvoiceResponse[];
@@ -58,8 +59,13 @@ export default function InvoiceItem({ data, func }: Props) {
                 <Chip
                   label={capitalizeFirstLetter(invoice.status)}
                   color={func(invoice.status)}
-                  sx={{ mr: 5, width: 100 }}
-                />
+                  sx={{
+                    mr: 5,
+                    width: 100,
+                    typography: "h4",
+                  }}
+                  icon={<FiberManualRecordIcon />}
+                ></Chip>
               </Stack>
               <div>
                 <Button

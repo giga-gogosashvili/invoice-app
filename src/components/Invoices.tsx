@@ -51,6 +51,7 @@ export const getStatusColor = (
   | "secondary"
   | "info"
   | "warning"
+  
   | undefined => {
   switch (status) {
     case "paid":

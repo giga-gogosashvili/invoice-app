@@ -24,6 +24,9 @@ const theme = createTheme({
       main: "#EC5757",
       light: "#9277FF",
     },
+    warning: {
+      main: "#FF8F00",
+    },
   },
   typography: {
     fontFamily: "League Spartan",
@@ -64,6 +67,36 @@ const theme = createTheme({
       fontSize: "13px",
       lineHeight: "15px",
       letterSpacing: -0.25,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 24,
+          size: "medium",
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          borderRadius: 6,
+          opacity: 0.7,
+        },
+        icon: {
+          height: 8,
+          width: 8,
+          // color: "green"
+          // size: "small",
+        },
+        label: {
+          // opacity: 1,
+        },
+        filled: {
+          // opacity: 0.0570882149040699,
+        },
+      },
     },
   },
 });
