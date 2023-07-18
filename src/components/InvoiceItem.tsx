@@ -51,7 +51,15 @@ export default function InvoiceItem({ data, func }: Props) {
         <List>
           {data.map((invoice, index: number) => (
             <ListItem sx={{ "& > :not(style)": { m: 0.5 } }} key={index}>
-              <ListItemText primary={invoice.id} />
+              <ListItemText>
+                <Typography component="div" variant="h4">
+                  <Box display="inline" color={"#7E88C3"}>
+                    #
+                  </Box>
+                  {""}
+                  {invoice.id}
+                </Typography>
+              </ListItemText>
               <ListItemText primary={invoice.paymentDue} />
               <ListItemText primary={invoice.clientName} />
               <ListItemText primary={`£${formatingNumbers(invoice.total)}`} />
