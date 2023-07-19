@@ -5,6 +5,7 @@ import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import StyledListItem from "../customize/ListItemLP";
 
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -45,24 +46,47 @@ export default function InvoiceItem({ data, func }: Props) {
         sx={{
           flexGrow: 1,
           width: 1200,
-          bgcolor: "#F8F8FB",
+          // bgcolor: "#F8F8FB",
         }}
       >
         <List>
           {data.map((invoice, index: number) => (
-            <ListItem sx={{ "& > :not(style)": { m: 0.5 } }} key={index}>
+            <StyledListItem key={index}>
               <ListItemText>
                 <Typography component="div" variant="h4">
                   <Box display="inline" color={"#7E88C3"}>
                     #
                   </Box>
-                  {""}
                   {invoice.id}
                 </Typography>
               </ListItemText>
-              <ListItemText primary={invoice.paymentDue} />
-              <ListItemText primary={invoice.clientName} />
-              <ListItemText primary={`£${formatingNumbers(invoice.total)}`} />
+              <ListItemText>
+                <Typography component="div" variant="body1" color="info.main">
+                  Due{" "}
+                  <Box display="inline" color={"info.light"}>
+                    {invoice.paymentDue}
+                  </Box>
+                </Typography>
+              </ListItemText>
+
+              <ListItemText
+                primary={invoice.clientName}
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    color: "info.main",
+                    typography: "body1",
+                  },
+                }}
+                color="info"
+              />
+              <ListItemText
+                primary={`£${formatingNumbers(invoice.total)}`}
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    typography: "h3",
+                  },
+                }}
+              />
               <Stack direction="row" spacing={2}>
                 <Chip
                   label={capitalizeFirstLetter(invoice.status)}
@@ -131,7 +155,7 @@ export default function InvoiceItem({ data, func }: Props) {
                   </Menu>
                 ))}
               </div>
-            </ListItem>
+            </StyledListItem>
           ))}
         </List>
       </Box>

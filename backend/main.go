@@ -3,14 +3,15 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"log"
-	"net/http"
 	"math/rand"
+	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+
 	//ADDED:
 	"github.com/rs/cors"
-
 )
 
 type senderAddress struct {
@@ -133,7 +134,7 @@ func main() {
 			fmt.Println("bad request")
 		}
 
-		inv.Id = "R" + strconv.Itoa(rand.Intn(10000))
+		inv.Id = "RT" + strconv.Itoa(rand.Intn(10000))
 
 		invoices = append(invoices, inv)
 

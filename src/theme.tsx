@@ -1,7 +1,27 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
+// const breakpointValues = {
+//   xs: 0,
+//   sm: 375,
+//   md: 768,
+//   lg: 992,
+//   xl: 1440,
+// };
+
+const themeLight = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 375,
+      md: 768,
+      lg: 992,
+      xl: 1440,
+    },
+  },
   palette: {
+    background: {
+      default: "#F8F8FB",
+    },
     primary: {
       main: "#7C5DFA",
       light: "#F8F8FB",
@@ -101,4 +121,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default themeLight;
