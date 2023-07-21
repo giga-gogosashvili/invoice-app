@@ -118,6 +118,13 @@ const themeLight = createTheme({
         },
       },
     },
+    MuiDrawer: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+        },
+      },
+    },
   },
 });
 

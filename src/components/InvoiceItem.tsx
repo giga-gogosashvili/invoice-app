@@ -5,7 +5,7 @@ import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import StyledListItem from "../customize/ListItemLP";
+import StyledListItem from "../customize/StyledListItemLP";
 
 import * as React from "react";
 import Button from "@mui/material/Button";

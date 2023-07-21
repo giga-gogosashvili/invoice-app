@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 
-import ResponsiveAppBar from "./AppBar";
+import Drawer from "./Drawer";
 
 import axios from "axios";
 
@@ -94,38 +94,40 @@ export default function Invoices() {
   }, [filterStatus]);
 
   return (
-    <Box>
-      <ResponsiveAppBar></ResponsiveAppBar>
-      <Typography color="gray.900" variant="h1">
-        Invoices{" "}
-      </Typography>{" "}
-      <Typography color="info.main" variant="body1">
-        There are {invoices.length} total invoices{" "}
-      </Typography>{" "}
-      <Stack
-        direction="row"
-        display={"flex"}
-        justifyContent="right"
-        sx={{
-          flexGrow: 1,
-          width: 1200,
-        }}
-      >
-        <FilterButton
-          filterStatus={filterStatus}
-          setFilterStatus={setFilterStatus}
-        />
-        <Link to={`/invoices/create`}>
-          <Button
-            sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
-            variant="contained"
-            startIcon={<AddCircleIcon />}
-          >
-            New Invoice
-          </Button>
-        </Link>
-      </Stack>
-      <InvoiceItem data={invoices} func={getStatusColor} />
+    <Box display={"flex"}>
+      <Drawer></Drawer>
+      <Box>
+        <Typography color="gray.900" variant="h1">
+          Invoices{" "}
+        </Typography>{" "}
+        <Typography color="info.main" variant="body1">
+          There are {invoices.length} total invoices{" "}
+        </Typography>{" "}
+        <Stack
+          direction="row"
+          display={"flex"}
+          justifyContent="right"
+          sx={{
+            flexGrow: 1,
+            width: 1200,
+          }}
+        >
+          <FilterButton
+            filterStatus={filterStatus}
+            setFilterStatus={setFilterStatus}
+          />
+          <Link to={`/invoices/create`}>
+            <Button
+              sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
+              variant="contained"
+              startIcon={<AddCircleIcon />}
+            >
+              New Invoice
+            </Button>
+          </Link>
+        </Stack>
+        <InvoiceItem data={invoices} func={getStatusColor} />
+      </Box>
     </Box>
   );
 
