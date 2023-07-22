@@ -122,6 +122,12 @@ const themeLight = createTheme({
       styleOverrides: {
         root: {
           display: "flex",
+          // borderTopRightRadius: 50,
+        },
+        docked: {},
+        paperAnchorLeft: {
+          borderTopRightRadius: 20,
+          borderBottomRightRadius: 20,
         },
       },
     },

@@ -6,7 +6,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -17,6 +16,8 @@ import StyledNavDrawer from "../customize/StyledNavDrawer";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 function NavDrawer() {
   return (
@@ -32,6 +33,7 @@ function NavDrawer() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          borderTopRightRadius: 20,
         }}
       >
         <img
@@ -46,7 +48,11 @@ function NavDrawer() {
             // alignItems: "center",
           }}
         />
+
         <Box>
+          <DarkModeIcon></DarkModeIcon>
+          <Divider />
+
           <Avatar
             alt="avatar"
             src={image}
