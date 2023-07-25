@@ -110,14 +110,24 @@ export default function Invoices() {
               There are {invoices.length} total invoices{" "}
             </Typography>{" "}
           </Box>
-          <Box>
+          <Box
+            // direction="row"
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent="end"
+            sx={{
+              flexGrow: 1,
+              // width: 1200,
+              alignItems: "flex-end",
+            }}
+          >
             <Stack
               direction="row"
               display={"flex"}
-              justifyContent="right"
+              flexDirection={"row"}
+              justifyContent="end"
               sx={{
                 flexGrow: 1,
-                // width: 1200,
               }}
             >
               <FilterButton
