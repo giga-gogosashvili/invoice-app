@@ -96,7 +96,7 @@ export default function Invoices() {
   return (
     <Box display={"flex"}>
       <Drawer></Drawer>
-      <Box>
+      <Box sx={{ margin: "0 auto", width: 630, height: 800 }}>
         <Typography color="gray.900" variant="h1">
           Invoices{" "}
         </Typography>{" "}

@@ -1,17 +1,4 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import StyledNavDrawer from "../customize/StyledNavDrawer";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
@@ -25,42 +12,85 @@ function NavDrawer() {
       <Box
         sx={{
           flexGrow: 0,
+          // height: "800px",
 
-          backgroundColor: "primary.main",
-          width: 103,
-          height: 103,
+          // backgroundColor: "primary.main",
+          // width: 103,
+          // height: 103,
 
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          borderTopRightRadius: 20,
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
+          // borderTopRightRadius: 20,
+          // mb: "556px",
         }}
       >
-        <img
-          alt="logo"
-          src={Logo}
-          style={{
-            width: 40,
-            height: 40,
-            margin: "0 auto",
+        <Box
+          sx={{
+            flexGrow: 0,
 
-            // display: "flex",
-            // alignItems: "center",
+            backgroundColor: "primary.main",
+            width: 103,
+            height: 103,
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            borderTopRightRadius: 20,
+            mb: "555.9px",
           }}
-        />
+        >
+          <img
+            alt="logo"
+            src={Logo}
+            style={{
+              width: 40,
+              height: 40,
+              margin: "0 auto",
 
-        <Box>
-          <DarkModeIcon></DarkModeIcon>
-          <Divider />
+              // display: "flex",
+              // alignItems: "center",
+            }}
+          />
+        </Box>
+        <Box
+          sx={{
+            flexGrow: 0,
 
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            // backgroundColor: "green",
+            alignItems: "center",
+            flexWrap: "wrap",
+            pb: "33.1px",
+          }}
+        >
+          <DarkModeIcon width={20} height={20}></DarkModeIcon>
+        </Box>
+        <Divider />
+
+        <Box
+          sx={{
+            flexGrow: 0,
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            // backgroundColor: "red",
+            alignItems: "center",
+            flexWrap: "wrap",
+            height: "88px",
+            m: "0",
+          }}
+        >
           <Avatar
             alt="avatar"
             src={image}
             sx={{
               position: "fixed",
-              bottom: 10,
-              width: 40,
-              height: 40,
+              width: "40px",
+              height: "40px",
             }}
           />
         </Box>
