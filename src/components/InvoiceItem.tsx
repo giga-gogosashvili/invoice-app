@@ -49,7 +49,7 @@ export default function InvoiceItem({ data, func }: Props) {
       >
         <List>
           {data.map((invoice, index: number) => (
-            <StyledListItem key={index}>
+            <StyledListItem key={index} >
               <ListItemText>
                 <Typography component="div" variant="h4">
                   <Box display="inline" color={"#7E88C3"}>

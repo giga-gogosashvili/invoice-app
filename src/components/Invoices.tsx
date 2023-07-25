@@ -7,6 +7,7 @@ import FilterButton from "./FilterButton";
 import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import NoInvoices from "./NoInvoices";
 
 import Drawer from "./Drawer";
 
@@ -107,7 +108,9 @@ export default function Invoices() {
               variant="body1"
               sx={{ mt: "16px", mb: "64px" }}
             >
-              There are {invoices.length} total invoices{" "}
+              {invoices.length > 0
+                ? `There are ${invoices.length} total invoices{" "}`
+                : "No invoices"}
             </Typography>{" "}
           </Box>
           <Box
@@ -147,7 +150,8 @@ export default function Invoices() {
           </Box>
         </Box>
 
-        <InvoiceItem data={invoices} func={getStatusColor} />
+        {invoices && <InvoiceItem data={invoices} func={getStatusColor} />}
+        {invoices.length === 0 && <NoInvoices />}
       </Box>
     </Box>
   );
