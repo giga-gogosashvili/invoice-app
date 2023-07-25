@@ -134,6 +134,13 @@ const themeLight = createTheme({
         },
       },
     },
+    // MuiCssBaseline: {
+    //   styleOverrides: {
+    //     body: {
+    //       width: "994px",
+    //     },
+    //   },
+    // },
   },
 });
 

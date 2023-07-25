@@ -29,7 +29,8 @@ function NavDrawer() {
           sx={{
             flexGrow: 0,
 
-            backgroundColor: "primary.main",
+            // backgroundColor: "primary.main",
+            background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
             width: 103,
             height: 103,
 
@@ -37,6 +38,7 @@ function NavDrawer() {
             flexDirection: "column",
             justifyContent: "center",
             borderTopRightRadius: 20,
+            borderBottomRightRadius: 20,
             mb: "555.9px",
           }}
         >
@@ -66,7 +68,11 @@ function NavDrawer() {
             pb: "33.1px",
           }}
         >
-          <DarkModeIcon width={20} height={20}></DarkModeIcon>
+          <DarkModeIcon
+            width={20}
+            height={20}
+            sx={{ color: "info.light" }}
+          ></DarkModeIcon>
         </Box>
         <Divider />
 

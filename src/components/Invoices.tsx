@@ -96,36 +96,47 @@ export default function Invoices() {
   return (
     <Box display={"flex"}>
       <Drawer></Drawer>
-      <Box sx={{ margin: "0 auto", width: 630, height: 800 }}>
-        <Typography color="gray.900" variant="h1">
-          Invoices{" "}
-        </Typography>{" "}
-        <Typography color="info.main" variant="body1">
-          There are {invoices.length} total invoices{" "}
-        </Typography>{" "}
-        <Stack
-          direction="row"
-          display={"flex"}
-          justifyContent="right"
-          sx={{
-            flexGrow: 1,
-            width: 1200,
-          }}
-        >
-          <FilterButton
-            filterStatus={filterStatus}
-            setFilterStatus={setFilterStatus}
-          />
-          <Link to={`/invoices/create`}>
-            <Button
-              sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
-              variant="contained"
-              startIcon={<AddCircleIcon />}
+      <Box sx={{ margin: "0 auto", width: 730, height: 800 }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box>
+            <Typography color="gray.900" variant="h1" sx={{ mt: "78px" }}>
+              Invoices{" "}
+            </Typography>{" "}
+            <Typography
+              color="info.main"
+              variant="body1"
+              sx={{ mt: "16px", mb: "64px" }}
             >
-              New Invoice
-            </Button>
-          </Link>
-        </Stack>
+              There are {invoices.length} total invoices{" "}
+            </Typography>{" "}
+          </Box>
+          <Box>
+            <Stack
+              direction="row"
+              display={"flex"}
+              justifyContent="right"
+              sx={{
+                flexGrow: 1,
+                // width: 1200,
+              }}
+            >
+              <FilterButton
+                filterStatus={filterStatus}
+                setFilterStatus={setFilterStatus}
+              />
+              <Link to={`/invoices/create`}>
+                <Button
+                  sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
+                  variant="contained"
+                  startIcon={<AddCircleIcon />}
+                >
+                  New Invoice
+                </Button>
+              </Link>
+            </Stack>
+          </Box>
+        </Box>
+
         <InvoiceItem data={invoices} func={getStatusColor} />
       </Box>
     </Box>

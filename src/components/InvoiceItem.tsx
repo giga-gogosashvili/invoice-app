@@ -45,8 +45,6 @@ export default function InvoiceItem({ data, func }: Props) {
       <Box
         sx={{
           flexGrow: 1,
-          width: 1200,
-          // bgcolor: "#F8F8FB",
         }}
       >
         <List>
