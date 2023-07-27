@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import Checkbox from "@mui/material/Checkbox";
 
 interface Props {
   setFilterStatus: (a: string) => void;

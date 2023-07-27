@@ -12,24 +12,11 @@ function NavDrawer() {
       <Box
         sx={{
           flexGrow: 0,
-          // height: "800px",
-
-          // backgroundColor: "primary.main",
-          // width: 103,
-          // height: 103,
-
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "center",
-          // borderTopRightRadius: 20,
-          // mb: "556px",
         }}
       >
         <Box
           sx={{
             flexGrow: 0,
-
-            // backgroundColor: "primary.main",
             background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
             width: 103,
             height: 103,
@@ -49,9 +36,6 @@ function NavDrawer() {
               width: 40,
               height: 40,
               margin: "0 auto",
-
-              // display: "flex",
-              // alignItems: "center",
             }}
           />
         </Box>
@@ -73,6 +57,11 @@ function NavDrawer() {
             height={20}
             sx={{ color: "info.light" }}
           ></DarkModeIcon>
+          {/* <Switch
+            checked={change}
+            onChange={check}
+            inputProps={{ "aria-label": "controlled" }}
+          /> */}
         </Box>
         <Divider />
 

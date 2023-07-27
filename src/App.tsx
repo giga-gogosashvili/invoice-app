@@ -7,13 +7,17 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import themeLight from "./theme";
+import themeLight from "./themeLight";
+import themeDark from "./themeDark";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import { useState } from "react";
+import { Switch } from "@mui/material";
 export default function App() {
+
   return (
     <ThemeProvider theme={themeLight}>
       <CssBaseline />
+      {/* <NavDrawer></NavDrawer> */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
           <Routes>

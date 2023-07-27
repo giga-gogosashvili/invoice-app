@@ -109,7 +109,7 @@ export default function Invoices() {
               sx={{ mt: "16px", mb: "64px" }}
             >
               {invoices.length > 0
-                ? `There are ${invoices.length} total invoices{" "}`
+                ? `There are ${invoices.length} total invoices`
                 : "No invoices"}
             </Typography>{" "}
           </Box>

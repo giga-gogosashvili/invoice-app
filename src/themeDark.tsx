@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 // const breakpointValues = {
 //   xs: 0,
@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 //   xl: 1440,
 // };
 
-const themeLight = createTheme({
+const themeDark: any = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -19,8 +19,9 @@ const themeLight = createTheme({
     },
   },
   palette: {
+    mode: "dark",
     background: {
-      default: "#F8F8FB",
+      default: "#1E2139",
     },
     primary: {
       main: "#7C5DFA",
@@ -107,14 +108,6 @@ const themeLight = createTheme({
         icon: {
           height: 8,
           width: 8,
-          // color: "green"
-          // size: "small",
-        },
-        label: {
-          // opacity: 1,
-        },
-        filled: {
-          // opacity: 0.0570882149040699,
         },
       },
     },
@@ -122,11 +115,6 @@ const themeLight = createTheme({
       styleOverrides: {
         root: {
           display: "flex",
-
-          // borderTopRightRadius: 50,
-        },
-        docked: {
-          // owerflow: "hidden",
         },
         paperAnchorLeft: {
           borderTopRightRadius: 20,
@@ -134,14 +122,7 @@ const themeLight = createTheme({
         },
       },
     },
-    // MuiCssBaseline: {
-    //   styleOverrides: {
-    //     body: {
-    //       width: "994px",
-    //     },
-    //   },
-    // },
   },
 });
 
-export default themeLight;
+export default themeDark;
