@@ -23,6 +23,9 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
 import { getStatusColor } from "./Invoices";
 import Drawer from "./Drawer";
+import NoInvoices from "./NoInvoices";
+
+import { List, ListItem, ListItemText } from "@mui/material";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -47,10 +50,12 @@ export default function Invoice() {
   if (error) {
     return (
       <>
-        <p>Invoice did not find</p>
+        <p>There is not any invoice.</p>
       </>
     );
   }
+
+  const fabStyle = { mr: "10px", p: "24px", borderRadius: "24px" };
   return (
     <Box
       display={"flex"}
@@ -68,235 +73,291 @@ export default function Invoice() {
         <Box
           sx={{
             display: "flex",
+            flexDirection: "row",
+            alignItems: "left",
+            alignContent: "center",
+            justifyContent: "left",
+            width: "100%",
+            height: 15,
+            mt: "65px",
+            mb: "31px",
+          }}
+        >
+          <BottomNavigation
+            sx={{ bgcolor: "#F8F8FB", display: "inline" }}
+            showLabels
+            onClick={() => navigate(-1)}
+          >
+            <BottomNavigationAction
+              label="Go back"
+              icon={<ArrowBackIosIcon sx={{ height: "10px" }} />}
+              sx={{
+                display: "inline",
+              }}
+            />
+          </BottomNavigation>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            width: 730,
-            height: 800,
+            justifyContent: "center",
           }}
         >
           {invoice && (
-            <Card>
-              <BottomNavigation
-                sx={{ justifyContent: "left" }}
-                showLabels
-                onClick={() => navigate(-1)}
-                // value={value}
-                // onChange={(event, newValue) => {
-                //   setValue(newValue);
-                // }}
+            <Box>
+              <Stack
+                direction="row"
+                // spacing={2}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  mb: "30px",
+                  pr: "22px",
+                  width: 730,
+                  height: 88,
+                  mt: 0,
+                  justifyContent: "space-between",
+                  borderadius: "8px",
+                  boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
+                }}
               >
-                <BottomNavigationAction
-                  label="Go back"
-                  icon={<ArrowBackIosIcon />}
-                />
-              </BottomNavigation>
-
-              <Stack direction="row" spacing={2}>
-                <Chip
-                  label={capitalizeFirstLetter(status)}
-                  color={getStatusColor(status)}
-                  sx={{ mr: 5, width: 100 }}
-                />
-                <Link to={`/invoices/${invoice.id}/edit`}>
-                  <Fab
-                    sx={{ mr: 1 }}
-                    variant="extended"
-                    size="small"
-                    color="primary"
-                    aria-label="add"
-                  >
-                    Edit
-                  </Fab>
-                </Link>
-
-                <Fab
-                  sx={{ mr: 1 }}
-                  variant="extended"
-                  size="small"
-                  color="error"
-                  aria-label="add"
-                  onClick={() =>
-                    axios
-                      .delete(`http://localhost:9481/invoices/${id}`)
-                      .then((error) => {
-                        console.log(error);
-                      })
-                      .then(() => {
-                        navigate("/invoices");
-                      })
-                  }
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
                 >
-                  Delete
-                </Fab>
-                {invoice.status !== "paid" && (
+                  <Typography variant="body1" sx={{ ml: "32px", mr: "20px" }}>
+                    Status{" "}
+                  </Typography>
+
+                  <Chip
+                    label={capitalizeFirstLetter(status)}
+                    color={getStatusColor(status)}
+                    sx={{ mr: 5, width: 100 }}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Link to={`/invoices/${invoice.id}/edit`}>
+                    <Fab
+                      sx={fabStyle}
+                      variant="extended"
+                      size="small"
+                      color="primary"
+                      aria-label="add"
+                    >
+                      Edit
+                    </Fab>
+                  </Link>
+
                   <Fab
-                    sx={{ mr: 1 }}
+                    sx={fabStyle}
                     variant="extended"
                     size="small"
-                    color="primary"
+                    color="error"
                     aria-label="add"
-                    onClick={() => {
-                      setStatus("paid");
-                      // to do!!!
+                    onClick={() =>
                       axios
-                        .put(`http://localhost:9481/invoices/${id}`, {
-                          id: id,
-                          senderAddress: {
-                            street: invoice.senderAddress.street,
-                            city: invoice.senderAddress.city,
-                            postCode: invoice.senderAddress.postCode,
-                            country: invoice.senderAddress.country,
-                          },
-                          clientName: invoice.clientName,
-                          clientEmail: invoice.clientEmail,
-                          clientAddress: {
-                            street: invoice.clientAddress.street,
-                            city: invoice.clientAddress.city,
-                            postCode: invoice.clientAddress.postCode,
-                            country: invoice.clientAddress.country,
-                          },
-                          createdAt: invoice.createdAt,
-                          paymentTerms: invoice.paymentTerms,
-                          paymentDue: invoice.paymentDue,
-                          status: "paid",
-                          description: invoice.description,
-                          items: invoice.items.map((item) => ({
-                            name: item.name,
-                            quantity: item.quantity,
-                            price: item.price,
-                            total: item.total,
-                          })),
+                        .delete(`http://localhost:9481/invoices/${id}`)
+                        .then((error) => {
+                          console.log(error);
                         })
-                        .then(
-                          (response) => {
-                            console.log(response);
-                          },
-                          (error) => {
-                            console.log(error);
-                          }
-                        )
                         .then(() => {
-                          window.location.reload();
-                        });
-                    }}
+                          navigate("/invoices");
+                        })
+                    }
                   >
-                    Mark as Paid
+                    Delete
                   </Fab>
-                )}
+                  {invoice.status !== "paid" && (
+                    <Fab
+                      sx={fabStyle}
+                      variant="extended"
+                      size="small"
+                      color="primary"
+                      aria-label="add"
+                      onClick={() => {
+                        setStatus("paid");
+                        // to do!!!
+                        axios
+                          .put(`http://localhost:9481/invoices/${id}`, {
+                            id: id,
+                            senderAddress: {
+                              street: invoice.senderAddress.street,
+                              city: invoice.senderAddress.city,
+                              postCode: invoice.senderAddress.postCode,
+                              country: invoice.senderAddress.country,
+                            },
+                            clientName: invoice.clientName,
+                            clientEmail: invoice.clientEmail,
+                            clientAddress: {
+                              street: invoice.clientAddress.street,
+                              city: invoice.clientAddress.city,
+                              postCode: invoice.clientAddress.postCode,
+                              country: invoice.clientAddress.country,
+                            },
+                            createdAt: invoice.createdAt,
+                            paymentTerms: invoice.paymentTerms,
+                            paymentDue: invoice.paymentDue,
+                            status: "paid",
+                            description: invoice.description,
+                            items: invoice.items.map((item) => ({
+                              name: item.name,
+                              quantity: item.quantity,
+                              price: item.price,
+                              total: item.total,
+                            })),
+                          })
+                          .then(
+                            (response) => {
+                              console.log(response);
+                            },
+                            (error) => {
+                              console.log(error);
+                            }
+                          )
+                          .then(() => {
+                            window.location.reload();
+                          });
+                      }}
+                    >
+                      Mark as Paid
+                    </Fab>
+                  )}
+                </Box>
               </Stack>
-              <Stack direction="row" spacing={2}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    #{invoice.id}
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {invoice.description}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {invoice.senderAddress.street} <br />
-                    {invoice.senderAddress.city} <br />
-                    {invoice.senderAddress.postCode} <br />
-                    {invoice.senderAddress.country}
-                  </Typography>
-                </CardContent>
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Invoice Date
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    {invoice.createdAt}
-                  </Typography>
+              <Card
+                sx={{
+                  display: "block",
+                  width: 730,
+                  // height: 631,
+                  borderRadius: "8px",
+                  boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
+                }}
+              >
+                <Stack direction="row" spacing={2}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      #{invoice.id}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {invoice.description}
+                    </Typography>
+                  </CardContent>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {invoice.senderAddress.street} <br />
+                      {invoice.senderAddress.city} <br />
+                      {invoice.senderAddress.postCode} <br />
+                      {invoice.senderAddress.country}
+                    </Typography>
+                  </CardContent>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Invoice Date
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      {invoice.createdAt}
+                    </Typography>
 
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Payment Due
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    {invoice.paymentDue}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Bill To
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    {invoice.clientName}
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {invoice.clientAddress.street} <br />
-                    {invoice.clientAddress.city} <br />
-                    {invoice.clientAddress.postCode} <br />
-                    {invoice.clientAddress.country}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Sent To
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    {invoice.clientEmail}
-                  </Typography>
-                </CardContent>
-              </Stack>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Payment Due
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      {invoice.paymentDue}
+                    </Typography>
+                  </CardContent>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Bill To
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      {invoice.clientName}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {invoice.clientAddress.street} <br />
+                      {invoice.clientAddress.city} <br />
+                      {invoice.clientAddress.postCode} <br />
+                      {invoice.clientAddress.country}
+                    </Typography>
+                  </CardContent>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Sent To
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      {invoice.clientEmail}
+                    </Typography>
+                  </CardContent>
+                </Stack>
 
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="spanning table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Item Name</TableCell>
-                      <TableCell align="right">Qty.</TableCell>
-                      <TableCell align="right">Price</TableCell>
-                      <TableCell align="right">Total</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {invoice.items.map((item, index: number) => (
-                      <TableRow key={index}>
-                        <TableCell>{item.name}</TableCell>
-                        <TableCell align="right">{item.quantity}</TableCell>
-                        <TableCell align="right">{item.price}</TableCell>
-                        <TableCell align="right">{item.total}</TableCell>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Item Name</TableCell>
+                        <TableCell align="right">Qty.</TableCell>
+                        <TableCell align="right">Price</TableCell>
+                        <TableCell align="right">Total</TableCell>
                       </TableRow>
-                    ))}
-                    <TableRow>
-                      <TableCell rowSpan={3} />
-                      <TableCell colSpan={2}>Amount Due</TableCell>
-                      <TableCell align="right">{invoice.total}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Card>
+                    </TableHead>
+                    <TableBody>
+                      {invoice.items.map((item, index: number) => (
+                        <TableRow key={index}>
+                          <TableCell>{item.name}</TableCell>
+                          <TableCell align="right">{item.quantity}</TableCell>
+                          <TableCell align="right">{item.price}</TableCell>
+                          <TableCell align="right">{item.total}</TableCell>
+                        </TableRow>
+                      ))}
+                      <TableRow>
+                        <TableCell rowSpan={3} />
+                        <TableCell colSpan={2}>Amount Due</TableCell>
+                        <TableCell align="right">{invoice.total}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Card>
+            </Box>
           )}
         </Box>
       </Box>

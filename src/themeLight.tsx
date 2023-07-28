@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions, Shadows } from "@mui/material/styles";
 
 // const breakpointValues = {
 //   xs: 0,
@@ -7,6 +7,11 @@ import { createTheme } from "@mui/material/styles";
 //   lg: 992,
 //   xl: 1440,
 // };
+
+const defaultTheme = createTheme();
+
+// get the default `shadows` object
+const defaultShadows: ThemeOptions["shadows"] = [...defaultTheme.shadows];
 
 const themeLight: any = createTheme({
   breakpoints: {
@@ -49,6 +54,7 @@ const themeLight: any = createTheme({
       main: "#FF8F00",
     },
   },
+
   typography: {
     fontFamily: "League Spartan",
     fontWeightMedium: 500,
@@ -123,6 +129,7 @@ const themeLight: any = createTheme({
       },
     },
   },
+  shadows: defaultShadows.map(() => "none") as Shadows,
 });
 
 export default themeLight;
