@@ -23,9 +23,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
 import { getStatusColor } from "./Invoices";
 import Drawer from "./Drawer";
-import NoInvoices from "./NoInvoices";
-
-import { List, ListItem, ListItemText } from "@mui/material";
+import TableFooter from "@mui/material/TableFooter";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -353,8 +351,14 @@ export default function Invoice() {
                   </CardContent>
                 </Stack>
 
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                <TableContainer
+                  component={Paper}
+                  sx={{
+                    bgcolor: "#F9FAFE",
+                    width: "634px",
+                  }}
+                >
+                  <Table sx={{}} aria-label="spanning table">
                     <TableHead>
                       <TableRow>
                         <TableCell>Item Name</TableCell>
@@ -366,18 +370,37 @@ export default function Invoice() {
                     <TableBody>
                       {invoice.items.map((item, index: number) => (
                         <TableRow key={index}>
-                          <TableCell>{item.name}</TableCell>
+                          <TableCell>
+                            <Typography variant="h4">{item.name}</Typography>
+                          </TableCell>
                           <TableCell align="right">{item.quantity}</TableCell>
                           <TableCell align="right">{item.price}</TableCell>
                           <TableCell align="right">{item.total}</TableCell>
                         </TableRow>
                       ))}
-                      <TableRow>
-                        <TableCell rowSpan={3} />
-                        <TableCell colSpan={2}>Amount Due</TableCell>
-                        <TableCell align="right">{invoice.total}</TableCell>
-                      </TableRow>
                     </TableBody>
+                    <TableFooter
+                      sx={{
+                        height: "80px",
+                        width: "100%",
+                        bgcolor: "#373B53",
+                        // justifyContent: "space-between",
+                      }}
+                    >
+                      <TableRow sx={{ width: "100%" }}>
+                        <TableCell colSpan={3}>
+                          {" "}
+                          <Typography variant="body1" color={"white"}>
+                            Amount Due
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Typography variant="h2" color={"white"}>
+                            £ {invoice.total}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableFooter>
                   </Table>
                 </TableContainer>
               </Card>
