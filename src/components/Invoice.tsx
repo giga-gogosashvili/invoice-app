@@ -241,15 +241,27 @@ export default function Invoice() {
                   // height: 631,
                   borderRadius: "8px",
                   boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
+                  p: "49px",
                 }}
               >
-                <Stack direction="row" spacing={2}>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  sx={{ justifyContent: "space-between" }}
+                >
                   <CardContent>
-                    <Typography variant="h5" component="div">
-                      #{invoice.id}
+                    <Typography
+                      component="div"
+                      variant="h3"
+                      sx={{ mb: "13px" }}
+                    >
+                      <Box display="inline" color={"#888EB0"}>
+                        #
+                      </Box>
+                      {invoice.id}
                     </Typography>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
                     >
@@ -258,7 +270,7 @@ export default function Invoice() {
                   </CardContent>
                   <CardContent>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
                     >
@@ -269,43 +281,54 @@ export default function Invoice() {
                     </Typography>
                   </CardContent>
                 </Stack>
-                <Stack direction="row" spacing={2}>
-                  <CardContent>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  sx={{ justifyContent: "space-between", mr: "109px" }}
+                >
+                  <CardContent sx={{ justifyContent: "space-between" }}>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
+                      sx={{ mb: "13px" }}
                     >
                       Invoice Date
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography
+                      variant="h3"
+                      component="div"
+                      sx={{ mb: "20px" }}
+                    >
                       {invoice.createdAt}
                     </Typography>
 
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
+                      sx={{ mb: "13px" }}
                     >
                       Payment Due
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h3" component="div">
                       {invoice.paymentDue}
                     </Typography>
                   </CardContent>
                   <CardContent>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
+                      sx={{ mb: "13px" }}
                     >
                       Bill To
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h3" component="div">
                       {invoice.clientName}
                     </Typography>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
                     >
@@ -317,13 +340,14 @@ export default function Invoice() {
                   </CardContent>
                   <CardContent>
                     <Typography
-                      sx={{ fontSize: 14 }}
+                      variant="body1"
                       color="text.secondary"
                       gutterBottom
+                      sx={{ mb: "13px" }}
                     >
                       Sent To
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h3" component="div">
                       {invoice.clientEmail}
                     </Typography>
                   </CardContent>
