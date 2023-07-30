@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "support/*": ["cypress/support/*"],
-      "fixtures/*": ["cypress/fixtures/*"]
+      "fixtures/*": ["cypress/fixtures/*"],
+      "react": ["./node_modules/@types/react"]
     }
   },
   "include": ["src"]
