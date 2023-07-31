@@ -31,7 +31,7 @@ const formatingNumbers = (number: number) => {
 
 export default function InvoiceItem({ data, func }: Props) {
   const navigate = useNavigate();
-  // const { id } = useParams();
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -61,15 +61,14 @@ export default function InvoiceItem({ data, func }: Props) {
 
   return (
     <>
-      {data.map((invoice, index: number) => (
-        <div key={index}>
-          <Box
-            sx={{
-              flexGrow: 1,
-            }}
-          >
-            <List>
-              {/* {data.map((invoice, index: number) => ( */}
+      <div>
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          <List>
+            {data.map((invoice, index: number) => (
               <StyledListItem key={index}>
                 <ListItemText>
                   <Typography component="div" variant="h4">
@@ -118,6 +117,8 @@ export default function InvoiceItem({ data, func }: Props) {
                     icon={<FiberManualRecordIcon />}
                   ></Chip>
                 </Stack>
+
+                {/* ))} */}
                 <div>
                   <Button
                     id="fade-button"
@@ -128,6 +129,7 @@ export default function InvoiceItem({ data, func }: Props) {
                   >
                     <NavigateNextIcon></NavigateNextIcon>
                   </Button>
+
                   {data.map((invoice, index: number) => (
                     <Menu
                       key={index}
@@ -160,18 +162,17 @@ export default function InvoiceItem({ data, func }: Props) {
                     </Menu>
                   ))}
                 </div>
+                <ConfirmDeletion
+                  open={open}
+                  closeDialog={handleClose}
+                  id={invoice.id}
+                  deleteFunction={() => deleteFunction(invoice.id)}
+                />
               </StyledListItem>
-              {/* ))} */}
-            </List>
-          </Box>
-          <ConfirmDeletion
-            open={open}
-            closeDialog={handleClose}
-            id={invoice.id}
-            deleteFunction={() => deleteFunction(invoice.id)}
-          />
-        </div>
-      ))}
+            ))}
+          </List>
+        </Box>
+      </div>
     </>
   );
 }
