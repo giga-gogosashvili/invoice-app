@@ -14,6 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import ConfirmDeletion from "./ConfirmDeletion";
+import { useState } from "react";
 
 interface Props {
   data: InvoiceResponse[];
@@ -29,134 +31,147 @@ const formatingNumbers = (number: number) => {
 
 export default function InvoiceItem({ data, func }: Props) {
   const navigate = useNavigate();
-  const { id } = useParams();
+  // const { id } = useParams();
+  const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const openMenu = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const deleteFunction = (id: string) => {
+    axios
+      .delete(`http://localhost:9481/invoices/${id}`)
+      .then((error) => {
+        console.log(error);
+      })
+      .then(() => {
+        window.location.reload();
+        // navigate("/invoices");
+      });
+  };
+
   return (
-    <div>
-      <Box
-        sx={{
-          flexGrow: 1,
-        }}
-      >
-        <List>
-          {data.map((invoice, index: number) => (
-            <StyledListItem key={index} >
-              <ListItemText>
-                <Typography component="div" variant="h4">
-                  <Box display="inline" color={"#7E88C3"}>
-                    #
-                  </Box>
-                  {invoice.id}
-                </Typography>
-              </ListItemText>
-              <ListItemText>
-                <Typography component="div" variant="body1" color="info.main">
-                  Due{" "}
-                  <Box display="inline" color={"info.light"}>
-                    {invoice.paymentDue}
-                  </Box>
-                </Typography>
-              </ListItemText>
+    <>
+      {data.map((invoice, index: number) => (
+        <div key={index}>
+          <Box
+            sx={{
+              flexGrow: 1,
+            }}
+          >
+            <List>
+              {/* {data.map((invoice, index: number) => ( */}
+              <StyledListItem key={index}>
+                <ListItemText>
+                  <Typography component="div" variant="h4">
+                    <Box display="inline" color={"#7E88C3"}>
+                      #
+                    </Box>
+                    {invoice.id}
+                  </Typography>
+                </ListItemText>
+                <ListItemText>
+                  <Typography component="div" variant="body1" color="info.main">
+                    Due{" "}
+                    <Box display="inline" color={"info.light"}>
+                      {invoice.paymentDue}
+                    </Box>
+                  </Typography>
+                </ListItemText>
 
-              <ListItemText
-                primary={invoice.clientName}
-                sx={{
-                  "& .MuiListItemText-primary": {
-                    color: "info.main",
-                    typography: "body1",
-                  },
-                }}
-                color="info"
-              />
-              <ListItemText
-                primary={`£${formatingNumbers(invoice.total)}`}
-                sx={{
-                  "& .MuiListItemText-primary": {
-                    typography: "h3",
-                  },
-                }}
-              />
-              <Stack direction="row" spacing={2}>
-                <Chip
-                  label={capitalizeFirstLetter(invoice.status)}
-                  color={func(invoice.status)}
+                <ListItemText
+                  primary={invoice.clientName}
                   sx={{
-                    mr: 5,
-                    width: 100,
-                    typography: "h4",
+                    "& .MuiListItemText-primary": {
+                      color: "info.main",
+                      typography: "body1",
+                    },
                   }}
-                  icon={<FiberManualRecordIcon />}
-                ></Chip>
-              </Stack>
-              <div>
-                <Button
-                  id="fade-button"
-                  aria-controls={open ? "fade-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
-                >
-                  <NavigateNextIcon></NavigateNextIcon>
-                </Button>
-                {data.map((invoice, index: number) => (
-                  <Menu
-                    key={index}
-                    id="fade-menu"
-                    MenuListProps={{
-                      "aria-labelledby": "fade-button",
+                  color="info"
+                />
+                <ListItemText
+                  primary={`£${formatingNumbers(invoice.total)}`}
+                  sx={{
+                    "& .MuiListItemText-primary": {
+                      typography: "h3",
+                    },
+                  }}
+                />
+                <Stack direction="row" spacing={2}>
+                  <Chip
+                    label={capitalizeFirstLetter(invoice.status)}
+                    color={func(invoice.status)}
+                    sx={{
+                      mr: 5,
+                      width: 100,
+                      typography: "h4",
                     }}
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    TransitionComponent={Fade}
+                    icon={<FiberManualRecordIcon />}
+                  ></Chip>
+                </Stack>
+                <div>
+                  <Button
+                    id="fade-button"
+                    aria-controls={open ? "fade-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
                   >
-                    <MenuItem
-                      onClick={() => {
-                        navigate(`/invoices/${invoice.id}`);
+                    <NavigateNextIcon></NavigateNextIcon>
+                  </Button>
+                  {data.map((invoice, index: number) => (
+                    <Menu
+                      key={index}
+                      id="fade-menu"
+                      MenuListProps={{
+                        "aria-labelledby": "fade-button",
                       }}
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      // onClick={() => setOpen(true)}
+                      onClose={handleCloseMenu}
+                      TransitionComponent={Fade}
                     >
-                      Details
-                    </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          navigate(`/invoices/${invoice.id}`);
+                        }}
+                      >
+                        Details
+                      </MenuItem>
 
-                    <MenuItem
-                      onClick={() => {
-                        navigate(`/invoices/${invoice.id}/edit`);
-                      }}
-                    >
-                      Edit
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() =>
-                        axios
-                          .delete(
-                            `http://localhost:9481/invoices/${invoice.id}`
-                          )
-                          .then((error) => {
-                            console.log(error);
-                          })
-                          .then(() => {
-                            window.location.reload();
-                          })
-                      }
-                    >
-                      Delete
-                    </MenuItem>
-                  </Menu>
-                ))}
-              </div>
-            </StyledListItem>
-          ))}
-        </List>
-      </Box>
-    </div>
+                      <MenuItem
+                        onClick={() => {
+                          navigate(`/invoices/${invoice.id}/edit`);
+                        }}
+                      >
+                        Edit
+                      </MenuItem>
+                      <MenuItem onClick={() => setOpen(true)}>Delete</MenuItem>
+                    </Menu>
+                  ))}
+                </div>
+              </StyledListItem>
+              {/* ))} */}
+            </List>
+          </Box>
+          <ConfirmDeletion
+            open={open}
+            closeDialog={handleClose}
+            id={invoice.id}
+            deleteFunction={() => deleteFunction(invoice.id)}
+          />
+        </div>
+      ))}
+    </>
   );
 }
