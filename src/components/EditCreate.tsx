@@ -19,6 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
 import React from "react";
+import { AxiosFunc } from "./AxiosFunc";
 
 export default function EditCreate() {
   const { id } = useParams();
@@ -71,56 +72,6 @@ export default function EditCreate() {
   const [status, setStatus] = useState<string>("");
 
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
-
-  // const updateInvoice = () => {
-  //   axios
-  //     .put(`http://localhost:9481/invoices/${id}`, {
-  //       id: id,
-  //       senderAddress: {
-  //         street: senderStreet,
-  //         city: senderCity,
-  //         postCode: senderPostCode,
-  //         country: senderCountry,
-  //       },
-  //       clientName: clientName,
-  //       clientEmail: clientEmail,
-  //       clientAddress: {
-  //         street: clientStreet,
-  //         city: clientCity,
-  //         postCode: clientPostCode,
-  //         country: clientCountry,
-  //       },
-  //       createdAt: dateJSON,
-  //       paymentTerms: paymentTerms,
-  //       paymentDue: paymentDue,
-  //       status: "draft",
-  //       description: description,
-
-  //       items: items.map((item) => ({
-  //         name: item.name,
-  //         quantity: item.quantity,
-  //         price: item.price,
-  //         total: item.total,
-  //       })),
-  //     })
-  //     .then(({ data }) => {
-  //       setSenderStreet(data.senderAddress.street);
-  //       setSenderCity(data.senderAddress.city);
-  //       setClientName(data.clientName);
-  //       setClientEmail(data.clientEmail);
-  //     })
-  //     .then(
-  //       (response) => {
-  //         console.log(response);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     )
-  //     .then(() => {
-  //       navigate("/invoices");
-  //     });
-  // };
 
   // VALIDATION
 
@@ -481,103 +432,27 @@ export default function EditCreate() {
                 onClick={
                   // updateInvoice
                   () => {
-                    if (invoice) {
-                      axios
-                        .put(
-                          `http://localhost:9481/invoices/${id}`,
-
-                          {
-                            id: id,
-                            senderAddress: {
-                              street: invoice
-                                ? senderStreet || invoice.senderAddress.street
-                                : senderStreet,
-                              city: senderCity || invoice.senderAddress.city,
-                              postCode:
-                                senderPostCode ||
-                                invoice.senderAddress.postCode,
-                              country:
-                                senderCountry || invoice.senderAddress.country,
-                            },
-                            clientName: clientName || invoice.clientName,
-                            clientEmail: clientEmail || invoice.clientEmail,
-                            clientAddress: {
-                              street:
-                                clientStreet || invoice.clientAddress.street,
-                              city: clientCity || invoice.clientAddress.city,
-                              postCode:
-                                clientPostCode ||
-                                invoice.clientAddress.postCode,
-                              country:
-                                clientCountry || invoice.clientAddress.country,
-                            },
-                            createdAt: dateJSON,
-                            paymentTerms: paymentTerms || invoice.paymentTerms,
-                            paymentDue: paymentDue || invoice.paymentDue,
-                            status: "draft",
-                            description: description || invoice.description,
-
-                            items: items.map((item) => ({
-                              name: item.name || items[index].name,
-                              quantity: item.quantity || items[index].quantity,
-                              price: item.price || items[index].price,
-                              total: item.total || items[index].total,
-                            })),
-                          }
-                        )
-                        .then(
-                          (response) => {
-                            console.log(response);
-                          },
-                          (error) => {
-                            console.log(error);
-                          }
-                        )
-                        .then(() => {
-                          navigate("/invoices");
-                        });
-                    } else {
-                      axios
-                        .post("http://localhost:9481/invoices", {
-                          senderAddress: {
-                            street: senderStreet,
-                            city: senderCity,
-                            postCode: senderPostCode,
-                            country: senderCountry,
-                          },
-                          clientName: clientName,
-                          clientEmail: clientEmail,
-                          clientAddress: {
-                            street: clientStreet,
-                            city: clientCity,
-                            postCode: clientPostCode,
-                            country: clientCountry,
-                          },
-                          createdAt: dateJSON,
-                          paymentTerms: paymentTerms,
-                          paymentDue: paymentDue,
-                          status: "draft",
-                          description: description,
-
-                          items: items.map((item) => ({
-                            name: item.name,
-                            quantity: item.quantity,
-                            price: item.price,
-                            total: item.total,
-                          })),
-                        })
-                        .then(
-                          (response) => {
-                            console.log(response);
-                          },
-                          (error) => {
-                            console.log(error);
-                          }
-                        )
-                        .then(() => {
-                          navigate("/invoices");
-                        });
-                    }
+                    AxiosFunc(
+                      id,
+                      invoice,
+                      senderStreet,
+                      senderCity,
+                      senderPostCode,
+                      senderCountry,
+                      clientName,
+                      clientEmail,
+                      clientStreet,
+                      clientCity,
+                      clientPostCode,
+                      clientCountry,
+                      dateJSON,
+                      paymentTerms,
+                      paymentDue,
+                      "draft",
+                      description,
+                      items,
+                      navigate
+                    );
                   }
                 }
               >
@@ -592,62 +467,7 @@ export default function EditCreate() {
                 onClick={
                   // updateInvoice
                   () => {
-                    if (invoice) {
-                      axios
-                        .put(
-                          `http://localhost:9481/invoices/${id}`,
-
-                          {
-                            id: id,
-                            senderAddress: {
-                              street: invoice
-                                ? senderStreet || invoice.senderAddress.street
-                                : senderStreet,
-                              city: senderCity || invoice.senderAddress.city,
-                              postCode:
-                                senderPostCode ||
-                                invoice.senderAddress.postCode,
-                              country:
-                                senderCountry || invoice.senderAddress.country,
-                            },
-                            clientName: clientName || invoice.clientName,
-                            clientEmail: clientEmail || invoice.clientEmail,
-                            clientAddress: {
-                              street:
-                                clientStreet || invoice.clientAddress.street,
-                              city: clientCity || invoice.clientAddress.city,
-                              postCode:
-                                clientPostCode ||
-                                invoice.clientAddress.postCode,
-                              country:
-                                clientCountry || invoice.clientAddress.country,
-                            },
-                            createdAt: dateJSON,
-                            paymentTerms: paymentTerms || invoice.paymentTerms,
-                            paymentDue: paymentDue || invoice.paymentDue,
-                            status: "pending",
-                            description: description || invoice.description,
-
-                            items: items.map((item) => ({
-                              name: item.name || items[index].name,
-                              quantity: item.quantity || items[index].quantity,
-                              price: item.price || items[index].price,
-                              total: item.total || items[index].total,
-                            })),
-                          }
-                        )
-                        .then(
-                          (response) => {
-                            console.log(response);
-                          },
-                          (error) => {
-                            console.log(error);
-                          }
-                        )
-                        .then(() => {
-                          navigate("/invoices");
-                        });
-                    } else {
+                    if (!invoice) {
                       if (senderStreet == "") {
                         setSenderStreetError(true);
                       } else if (senderCity == "") {
@@ -671,47 +491,50 @@ export default function EditCreate() {
                       } else if (description == "") {
                         setDescriptionError(true);
                       } else {
-                        axios
-                          .post("http://localhost:9481/invoices", {
-                            senderAddress: {
-                              street: senderStreet,
-                              city: senderCity,
-                              postCode: senderPostCode,
-                              country: senderCountry,
-                            },
-                            clientName: clientName,
-                            clientEmail: clientEmail,
-                            clientAddress: {
-                              street: clientStreet,
-                              city: clientCity,
-                              postCode: clientPostCode,
-                              country: clientCountry,
-                            },
-                            createdAt: dateJSON,
-                            paymentTerms: paymentTerms,
-                            paymentDue: paymentDue,
-                            status: "pending",
-                            description: description,
-
-                            items: items.map((item) => ({
-                              name: item.name,
-                              quantity: item.quantity,
-                              price: item.price,
-                              total: item.total,
-                            })),
-                          })
-                          .then(
-                            (response) => {
-                              console.log(response);
-                            },
-                            (error) => {
-                              console.log(error);
-                            }
-                          )
-                          .then(() => {
-                            navigate("/invoices");
-                          });
+                        AxiosFunc(
+                          id,
+                          invoice,
+                          senderStreet,
+                          senderCity,
+                          senderPostCode,
+                          senderCountry,
+                          clientName,
+                          clientEmail,
+                          clientStreet,
+                          clientCity,
+                          clientPostCode,
+                          clientCountry,
+                          dateJSON,
+                          paymentTerms,
+                          paymentDue,
+                          "pending",
+                          description,
+                          items,
+                          navigate
+                        );
                       }
+                    } else {
+                      AxiosFunc(
+                        id,
+                        invoice,
+                        senderStreet,
+                        senderCity,
+                        senderPostCode,
+                        senderCountry,
+                        clientName,
+                        clientEmail,
+                        clientStreet,
+                        clientCity,
+                        clientPostCode,
+                        clientCountry,
+                        dateJSON,
+                        paymentTerms,
+                        paymentDue,
+                        "pending",
+                        description,
+                        items,
+                        navigate
+                      );
                     }
                   }
                 }
