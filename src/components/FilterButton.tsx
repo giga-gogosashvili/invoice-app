@@ -27,7 +27,10 @@ export default function FilterButton(props: Props) {
         fullWidth
       >
         <InputLabel id="demo-simple-select-label">
-          <Typography variant="body2"> Filter by status</Typography>
+          <Typography variant="body2" color="text.primary">
+            {" "}
+            Filter by status
+          </Typography>
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -36,7 +39,19 @@ export default function FilterButton(props: Props) {
           label="Status"
           onChange={handleChange}
         >
-          <MenuItem value={undefined}>All</MenuItem>
+          <MenuItem
+            value={undefined}
+            color="text.secondary"
+            sx={{
+              "& .MuiMenuItem-root": {
+                color: "info.main",
+                typography: "body1",
+                backgroundColor: "red",
+              },
+            }}
+          >
+            All
+          </MenuItem>
           <MenuItem value={"draft"}>Draft</MenuItem>
           <MenuItem value={"pending"}>Pending</MenuItem>
           <MenuItem value={"paid"}>Paid</MenuItem>

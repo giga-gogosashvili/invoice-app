@@ -5,8 +5,21 @@ import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import themeLight from "../themeLight";
+import React from "react";
+import { useState } from "react";
+import { ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
+import App from "src/App";
+import getDesignTokens from "../themeLight";
+import Switch from "@mui/material/Switch";
 
 function NavDrawer() {
+  // const [checked, setChecked] = React.useState(true);
+
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setChecked(event.target.checked);
+  // };
+
   return (
     <StyledNavDrawer variant="permanent" anchor="left">
       <Box
@@ -56,10 +69,11 @@ function NavDrawer() {
             width={20}
             height={20}
             sx={{ color: "info.light" }}
+            // onClick={func}
           ></DarkModeIcon>
           {/* <Switch
-            checked={change}
-            onChange={check}
+            checked={checked}
+            onChange={onChange}
             inputProps={{ "aria-label": "controlled" }}
           /> */}
         </Box>

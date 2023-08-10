@@ -25,6 +25,7 @@ import { getStatusColor } from "./Invoices";
 import Drawer from "./Drawer";
 import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
+import toggleColorMode from "../App";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -74,6 +75,7 @@ export default function Invoice() {
   const fabStyle = { mr: "10px", p: "24px", borderRadius: "24px" };
   return (
     <>
+      {/* <Drawer></Drawer> */}
       <Box
         display={"flex"}
         sx={{
@@ -81,7 +83,6 @@ export default function Invoice() {
           bgcolor: "#F8F8FB",
         }}
       >
-        <Drawer></Drawer>
         <Box
           sx={{
             margin: "0 auto",

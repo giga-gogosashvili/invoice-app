@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
 import InvoiceItemMenu from "./InvoiceItemMenu";
+import toggleColorMode from "../App";
 
 import Drawer from "./Drawer";
 
@@ -98,10 +99,11 @@ export default function Invoices() {
   return (
     <Box display={"flex"}>
       <Drawer></Drawer>
+
       <Box sx={{ margin: "0 auto", width: 730 }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box>
-            <Typography color="gray.900" variant="h1" sx={{ mt: "78px" }}>
+            <Typography color="text.primary" variant="h1" sx={{ mt: "78px" }}>
               Invoices{" "}
             </Typography>{" "}
             <Typography
