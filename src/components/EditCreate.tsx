@@ -21,7 +21,7 @@ import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
 import StyledTFShort from "../customize/StyledTFShort";
 import StyledTFLong from "../customize/StyledTFLong";
-import StyledItemFields from "../customize/StyledItemFields";
+import { StyledItemFields, StyledButton } from "../customize/StyledItemFields";
 
 import Button from "@mui/material/Button";
 
@@ -511,13 +511,11 @@ export default function EditCreate() {
             </ListItem>
           ))}
 
-          <Button
-            // variant="extended"
+          <StyledButton
             sx={{
               width: "504px",
               mt: 1,
               mb: 1,
-              textTransform: "capitalize",
             }}
             onClick={() => {
               const withNewItem = items.concat({
@@ -531,7 +529,7 @@ export default function EditCreate() {
           >
             <AddIcon sx={{ mr: 1 }} />
             Add New Item
-          </Button>
+          </StyledButton>
         </List>
         {/* {items.map((item, index) => ( */}
         <Stack
@@ -541,9 +539,8 @@ export default function EditCreate() {
           sx={{ width: "504px" }}
         >
           {invoice && (
-            <Fab
+            <StyledButton
               sx={{ mr: 1 }}
-              variant="extended"
               size="small"
               color="primary"
               aria-label="add"
@@ -552,7 +549,7 @@ export default function EditCreate() {
               }}
             >
               Discard
-            </Fab>
+            </StyledButton>
           )}
           <Stack
             sx={{
@@ -562,9 +559,8 @@ export default function EditCreate() {
             }}
           >
             {!invoice && (
-              <Fab
+              <StyledButton
                 sx={{ mr: 1 }}
-                variant="extended"
                 size="small"
                 color="primary"
                 aria-label="add"
@@ -573,15 +569,14 @@ export default function EditCreate() {
                 }}
               >
                 Cancel
-              </Fab>
+              </StyledButton>
             )}
 
             {invoice && (
-              <Fab
+              <StyledButton
                 sx={{
                   mr: 1,
                 }}
-                variant="extended"
                 size="small"
                 color="primary"
                 aria-label="add"
@@ -613,14 +608,17 @@ export default function EditCreate() {
                   }
                 }
               >
-                Save as Draft
-              </Fab>
+                Save{" "}
+                <Box display="inline" textTransform="lowercase">
+                  as
+                </Box>{" "}
+                Draft
+              </StyledButton>
             )}
-            <Fab
+            <StyledButton
               sx={{
                 mr: 1,
               }}
-              variant="extended"
               size="small"
               color="primary"
               aria-label="add"
@@ -700,7 +698,7 @@ export default function EditCreate() {
               }
             >
               Save & Send
-            </Fab>
+            </StyledButton>
           </Stack>
         </Stack>
         {/* ))} */}

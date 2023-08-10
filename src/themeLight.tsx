@@ -137,6 +137,8 @@ const getDesignTokens = (mode: any) => ({
       styleOverrides: {
         root: {
           borderRadius: "24px !important",
+          height: "48px",
+
           size: "medium",
         },
       },
@@ -161,13 +163,6 @@ const getDesignTokens = (mode: any) => ({
         paperAnchorLeft: {
           borderTopRightRadius: 20,
           borderBottomRightRadius: 20,
-        },
-      },
-    },
-    MuiFab: {
-      styleOverrides: {
-        extended: {
-          borderRadius: 50,
         },
       },
     },

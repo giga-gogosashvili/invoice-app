@@ -16,7 +16,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import { capitalizeFirstLetter } from "./InvoiceItem";
-import Fab from "@mui/material/Fab";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -26,6 +25,8 @@ import Drawer from "./Drawer";
 import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
 import toggleColorMode from "../App";
+import Button from "@mui/material/Button";
+import { StyledButton } from "../customize/StyledItemFields";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -165,33 +166,21 @@ export default function Invoice() {
                     }}
                   >
                     <Link to={`/invoices/${invoice.id}/edit`}>
-                      <Fab
-                        sx={fabStyle}
-                        variant="extended"
-                        size="small"
-                        color="primary"
-                        aria-label="add"
-                      >
-                        Edit
-                      </Fab>
+                      <Button sx={fabStyle} aria-label="add">
+                        <StyledButton>Edit</StyledButton>
+                      </Button>
                     </Link>
 
-                    <Fab
+                    <StyledButton
                       sx={fabStyle}
-                      variant="extended"
-                      size="small"
-                      color="error"
                       aria-label="add"
                       onClick={() => setOpen(true)}
                     >
                       Delete
-                    </Fab>
+                    </StyledButton>
                     {invoice.status !== "paid" && (
-                      <Fab
+                      <StyledButton
                         sx={fabStyle}
-                        variant="extended"
-                        size="small"
-                        color="primary"
                         aria-label="add"
                         onClick={() => {
                           setStatus("paid");
@@ -239,7 +228,7 @@ export default function Invoice() {
                         }}
                       >
                         Mark as Paid
-                      </Fab>
+                      </StyledButton>
                     )}
                   </Box>
                 </Stack>

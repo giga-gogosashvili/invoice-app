@@ -1,7 +1,9 @@
 import { styled } from "@mui/system";
 import { TextField } from "@mui/material";
+import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 
-const StyledItemFields = styled(TextField)(({ theme }) => ({
+export const StyledItemFields = styled(TextField)(({ theme }) => ({
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
     display: "none",
   },
@@ -18,4 +20,7 @@ const StyledItemFields = styled(TextField)(({ theme }) => ({
   },
 }));
 
-export default StyledItemFields;
+export const StyledButton = styled(Button)(({ theme }) => ({
+  textTransform: "capitalize",
+  fontVariant: "h4",
+}));
