@@ -13,7 +13,6 @@ import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import { List, ListItem, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Chip from "@mui/material/Chip";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ import StyledTFShort from "../customize/StyledTFShort";
 import StyledTFLong from "../customize/StyledTFLong";
 import StyledItemFields from "../customize/StyledItemFields";
 
-import { inputLabelClasses } from "@mui/material/InputLabel";
+import Button from "@mui/material/Button";
 
 export default function EditCreate() {
   const { id } = useParams();
@@ -512,10 +511,13 @@ export default function EditCreate() {
             </ListItem>
           ))}
 
-          <Fab
-            variant="extended"
+          <Button
+            // variant="extended"
             sx={{
               width: "504px",
+              mt: 1,
+              mb: 1,
+              textTransform: "capitalize",
             }}
             onClick={() => {
               const withNewItem = items.concat({
@@ -529,90 +531,132 @@ export default function EditCreate() {
           >
             <AddIcon sx={{ mr: 1 }} />
             Add New Item
-          </Fab>
+          </Button>
         </List>
         {/* {items.map((item, index) => ( */}
-        <div>
-          <Fab
-            sx={{ mr: 1 }}
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={() => {
-              navigate("/invoices");
+        <Stack
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          sx={{ width: "504px" }}
+        >
+          {invoice && (
+            <Fab
+              sx={{ mr: 1 }}
+              variant="extended"
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={() => {
+                navigate("/invoices");
+              }}
+            >
+              Discard
+            </Fab>
+          )}
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              // justifyContent: "flex-end",
+              ml: "auto",
             }}
           >
-            Discard
-          </Fab>
-          <Fab
-            sx={{ mr: 1 }}
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            type="submit"
-            onClick={
-              // updateInvoice
-              () => {
-                AxiosFunc(
-                  id,
-                  invoice,
-                  senderStreet,
-                  senderCity,
-                  senderPostCode,
-                  senderCountry,
-                  clientName,
-                  clientEmail,
-                  clientStreet,
-                  clientCity,
-                  clientPostCode,
-                  clientCountry,
-                  dateJSON,
-                  paymentTerms,
-                  paymentDue,
-                  "draft",
-                  description,
-                  items,
-                  navigate
-                );
+            <Fab
+              sx={{
+                mr: 1,
+              }}
+              variant="extended"
+              size="small"
+              color="primary"
+              aria-label="add"
+              type="submit"
+              onClick={
+                // updateInvoice
+                () => {
+                  AxiosFunc(
+                    id,
+                    invoice,
+                    senderStreet,
+                    senderCity,
+                    senderPostCode,
+                    senderCountry,
+                    clientName,
+                    clientEmail,
+                    clientStreet,
+                    clientCity,
+                    clientPostCode,
+                    clientCountry,
+                    dateJSON,
+                    paymentTerms,
+                    paymentDue,
+                    "draft",
+                    description,
+                    items,
+                    navigate
+                  );
+                }
               }
-            }
-          >
-            Save as Draft
-          </Fab>
-          <Fab
-            sx={{ mr: 1 }}
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={
-              // updateInvoice
-              () => {
-                if (!invoice) {
-                  if (senderStreet == "") {
-                    setSenderStreetError(true);
-                  } else if (senderCity == "") {
-                    setSenderCityError(true);
-                  } else if (senderPostCode == "") {
-                    setSenderPostCodeError(true);
-                  } else if (senderCountry == "") {
-                    setSenderCountryError(true);
-                  } else if (clientName == "") {
-                    setClientNameError(true);
-                  } else if (clientEmail == "") {
-                    setClientEmailError(true);
-                  } else if (clientStreet == "") {
-                    setClientStreetError(true);
-                  } else if (clientCity == "") {
-                    setClientCityError(true);
-                  } else if (clientPostCode == "") {
-                    setClientPostCodeError(true);
-                  } else if (clientCountry == "") {
-                    setClientCountryError(true);
-                  } else if (description == "") {
-                    setDescriptionError(true);
+            >
+              Save as Draft
+            </Fab>
+            <Fab
+              sx={{
+                mr: 1,
+              }}
+              variant="extended"
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={
+                // updateInvoice
+                () => {
+                  if (!invoice) {
+                    if (senderStreet == "") {
+                      setSenderStreetError(true);
+                    } else if (senderCity == "") {
+                      setSenderCityError(true);
+                    } else if (senderPostCode == "") {
+                      setSenderPostCodeError(true);
+                    } else if (senderCountry == "") {
+                      setSenderCountryError(true);
+                    } else if (clientName == "") {
+                      setClientNameError(true);
+                    } else if (clientEmail == "") {
+                      setClientEmailError(true);
+                    } else if (clientStreet == "") {
+                      setClientStreetError(true);
+                    } else if (clientCity == "") {
+                      setClientCityError(true);
+                    } else if (clientPostCode == "") {
+                      setClientPostCodeError(true);
+                    } else if (clientCountry == "") {
+                      setClientCountryError(true);
+                    } else if (description == "") {
+                      setDescriptionError(true);
+                    } else {
+                      AxiosFunc(
+                        id,
+                        invoice,
+                        senderStreet,
+                        senderCity,
+                        senderPostCode,
+                        senderCountry,
+                        clientName,
+                        clientEmail,
+                        clientStreet,
+                        clientCity,
+                        clientPostCode,
+                        clientCountry,
+                        dateJSON,
+                        paymentTerms,
+                        paymentDue,
+                        "pending",
+                        description,
+                        items,
+                        navigate
+                      );
+                    }
                   } else {
                     AxiosFunc(
                       id,
@@ -636,35 +680,13 @@ export default function EditCreate() {
                       navigate
                     );
                   }
-                } else {
-                  AxiosFunc(
-                    id,
-                    invoice,
-                    senderStreet,
-                    senderCity,
-                    senderPostCode,
-                    senderCountry,
-                    clientName,
-                    clientEmail,
-                    clientStreet,
-                    clientCity,
-                    clientPostCode,
-                    clientCountry,
-                    dateJSON,
-                    paymentTerms,
-                    paymentDue,
-                    "pending",
-                    description,
-                    items,
-                    navigate
-                  );
                 }
               }
-            }
-          >
-            Save & Send
-          </Fab>
-        </div>
+            >
+              Save & Send
+            </Fab>
+          </Stack>
+        </Stack>
         {/* ))} */}
       </div>
       {/* </Box> */}

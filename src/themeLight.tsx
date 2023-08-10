@@ -136,7 +136,7 @@ const getDesignTokens = (mode: any) => ({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 24,
+          borderRadius: "24px !important",
           size: "medium",
         },
       },
@@ -164,6 +164,14 @@ const getDesignTokens = (mode: any) => ({
         },
       },
     },
+    MuiFab: {
+      styleOverrides: {
+        extended: {
+          borderRadius: 50,
+        },
+      },
+    },
+
     // MuiTextField: {
     //   styleOverrides: {
     //     root: { height: "48px", m: 1, display: "block" },
