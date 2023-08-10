@@ -558,48 +558,64 @@ export default function EditCreate() {
             sx={{
               display: "flex",
               flexDirection: "row",
-              // justifyContent: "flex-end",
               ml: "auto",
             }}
           >
-            <Fab
-              sx={{
-                mr: 1,
-              }}
-              variant="extended"
-              size="small"
-              color="primary"
-              aria-label="add"
-              type="submit"
-              onClick={
-                // updateInvoice
-                () => {
-                  AxiosFunc(
-                    id,
-                    invoice,
-                    senderStreet,
-                    senderCity,
-                    senderPostCode,
-                    senderCountry,
-                    clientName,
-                    clientEmail,
-                    clientStreet,
-                    clientCity,
-                    clientPostCode,
-                    clientCountry,
-                    dateJSON,
-                    paymentTerms,
-                    paymentDue,
-                    "draft",
-                    description,
-                    items,
-                    navigate
-                  );
+            {!invoice && (
+              <Fab
+                sx={{ mr: 1 }}
+                variant="extended"
+                size="small"
+                color="primary"
+                aria-label="add"
+                onClick={() => {
+                  navigate("/invoices");
+                }}
+              >
+                Cancel
+              </Fab>
+            )}
+
+            {invoice && (
+              <Fab
+                sx={{
+                  mr: 1,
+                }}
+                variant="extended"
+                size="small"
+                color="primary"
+                aria-label="add"
+                type="submit"
+                onClick={
+                  // updateInvoice
+                  () => {
+                    AxiosFunc(
+                      id,
+                      invoice,
+                      senderStreet,
+                      senderCity,
+                      senderPostCode,
+                      senderCountry,
+                      clientName,
+                      clientEmail,
+                      clientStreet,
+                      clientCity,
+                      clientPostCode,
+                      clientCountry,
+                      dateJSON,
+                      paymentTerms,
+                      paymentDue,
+                      "draft",
+                      description,
+                      items,
+                      navigate
+                    );
+                  }
                 }
-              }
-            >
-              Save as Draft
-            </Fab>
+              >
+                Save as Draft
+              </Fab>
+            )}
             <Fab
               sx={{
                 mr: 1,
