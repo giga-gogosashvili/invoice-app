@@ -21,7 +21,7 @@ export default function NoInvoices() {
         />
         <Typography
           variant="h2"
-          color={"grey.900"}
+          color={"text.primary"}
           align="center"
           sx={{ mt: "66px", mb: "23px" }}
         >
