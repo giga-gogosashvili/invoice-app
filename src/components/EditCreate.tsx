@@ -21,7 +21,11 @@ import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
 import StyledTFShort from "../customize/StyledTFShort";
 import StyledTFLong from "../customize/StyledTFLong";
-import { StyledItemFields, StyledButton } from "../customize/StyledItemFields";
+import {
+  StyledItemFields,
+  StyledButton,
+  StyledTypoButton,
+} from "../customize/StyledItemFields";
 
 import Button from "@mui/material/Button";
 
@@ -516,6 +520,8 @@ export default function EditCreate() {
               width: "504px",
               mt: 1,
               mb: 1,
+              color: "primary.dark",
+              bgcolor: "grey.400",
             }}
             onClick={() => {
               const withNewItem = items.concat({
@@ -540,9 +546,7 @@ export default function EditCreate() {
         >
           {invoice && (
             <StyledButton
-              sx={{ mr: 1 }}
-              size="small"
-              color="primary"
+              sx={{ width: "96px", color: "#7E88C3", bgcolor: "#F9FAFE" }}
               aria-label="add"
               onClick={() => {
                 navigate("/invoices");
@@ -560,9 +564,12 @@ export default function EditCreate() {
           >
             {!invoice && (
               <StyledButton
-                sx={{ mr: 1 }}
-                size="small"
-                color="primary"
+                sx={{
+                  mr: 1,
+                  color: "primary.dark",
+                  width: "96px",
+                  bgcolor: "grey.400",
+                }}
                 aria-label="add"
                 onClick={() => {
                   navigate("/invoices");
@@ -576,6 +583,9 @@ export default function EditCreate() {
               <StyledButton
                 sx={{
                   mr: 1,
+                  width: "133px",
+                  bgcolor: "secondary.main",
+                  color: "info.main",
                 }}
                 size="small"
                 color="primary"
@@ -608,16 +618,21 @@ export default function EditCreate() {
                   }
                 }
               >
-                Save{" "}
-                <Box display="inline" textTransform="lowercase">
-                  as
-                </Box>{" "}
-                Draft
+                <StyledTypoButton>
+                  Save{" "}
+                  <Box display="inline" textTransform="lowercase">
+                    as
+                  </Box>{" "}
+                  Draft
+                </StyledTypoButton>
               </StyledButton>
             )}
             <StyledButton
               sx={{
                 mr: 1,
+                width: "128px",
+                color: "#fff",
+                bgcolor: "#7C5DFA",
               }}
               size="small"
               color="primary"
@@ -697,7 +712,7 @@ export default function EditCreate() {
                 }
               }
             >
-              Save & Send
+              {invoice ? `Save & Send` : `Save Changes`}
             </StyledButton>
           </Stack>
         </Stack>

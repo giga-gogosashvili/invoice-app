@@ -26,7 +26,7 @@ import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
 import toggleColorMode from "../App";
 import Button from "@mui/material/Button";
-import { StyledButton } from "../customize/StyledItemFields";
+import { StyledButton, StyledTypoButton } from "../customize/StyledItemFields";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -73,7 +73,6 @@ export default function Invoice() {
       });
   };
 
-  const fabStyle = { mr: "10px", p: "24px", borderRadius: "24px" };
   return (
     <>
       {/* <Drawer></Drawer> */}
@@ -166,13 +165,26 @@ export default function Invoice() {
                     }}
                   >
                     <Link to={`/invoices/${invoice.id}/edit`}>
-                      <Button sx={fabStyle} aria-label="add">
-                        <StyledButton>Edit</StyledButton>
-                      </Button>
+                      <StyledButton
+                        sx={{
+                          mr: 1,
+                          width: "73px",
+                          color: "primary.dark",
+                          bgcolor: "grey.400",
+                        }}
+                        aria-label="add"
+                      >
+                        Edit
+                      </StyledButton>
                     </Link>
 
                     <StyledButton
-                      sx={fabStyle}
+                      sx={{
+                        mr: 1,
+                        width: "89px",
+                        color: "#fff",
+                        bgcolor: "#EC5757",
+                      }}
                       aria-label="add"
                       onClick={() => setOpen(true)}
                     >
@@ -180,7 +192,11 @@ export default function Invoice() {
                     </StyledButton>
                     {invoice.status !== "paid" && (
                       <StyledButton
-                        sx={fabStyle}
+                        sx={{
+                          width: "131px",
+                          color: "#fff",
+                          bgcolor: "#7C5DFA",
+                        }}
                         aria-label="add"
                         onClick={() => {
                           setStatus("paid");
@@ -227,7 +243,13 @@ export default function Invoice() {
                             });
                         }}
                       >
-                        Mark as Paid
+                        <StyledTypoButton>
+                          Mark{" "}
+                          <Box display="inline" textTransform="lowercase">
+                            as
+                          </Box>{" "}
+                          Paid
+                        </StyledTypoButton>
                       </StyledButton>
                     )}
                   </Box>

@@ -22,5 +22,19 @@ export const StyledItemFields = styled(TextField)(({ theme }) => ({
 
 export const StyledButton = styled(Button)(({ theme }) => ({
   textTransform: "capitalize",
-  fontVariant: "h4",
+  fontFamily: "League Spartan",
+  fontSize: "15px",
+  fontWeight: 700,
+  lineHeight: "15px",
+  letterSpacing: "-0.25px",
+  p: "24px",
+}));
+
+export const StyledTypoButton = styled(Typography)(({ theme }) => ({
+  textTransform: "capitalize",
+  fontFamily: "League Spartan",
+  fontSize: "15px",
+  fontWeight: 700,
+  lineHeight: "15px",
+  letterSpacing: "-0.25px",
 }));
