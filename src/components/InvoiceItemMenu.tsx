@@ -90,11 +90,7 @@ export default function InvoiceItemMenu({ invoice }: Props) {
                 Details
               </MenuItem>
             </Link>
-            <DeleteIcon
-              onClick={() => {
-                navigate(`/invoices/${invoice.id}`);
-              }}
-            ></DeleteIcon>
+
             <MenuItem
               key={index}
               value={invoice.id}

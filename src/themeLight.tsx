@@ -152,6 +152,13 @@ const getDesignTokens = (mode: any) => ({
         icon: {
           height: 8,
           width: 8,
+          opacity: 1,
+        },
+        label: {
+          opacity: "1 !important",
+        },
+        "& .MuiChip-label": {
+          opacity: 1,
         },
       },
     },

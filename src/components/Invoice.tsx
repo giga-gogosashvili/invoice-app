@@ -75,7 +75,6 @@ export default function Invoice() {
 
   return (
     <>
-      {/* <Drawer></Drawer> */}
       <Box
         display={"flex"}
         sx={{
@@ -83,6 +82,8 @@ export default function Invoice() {
           bgcolor: "#F8F8FB",
         }}
       >
+        <Drawer></Drawer>
+
         <Box
           sx={{
             margin: "0 auto",

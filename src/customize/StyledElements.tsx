@@ -62,3 +62,9 @@ export const StyledTFShort = styled(TextField)(() => ({
   width: "152px",
   flexShrink: 0,
 }));
+
+export const StatusButton = styled(Button)(() => ({
+  width: "104px",
+  flexShrink: 0,
+  borderRadius: "6px",
+}));

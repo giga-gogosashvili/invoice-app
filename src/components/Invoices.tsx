@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import InvoiceItem from "./InvoiceItem";
-import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Stack from "@mui/material/Stack";
 import FilterButton from "./FilterButton";

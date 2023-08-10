@@ -2,7 +2,7 @@ import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
-import { StyledListItem } from "../customize/StyledElements";
+import { StyledListItem, StatusButton } from "../customize/StyledElements";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
@@ -95,6 +95,10 @@ export default function InvoiceItem({ data, func }: Props) {
                           mr: 5,
                           width: 100,
                           typography: "h4",
+
+                          "& .MuiChip-label": {
+                            opacity: "1!important",
+                          },
                         }}
                         icon={<FiberManualRecordIcon />}
                       ></Chip>
