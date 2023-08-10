@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import StyledNavDrawer from "../customize/StyledNavDrawer";
+import { StyledDrawer } from "../customize/StyledElements";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
@@ -21,7 +21,7 @@ function NavDrawer() {
   // };
 
   return (
-    <StyledNavDrawer variant="permanent" anchor="left">
+    <StyledDrawer variant="permanent" anchor="left">
       <Box
         sx={{
           flexGrow: 0,
@@ -104,7 +104,7 @@ function NavDrawer() {
           />
         </Box>
       </Box>
-    </StyledNavDrawer>
+    </StyledDrawer>
   );
 }
 export default NavDrawer;

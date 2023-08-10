@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { InvoiceResponse } from "./Invoices";
 import axios from "axios";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -13,19 +12,19 @@ import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import { List, ListItem, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
 import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
-import StyledTFShort from "../customize/StyledTFShort";
-import StyledTFLong from "../customize/StyledTFLong";
+
 import {
   StyledItemFields,
   StyledButton,
   StyledTypoButton,
-} from "../customize/StyledItemFields";
+  StyledTFShort,
+  StyledTFLong,
+} from "../customize/StyledElements";
 
 import Button from "@mui/material/Button";
 
@@ -399,6 +398,14 @@ export default function EditCreate() {
                   width: "214px",
                   mt: 1,
                   mb: 1,
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#DFE3FA",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "primary.main",
+                    },
+                  },
                 }}
                 InputLabelProps={{ shrink: true }}
                 value={
@@ -428,6 +435,14 @@ export default function EditCreate() {
                     },
                   "& input[type=number]": {
                     MozAppearance: "textfield",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#DFE3FA",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "primary.main",
+                    },
                   },
                 }}
                 type="number"
@@ -467,6 +482,14 @@ export default function EditCreate() {
                     },
                   "& input[type=number]": {
                     MozAppearance: "textfield",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#DFE3FA",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "primary.main",
+                    },
                   },
                 }}
                 value={

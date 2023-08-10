@@ -2,7 +2,7 @@ import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
-import StyledListItem from "../customize/StyledListItemLP";
+import { StyledListItem } from "../customize/StyledElements";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
@@ -32,9 +32,13 @@ export default function InvoiceItem({ data, func }: Props) {
             <Grid item xs={10}>
               <List sx={{ m: 0, p: 0 }}>
                 {data.map((invoice, index: number) => (
-                  <StyledListItem key={index}>
+                  <StyledListItem key={index} sx={{ bgcolor: "grey.50" }}>
                     <ListItemText>
-                      <Typography component="div" variant="h4">
+                      <Typography
+                        component="div"
+                        variant="h4"
+                        color="text.primary"
+                      >
                         <Box display="inline" color={"#7E88C3"}>
                           #
                         </Box>
@@ -48,7 +52,16 @@ export default function InvoiceItem({ data, func }: Props) {
                         color="info.main"
                       >
                         Due{" "}
-                        <Box display="inline" color={"info.light"}>
+                        <Box
+                          display="inline"
+                          color={"primary.dark"}
+                          sx={{
+                            fontWeight: 500,
+                            fontSize: "13px",
+                            lineHeight: "18px",
+                            letterSpacing: -0.1,
+                          }}
+                        >
                           {invoice.paymentDue}
                         </Box>
                       </Typography>
@@ -58,7 +71,7 @@ export default function InvoiceItem({ data, func }: Props) {
                       primary={invoice.clientName}
                       sx={{
                         "& .MuiListItemText-primary": {
-                          color: "info.main",
+                          color: "grey.100",
                           typography: "body1",
                         },
                       }}
@@ -68,6 +81,7 @@ export default function InvoiceItem({ data, func }: Props) {
                       primary={`£${formatingNumbers(invoice.total)}`}
                       sx={{
                         "& .MuiListItemText-primary": {
+                          color: "text.primary",
                           typography: "h3",
                         },
                       }}

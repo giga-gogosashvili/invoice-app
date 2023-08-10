@@ -26,7 +26,7 @@ import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
 import toggleColorMode from "../App";
 import Button from "@mui/material/Button";
-import { StyledButton, StyledTypoButton } from "../customize/StyledItemFields";
+import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 
 export default function Invoice() {
   const { id } = useParams();

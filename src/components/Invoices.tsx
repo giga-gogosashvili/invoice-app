@@ -8,9 +8,7 @@ import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
-import InvoiceItemMenu from "./InvoiceItemMenu";
-import toggleColorMode from "../App";
-
+import { StyledButton } from "../customize/StyledElements";
 import Drawer from "./Drawer";
 
 import axios from "axios";
@@ -97,7 +95,7 @@ export default function Invoices() {
   }, [filterStatus]);
 
   return (
-    <Box display={"flex"}>
+    <Box display={"flex"} sx={{ bgcolor: "background.paper" }}>
       <Drawer></Drawer>
 
       <Box sx={{ margin: "0 auto", width: 730 }}>
@@ -141,13 +139,13 @@ export default function Invoices() {
                 setFilterStatus={setFilterStatus}
               />
               <Link to={`/invoices/create`}>
-                <Button
-                  sx={{ bgcolor: "primary.main", width: 150, height: 48 }}
+                <StyledButton
+                  sx={{ bgcolor: "primary.main", width: "150px" }}
                   variant="contained"
-                  startIcon={<AddCircleIcon />}
+                  startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
                 >
                   New Invoice
-                </Button>
+                </StyledButton>
               </Link>
             </Stack>
           </Box>

@@ -33,6 +33,12 @@ export default function FilterButton(props: Props) {
           </Typography>
         </InputLabel>
         <Select
+          variant="outlined"
+          sx={{
+            "&.MuiNativeSelect-icon": {
+              color: "red",
+            },
+          }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={props.filterStatus}
