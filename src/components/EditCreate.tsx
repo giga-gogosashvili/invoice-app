@@ -103,11 +103,14 @@ export default function EditCreate() {
 
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#DFE3FA",
+        borderColor: "primary.main",
       },
       "&:hover fieldset": {
         borderColor: "primary.main",
       },
+    },
+    "& .MuiInputBase-input": {
+      backgroundColor: "grey.50",
     },
   };
 
@@ -117,11 +120,14 @@ export default function EditCreate() {
 
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#DFE3FA",
+        borderColor: "primary.main",
       },
       "&:hover fieldset": {
         borderColor: "primary.main",
       },
+    },
+    "& .MuiInputBase-input": {
+      backgroundColor: "grey.50",
     },
     width: "240px",
   };
@@ -407,11 +413,14 @@ export default function EditCreate() {
                     mb: 1,
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        borderColor: "#DFE3FA",
+                        borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
                         borderColor: "primary.main",
                       },
+                    },
+                    "& .MuiInputBase-input": {
+                      backgroundColor: "grey.50",
                     },
                   }}
                   InputLabelProps={{ shrink: true }}
@@ -436,20 +445,22 @@ export default function EditCreate() {
                   label="Qty."
                   sx={{
                     width: "48px",
-                    "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                      {
-                        display: "none",
-                      },
+                    "& input::-webkit-inner-spin-button": {
+                      display: "none",
+                    },
                     "& input[type=number]": {
                       MozAppearance: "textfield",
                     },
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        borderColor: "#DFE3FA",
+                        borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
                         borderColor: "primary.main",
                       },
+                    },
+                    "& .MuiInputBase-input": {
+                      backgroundColor: "grey.50",
                     },
                   }}
                   type="number"
@@ -483,20 +494,22 @@ export default function EditCreate() {
                   InputLabelProps={{ shrink: true }}
                   sx={{
                     width: "100px",
-                    "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                      {
-                        display: "none",
-                      },
+                    "& input::-webkit-inner-spin-button": {
+                      display: "none",
+                    },
                     "& input[type=number]": {
                       MozAppearance: "textfield",
                     },
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        borderColor: "#DFE3FA",
+                        borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
                         borderColor: "primary.main",
                       },
+                    },
+                    "& .MuiInputBase-input": {
+                      backgroundColor: "grey.50",
                     },
                   }}
                   value={
