@@ -79,7 +79,7 @@ export default function Invoice() {
         display={"flex"}
         sx={{
           flexGrow: 1,
-          bgcolor: "#F8F8FB",
+          bgcolor: "background.paper",
         }}
       >
         <Drawer></Drawer>
@@ -103,15 +103,18 @@ export default function Invoice() {
             }}
           >
             <BottomNavigation
-              sx={{ bgcolor: "#F8F8FB", display: "inline" }}
+              sx={{ display: "inline" }}
               showLabels
               onClick={() => navigate(-1)}
             >
               <BottomNavigationAction
                 label="Go back"
-                icon={<ArrowBackIosIcon sx={{ height: "10px" }} />}
+                icon={
+                  <ArrowBackIosIcon sx={{ height: "10px", color: "#7C5DFA" }} />
+                }
                 sx={{
                   display: "inline",
+                  color: "text.primary",
                 }}
               />
             </BottomNavigation>
@@ -130,7 +133,7 @@ export default function Invoice() {
                   direction="row"
                   // spacing={2}
                   sx={{
-                    backgroundColor: "#ffffff",
+                    bgcolor: "grey.50",
                     mb: "30px",
                     pr: "22px",
                     width: 730,
@@ -263,6 +266,7 @@ export default function Invoice() {
                     borderRadius: "8px",
                     boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
                     p: "49px",
+                    bgcolor: "grey.50",
                   }}
                 >
                   <Stack
@@ -274,6 +278,7 @@ export default function Invoice() {
                       <Typography
                         component="div"
                         variant="h3"
+                        color="text.primary"
                         sx={{ mb: "13px" }}
                       >
                         <Box display="inline" color={"#888EB0"}>
@@ -283,7 +288,7 @@ export default function Invoice() {
                       </Typography>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                       >
                         {invoice.description}
@@ -292,7 +297,7 @@ export default function Invoice() {
                     <CardContent>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                       >
                         {invoice.senderAddress.street} <br />
@@ -310,13 +315,14 @@ export default function Invoice() {
                     <CardContent sx={{ justifyContent: "space-between" }}>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                         sx={{ mb: "13px" }}
                       >
                         Invoice Date
                       </Typography>
                       <Typography
+                        color="text.primary"
                         variant="h3"
                         component="div"
                         sx={{ mb: "20px" }}
@@ -326,31 +332,39 @@ export default function Invoice() {
 
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                         sx={{ mb: "13px" }}
                       >
                         Payment Due
                       </Typography>
-                      <Typography variant="h3" component="div">
+                      <Typography
+                        variant="h3"
+                        component="div"
+                        color="text.primary"
+                      >
                         {invoice.paymentDue}
                       </Typography>
                     </CardContent>
                     <CardContent>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                         sx={{ mb: "13px" }}
                       >
                         Bill To
                       </Typography>
-                      <Typography variant="h3" component="div">
+                      <Typography
+                        variant="h3"
+                        component="div"
+                        color="text.primary"
+                      >
                         {invoice.clientName}
                       </Typography>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                       >
                         {invoice.clientAddress.street} <br />
@@ -362,13 +376,17 @@ export default function Invoice() {
                     <CardContent>
                       <Typography
                         variant="body1"
-                        color="text.secondary"
+                        color="primary.dark"
                         gutterBottom
                         sx={{ mb: "13px" }}
                       >
                         Sent To
                       </Typography>
-                      <Typography variant="h3" component="div">
+                      <Typography
+                        variant="h3"
+                        component="div"
+                        color="text.primary"
+                      >
                         {invoice.clientEmail}
                       </Typography>
                     </CardContent>
@@ -384,21 +402,66 @@ export default function Invoice() {
                     <Table sx={{}} aria-label="spanning table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Item Name</TableCell>
-                          <TableCell align="right">Qty.</TableCell>
-                          <TableCell align="right">Price</TableCell>
-                          <TableCell align="right">Total</TableCell>
+                          <TableCell
+                            sx={{
+                              color: "primary.dark",
+                            }}
+                          >
+                            Item Name
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              color: "primary.dark",
+                            }}
+                            align="right"
+                          >
+                            Qty.
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              color: "primary.dark",
+                            }}
+                            align="right"
+                          >
+                            Price
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              color: "primary.dark",
+                            }}
+                            align="right"
+                          >
+                            Total
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {invoice.items.map((item, index: number) => (
                           <TableRow key={index}>
                             <TableCell>
-                              <Typography variant="h4">{item.name}</Typography>
+                              <Typography variant="h4" color="text.primary">
+                                {item.name}
+                              </Typography>
                             </TableCell>
-                            <TableCell align="right">{item.quantity}</TableCell>
-                            <TableCell align="right">{item.price}</TableCell>
-                            <TableCell align="right">{item.total}</TableCell>
+                            <TableCell
+                              align="right"
+                              sx={{
+                                color: "primary.dark",
+                              }}
+                            >
+                              {item.quantity}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              sx={{
+                                color: "primary.dark",
+                              }}
+                            >
+                              {item.price}
+                            </TableCell>
+                            <TableCell align="right" color="text.primary">
+                              {item.total}
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
