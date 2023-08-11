@@ -9,7 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -267,6 +267,7 @@ export default function Invoice() {
                     boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
                     p: "49px",
                     bgcolor: "grey.50",
+                    mb: "65px",
                   }}
                 >
                   <Stack
@@ -395,43 +396,39 @@ export default function Invoice() {
                   <TableContainer
                     component={Paper}
                     sx={{
-                      bgcolor: "#F9FAFE",
+                      bgcolor: "grey.400",
                       width: "634px",
                     }}
                   >
-                    <Table sx={{}} aria-label="spanning table">
+                    <Table
+                      sx={{
+                        [`& .${tableCellClasses.root}`]: {
+                          borderBottom: "none",
+                        },
+                      }}
+                      aria-label="spanning table"
+                    >
                       <TableHead>
                         <TableRow>
-                          <TableCell
-                            sx={{
-                              color: "primary.dark",
-                            }}
-                          >
-                            Item Name
+                          <TableCell>
+                            <Typography variant="body1" color="primary.dark">
+                              Item Name
+                            </Typography>
                           </TableCell>
-                          <TableCell
-                            sx={{
-                              color: "primary.dark",
-                            }}
-                            align="right"
-                          >
-                            Qty.
+                          <TableCell align="right">
+                            <Typography variant="body1" color="primary.dark">
+                              Qty.
+                            </Typography>
                           </TableCell>
-                          <TableCell
-                            sx={{
-                              color: "primary.dark",
-                            }}
-                            align="right"
-                          >
-                            Price
+                          <TableCell align="right">
+                            <Typography variant="body1" color="primary.dark">
+                              Price
+                            </Typography>
                           </TableCell>
-                          <TableCell
-                            sx={{
-                              color: "primary.dark",
-                            }}
-                            align="right"
-                          >
-                            Total
+                          <TableCell align="right">
+                            <Typography variant="body1" color="primary.dark">
+                              Total
+                            </Typography>
                           </TableCell>
                         </TableRow>
                       </TableHead>
@@ -443,24 +440,20 @@ export default function Invoice() {
                                 {item.name}
                               </Typography>
                             </TableCell>
-                            <TableCell
-                              align="right"
-                              sx={{
-                                color: "primary.dark",
-                              }}
-                            >
-                              {item.quantity}
+                            <TableCell align="right">
+                              <Typography variant="h4" color="primary.dark">
+                                {item.quantity}
+                              </Typography>
                             </TableCell>
-                            <TableCell
-                              align="right"
-                              sx={{
-                                color: "primary.dark",
-                              }}
-                            >
-                              {item.price}
+                            <TableCell align="right">
+                              <Typography variant="h4" color="primary.dark">
+                                {item.price}
+                              </Typography>
                             </TableCell>
-                            <TableCell align="right" color="text.primary">
-                              {item.total}
+                            <TableCell align="right">
+                              <Typography variant="h4" color="text.primary">
+                                £ {item.total}
+                              </Typography>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -469,19 +462,19 @@ export default function Invoice() {
                         sx={{
                           height: "80px",
                           width: "100%",
-                          bgcolor: "#373B53",
+                          bgcolor: "grey.600",
                           // justifyContent: "space-between",
                         }}
                       >
                         <TableRow sx={{ width: "100%" }}>
                           <TableCell colSpan={3}>
                             {" "}
-                            <Typography variant="body1" color={"white"}>
+                            <Typography variant="body1" color={"#fff"}>
                               Amount Due
                             </Typography>
                           </TableCell>
                           <TableCell align="right">
-                            <Typography variant="h2" color={"white"}>
+                            <Typography variant="h2" color={"#fff"}>
                               £ {invoice.total}
                             </Typography>
                           </TableCell>

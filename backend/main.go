@@ -96,7 +96,7 @@ var invoices = []invoice{
 			Country:  "United Kingdom",
 		},
 		Items: []items{
-			items{Name: "Banner Design", Quantity: 1, Price: 156.00, Total: 156.00},
+			items{Name: "Banner Design", Quantity: 1, Price: 156.00, Total: 156.00}, items{Name: "Email Design", Quantity: 2, Price: 200.00, Total: 400.00},
 		},
 		Total: 556.00,
 	},
