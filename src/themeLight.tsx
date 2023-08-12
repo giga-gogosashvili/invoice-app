@@ -15,6 +15,16 @@ const defaultTheme = createTheme();
 const defaultShadows: ThemeOptions["shadows"] = [...defaultTheme.shadows];
 
 const getDesignTokens = (mode: any) => ({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 375, //Mobile
+      md: 768, //Tablet
+      lg: 992, //Laptop - not used
+      xl: 1440, //Desctop
+    },
+  },
+
   palette: {
     mode,
     ...(mode === "light"
@@ -175,7 +185,12 @@ const getDesignTokens = (mode: any) => ({
         },
       },
     },
-  
+    MuiToolbar: {
+      styleOverrides: {
+       
+        // root: { pl: 0, pr: 0 },
+      },
+    },
 
     // MuiTextField: {
     //   styleOverrides: {

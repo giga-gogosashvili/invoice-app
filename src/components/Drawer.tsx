@@ -31,8 +31,8 @@ function NavDrawer() {
           sx={{
             flexGrow: 0,
             background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-            width: 103,
-            height: 103,
+            width: { xl: 103, md: 80, sm: 72 },
+            height: { xl: 103, md: 80, sm: 72 },
 
             display: "flex",
             flexDirection: "column",

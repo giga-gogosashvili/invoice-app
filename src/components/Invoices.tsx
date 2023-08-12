@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
 import { StyledButton } from "../customize/StyledElements";
 import Drawer from "./Drawer";
+import NavBar from "./NavBar";
 
 import axios from "axios";
 
@@ -94,10 +95,14 @@ export default function Invoices() {
   }, [filterStatus]);
 
   return (
-    <Box display={"flex"} sx={{ bgcolor: "background.paper" }}>
-      <Drawer></Drawer>
+    <Box
+      display={"flex"}
+      sx={{ bgcolor: "background.paper", flexDirection: "column" }}
+    >
+      <NavBar></NavBar>
+      {/* <Drawer></Drawer> */}
 
-      <Box sx={{ margin: "0 auto", width: 730 }}>
+      <Box sx={{ margin: "0 auto", width: { xl: 730, md: 672, sm: 327 } }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box>
             <Typography color="text.primary" variant="h1" sx={{ mt: "78px" }}>

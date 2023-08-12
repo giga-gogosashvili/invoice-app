@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Item } from "./Invoices";
 import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
+import NavBar from "./NavBar";
 
 import {
   StyledItemFields,
@@ -131,25 +132,6 @@ export default function EditCreate() {
     },
     width: "240px",
   };
-
-  const datePickerStyle = {
-    mt: 1,
-    mb: 1,
-
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "primary.main",
-      },
-      "&:hover fieldset": {
-        borderColor: "grey.700",
-      },
-    },
-    "& .MuiInputBase-input": {
-      backgroundColor: "grey.50",
-    },
-    "&.MuiDatePickerToolbar-root": { bgcolor: "red" },
-    width: "240px",
-  };
   const segmentTitleStyle = {
     mb: "24px",
     mt: "24px",
@@ -157,8 +139,16 @@ export default function EditCreate() {
   };
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "background.paper" }}>
-      <Drawer></Drawer>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: "background.paper",
+      }}
+    >
+      {/* <Drawer></Drawer> */}
+      <NavBar></NavBar>
+
       <Box
         sx={{
           width: "616px",
@@ -362,7 +352,7 @@ export default function EditCreate() {
           sx={{ width: "504px" }}
         >
           <DatePicker
-            sx={datePickerStyle}
+            sx={dateStyle}
             //DO NAPRAWY
             value={invoice ? createdAt || invoice.createdAt : createdAt}
             onChange={(newValue) => setCreatedAt(newValue)}

@@ -27,6 +27,7 @@ import ConfirmDeletion from "./ConfirmDeletion";
 import toggleColorMode from "../App";
 import Button from "@mui/material/Button";
 import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
+import NavBar from "./NavBar";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -76,13 +77,15 @@ export default function Invoice() {
   return (
     <>
       <Box
-        display={"flex"}
         sx={{
           flexGrow: 1,
           bgcolor: "background.paper",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <Drawer></Drawer>
+        {/* <Drawer></Drawer> */}
+        <NavBar></NavBar>
 
         <Box
           sx={{
