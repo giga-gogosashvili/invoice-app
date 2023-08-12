@@ -68,7 +68,17 @@ function NavDrawer() {
           <DarkModeIcon
             width={20}
             height={20}
-            sx={{ color: "info.light" }}
+            sx={{
+              color: "info.light",
+              "&:hover": {
+                color: "#DFE3FA",
+                boxShadow: "none",
+              },
+              "&:active": {
+                boxShadow: "none",
+                color: "#DFE3FA",
+              },
+            }}
             // onClick={func}
           ></DarkModeIcon>
           {/* <Switch

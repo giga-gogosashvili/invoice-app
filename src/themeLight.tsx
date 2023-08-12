@@ -36,6 +36,7 @@ const getDesignTokens = (mode: any) => ({
           info: {
             main: "#888EB0",
             light: "#DFE3FA",
+            dark: "#FFFFFF",
           },
           grey: {
             50: "#FFFFFF",
@@ -72,6 +73,7 @@ const getDesignTokens = (mode: any) => ({
           info: {
             main: "#DFE3FA",
             light: "#1E2139",
+            dark: "#141625",
           },
           grey: {
             50: "#1E2139",
@@ -173,6 +175,7 @@ const getDesignTokens = (mode: any) => ({
         },
       },
     },
+  
 
     // MuiTextField: {
     //   styleOverrides: {

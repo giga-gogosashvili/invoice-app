@@ -66,7 +66,7 @@ export default function InvoiceItemMenu({ invoice }: Props) {
             aria-expanded={openMenu ? "true" : undefined}
             onClick={handleClick}
           >
-            <NavigateNextIcon></NavigateNextIcon>
+            <NavigateNextIcon sx={{ color: "#7C5DFA" }}></NavigateNextIcon>
           </Button>
           <Menu
             id="fade-menu"

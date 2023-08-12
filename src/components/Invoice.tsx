@@ -103,18 +103,33 @@ export default function Invoice() {
             }}
           >
             <BottomNavigation
-              sx={{ display: "inline" }}
+              sx={{
+                display: "inline",
+              }}
               showLabels
               onClick={() => navigate(-1)}
             >
               <BottomNavigationAction
                 label="Go back"
                 icon={
-                  <ArrowBackIosIcon sx={{ height: "10px", color: "#7C5DFA" }} />
+                  <ArrowBackIosIcon
+                    sx={{
+                      height: "10px",
+                      color: "#7C5DFA",
+                    }}
+                  />
                 }
                 sx={{
                   display: "inline",
                   color: "text.primary",
+                  "& label:hover": {
+                    color: "#grey.200",
+                    boxShadow: "none",
+                  },
+                  "&MuiBottomNavigationAction-label:active": {
+                    boxShadow: "none",
+                    color: "#grey.200",
+                  },
                 }}
               />
             </BottomNavigation>
@@ -175,6 +190,16 @@ export default function Invoice() {
                           width: "73px",
                           color: "primary.dark",
                           bgcolor: "grey.400",
+                          "&:hover": {
+                            bgcolor: "grey.500",
+                            color: "#7E88C3",
+                            boxShadow: "none",
+                          },
+                          "&:active": {
+                            bgcolor: "grey.500",
+                            color: "#7E88C3",
+                            boxShadow: "none",
+                          },
                         }}
                         aria-label="add"
                       >
@@ -188,6 +213,16 @@ export default function Invoice() {
                         width: "89px",
                         color: "#fff",
                         bgcolor: "#EC5757",
+                        "&:hover": {
+                          bgcolor: "#FF9797",
+
+                          boxShadow: "none",
+                        },
+                        "&:active": {
+                          bgcolor: "#FF9797",
+
+                          boxShadow: "none",
+                        },
                       }}
                       aria-label="add"
                       onClick={() => setOpen(true)}
@@ -200,6 +235,16 @@ export default function Invoice() {
                           width: "131px",
                           color: "#fff",
                           bgcolor: "#7C5DFA",
+                          "&:hover": {
+                            bgcolor: "#9277FF",
+
+                            boxShadow: "none",
+                          },
+                          "&:active": {
+                            bgcolor: "#9277FF",
+
+                            boxShadow: "none",
+                          },
                         }}
                         aria-label="add"
                         onClick={() => {

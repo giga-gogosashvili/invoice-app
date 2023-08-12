@@ -139,7 +139,18 @@ export default function Invoices() {
               />
               <Link to={`/invoices/create`}>
                 <StyledButton
-                  sx={{ bgcolor: "primary.main", width: "150px" }}
+                  sx={{
+                    bgcolor: "primary.main",
+                    width: "150px",
+                    "&:hover": {
+                      backgroundColor: "#9277FF",
+                      boxShadow: "none",
+                    },
+                    "&:active": {
+                      boxShadow: "none",
+                      backgroundColor: "#9277FF",
+                    },
+                  }}
                   variant="contained"
                   startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
                 >

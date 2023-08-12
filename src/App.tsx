@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-      <ThemeProvider theme={darkModeTheme}>
+      <ThemeProvider theme={lightModeTheme}>
         <CssBaseline />
         <Drawer></Drawer>
 

@@ -106,7 +106,7 @@ export default function EditCreate() {
         borderColor: "primary.main",
       },
       "&:hover fieldset": {
-        borderColor: "primary.main",
+        borderColor: "grey.700",
       },
     },
     "& .MuiInputBase-input": {
@@ -123,7 +123,7 @@ export default function EditCreate() {
         borderColor: "primary.main",
       },
       "&:hover fieldset": {
-        borderColor: "primary.main",
+        borderColor: "grey.700",
       },
     },
     "& .MuiInputBase-input": {
@@ -132,6 +132,24 @@ export default function EditCreate() {
     width: "240px",
   };
 
+  const datePickerStyle = {
+    mt: 1,
+    mb: 1,
+
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "primary.main",
+      },
+      "&:hover fieldset": {
+        borderColor: "grey.700",
+      },
+    },
+    "& .MuiInputBase-input": {
+      backgroundColor: "grey.50",
+    },
+    "&.MuiDatePickerToolbar-root": { bgcolor: "red" },
+    width: "240px",
+  };
   const segmentTitleStyle = {
     mb: "24px",
     mt: "24px",
@@ -141,7 +159,15 @@ export default function EditCreate() {
   return (
     <Box sx={{ display: "flex", bgcolor: "background.paper" }}>
       <Drawer></Drawer>
-      <Box sx={{ width: "616px", ml: "56px" }}>
+      <Box
+        sx={{
+          width: "616px",
+          pl: "56px",
+          bgcolor: "info.dark",
+          borderTopRightRadius: 20,
+          borderBottomRightRadius: 20,
+        }}
+      >
         <Typography color="text.primary" variant="h2" sx={{ mt: "59px" }}>
           {invoice ? `Edit ${id}` : "New Envoice"}
         </Typography>
@@ -336,7 +362,7 @@ export default function EditCreate() {
           sx={{ width: "504px" }}
         >
           <DatePicker
-            sx={dateStyle}
+            sx={datePickerStyle}
             //DO NAPRAWY
             value={invoice ? createdAt || invoice.createdAt : createdAt}
             onChange={(newValue) => setCreatedAt(newValue)}
@@ -416,7 +442,7 @@ export default function EditCreate() {
                         borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
-                        borderColor: "primary.main",
+                        borderColor: "grey.700",
                       },
                     },
                     "& .MuiInputBase-input": {
@@ -456,7 +482,7 @@ export default function EditCreate() {
                         borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
-                        borderColor: "primary.main",
+                        borderColor: "grey.700",
                       },
                     },
                     "& .MuiInputBase-input": {
@@ -505,7 +531,7 @@ export default function EditCreate() {
                         borderColor: "primary.main",
                       },
                       "&:hover fieldset": {
-                        borderColor: "primary.main",
+                        borderColor: "grey.700",
                       },
                     },
                     "& .MuiInputBase-input": {
@@ -554,7 +580,18 @@ export default function EditCreate() {
                   }
                 />
                 <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
+                  <DeleteIcon
+                    sx={{
+                      "&:hover": {
+                        color: "#EC5757",
+                        boxShadow: "none",
+                      },
+                      "&:active": {
+                        boxShadow: "none",
+                        color: "#EC5757",
+                      },
+                    }}
+                  />
                 </IconButton>
               </ListItem>
             ))}
@@ -630,6 +667,15 @@ export default function EditCreate() {
                     width: "133px",
                     bgcolor: "secondary.main",
                     color: "info.main",
+
+                    "&:hover": {
+                      bgcolor: "secondary.dark",
+                      boxShadow: "none",
+                    },
+                    "&:active": {
+                      boxShadow: "none",
+                      bgcolor: "secondary.dark",
+                    },
                   }}
                   size="small"
                   color="primary"
@@ -677,6 +723,14 @@ export default function EditCreate() {
                   width: "128px",
                   color: "#fff",
                   bgcolor: "#7C5DFA",
+                  "&:hover": {
+                    bgcolor: "#9277FF",
+                    boxShadow: "none",
+                  },
+                  "&:active": {
+                    boxShadow: "none",
+                    bgcolor: "#9277FF",
+                  },
                 }}
                 size="small"
                 color="primary"
