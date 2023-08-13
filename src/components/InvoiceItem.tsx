@@ -6,6 +6,7 @@ import { StyledListItem, StatusButton } from "../customize/StyledElements";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface Props {
   data: InvoiceResponse[];
@@ -20,6 +21,8 @@ const formatingNumbers = (number: number) => {
 };
 
 export default function InvoiceItem({ data, func }: Props) {
+  const matchesXS = useMediaQuery("(min-width:768px)");
+
   return (
     <div>
       <Box
@@ -28,7 +31,11 @@ export default function InvoiceItem({ data, func }: Props) {
         }}
       >
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={0}>
+          <Grid
+            container
+            spacing={0}
+            sx={{ flexDirection: { xs: "column", md: "row" } }}
+          >
             <Grid item xs={10}>
               <List sx={{ m: 0, p: 0 }}>
                 {data.map((invoice, index: number) => (
@@ -108,7 +115,11 @@ export default function InvoiceItem({ data, func }: Props) {
               </List>
             </Grid>
             <Grid item xs={2}>
-              <InvoiceItemMenu invoice={data}></InvoiceItemMenu>
+              {matchesXS ? (
+                <InvoiceItemMenu invoice={data}></InvoiceItemMenu>
+              ) : (
+                ""
+              )}
             </Grid>
           </Grid>
         </Box>

@@ -19,6 +19,7 @@ import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
 import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import GoBackButton from "./GoBackButton";
 
 import {
   StyledItemFields,
@@ -140,6 +141,8 @@ export default function EditCreate() {
   };
 
   const matches = useMediaQuery("(min-width:1440px)");
+  const matchesXS = useMediaQuery("(min-width:768px)");
+
   const direction = matches ? "row" : "column";
 
   return (
@@ -147,22 +150,27 @@ export default function EditCreate() {
       display="flex"
       flexDirection={direction}
       sx={{
-        bgcolor: "background.paper",
+        bgcolor: { md: "background.paper", xs: "#fff" },
       }}
     >
       {/* <Drawer></Drawer> */}
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
+      {!matchesXS ? <GoBackButton></GoBackButton> : ""}
 
       <Box
         sx={{
-          width: "616px",
-          pl: "56px",
+          width: { md: "616px", xs: "375px" },
+          pl: { md: "56px", xs: "5px" },
           bgcolor: "info.dark",
-          borderTopRightRadius: 20,
-          borderBottomRightRadius: 20,
+          borderTopRightRadius: { md: "20px", xs: 0 },
+          borderBottomRightRadius: { md: "20px", xs: 0 },
         }}
       >
-        <Typography color="text.primary" variant="h2" sx={{ mt: "59px" }}>
+        <Typography
+          color="text.primary"
+          variant="h2"
+          sx={{ mt: { md: "59px", xs: 0 } }}
+        >
           {invoice ? `Edit ${id}` : "New Envoice"}
         </Typography>
 

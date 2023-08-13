@@ -29,9 +29,9 @@ import Button from "@mui/material/Button";
 import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import GoBackButton from "./GoBackButton";
 
 export default function Invoice() {
-
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
@@ -96,7 +96,7 @@ export default function Invoice() {
             margin: "0 auto",
           }}
         >
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               flexDirection: "row",
@@ -108,8 +108,9 @@ export default function Invoice() {
               mt: "65px",
               mb: "31px",
             }}
-          >
-            <BottomNavigation
+          > */}
+          <GoBackButton></GoBackButton>
+          {/* <BottomNavigation
               sx={{
                 display: "inline",
               }}
@@ -139,8 +140,8 @@ export default function Invoice() {
                   },
                 }}
               />
-            </BottomNavigation>
-          </Box>
+            </BottomNavigation> */}
+          {/* </Box> */}
           <Box
             sx={{
               display: "flex",
