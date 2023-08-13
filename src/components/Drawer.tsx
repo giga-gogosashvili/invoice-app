@@ -31,14 +31,15 @@ function NavDrawer() {
           sx={{
             flexGrow: 0,
             background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-            width: { xl: 103, md: 80, sm: 72 },
-            height: { xl: 103, md: 80, sm: 72 },
-
+            // width: { xl: 103, md: 80, xs: 72 },
+            // height: { xl: 103, md: 80, xs: 72 },
+            width: "103px",
+            height: "103px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20,
+            borderTopRightRadius: "20px",
+            borderBottomRightRadius: "20px",
             mb: "555.9px",
           }}
         >
@@ -46,8 +47,8 @@ function NavDrawer() {
             alt="logo"
             src={Logo}
             style={{
-              width: 40,
-              height: 40,
+              width: "40px",
+              height: "40px",
               margin: "0 auto",
             }}
           />
@@ -66,8 +67,8 @@ function NavDrawer() {
           }}
         >
           <DarkModeIcon
-            width={20}
-            height={20}
+            width={"20px"}
+            height={"20px"}
             sx={{
               color: "info.light",
               "&:hover": {

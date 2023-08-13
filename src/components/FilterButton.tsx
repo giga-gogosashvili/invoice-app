@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface Props {
   setFilterStatus: (a: string) => void;
@@ -14,50 +15,34 @@ export default function FilterButton(props: Props) {
   const handleChange = (event: SelectChangeEvent) => {
     props.setFilterStatus(event.target.value as string);
   };
+  const matches = useMediaQuery("(min-width:768px)");
 
   return (
     <Box>
       <FormControl
         sx={{
-          width: 117.46,
-          height: 15,
+          width: { md: "140.46px", xs: "79.5px" },
+          height: "15px",
           border: "none",
           "& fieldset": { border: "none" },
         }}
         fullWidth
       >
         <InputLabel id="demo-simple-select-label">
-          <Typography variant="body2" color="text.primary">
+          <Typography variant="h4" color="text.primary">
             {" "}
-            Filter by status
+            {matches ? "Filter by status" : "Filter"}
           </Typography>
         </InputLabel>
         <Select
           variant="outlined"
-          sx={{
-            "&.MuiNativeSelect-icon": {
-              color: "red",
-            },
-          }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={props.filterStatus}
           label="Status"
           onChange={handleChange}
         >
-          <MenuItem
-            value={undefined}
-            color="text.secondary"
-            sx={{
-              "& .MuiMenuItem-root": {
-                color: "info.main",
-                typography: "body1",
-                backgroundColor: "red",
-              },
-            }}
-          >
-            All
-          </MenuItem>
+          <MenuItem value={undefined}>All</MenuItem>
           <MenuItem value={"draft"}>Draft</MenuItem>
           <MenuItem value={"pending"}>Pending</MenuItem>
           <MenuItem value={"paid"}>Paid</MenuItem>

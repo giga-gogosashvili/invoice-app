@@ -69,7 +69,6 @@ export const getStatusColor = (
 };
 
 export default function Invoices() {
-  const matches = useMediaQuery("(min-width:992px)");
   const [invoices, setInvoices] = useState<InvoiceResponse[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | undefined>(
     undefined
@@ -96,6 +95,9 @@ export default function Invoices() {
     }
   }, [filterStatus]);
 
+  const matches = useMediaQuery("(min-width:1440px)");
+  const matchesXS = useMediaQuery("(min-width:768px)");
+
   const direction = matches ? "row" : "column";
 
   return (
@@ -110,20 +112,36 @@ export default function Invoices() {
 
       {/* <Drawer></Drawer> */}
 
-      <Box sx={{ margin: "0 auto", width: { xl: 730, md: 672, sm: 327 } }}>
+      <Box
+        sx={{
+          margin: "0 auto",
+          width: { xl: "730px", md: "672px", xs: "327px" },
+        }}
+      >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box>
-            <Typography color="text.primary" variant="h1" sx={{ mt: "78px" }}>
+            <Typography
+              color="text.primary"
+              sx={{
+                mt: { xl: "78px", md: "62px", xs: "36px" },
+                typography: { md: "h1", xs: "h2" },
+              }}
+            >
               Invoices{" "}
             </Typography>{" "}
             <Typography
               color="info.main"
               variant="body1"
-              sx={{ mt: "16px", mb: "64px" }}
+              sx={{
+                mt: { md: "16px", xs: "8px" },
+                mb: { md: "64px", xs: "32px" },
+              }}
             >
-              {invoices.length > 0
-                ? `There are ${invoices.length} total invoices`
-                : "No invoices"}
+              {(invoices.length > 0 &&
+                (matchesXS
+                  ? `There are ${invoices.length} total invoices`
+                  : `${invoices.length} invoices`)) ||
+                "No invoices"}
             </Typography>{" "}
           </Box>
           <Box
@@ -154,7 +172,7 @@ export default function Invoices() {
                 <StyledButton
                   sx={{
                     bgcolor: "primary.main",
-                    width: "150px",
+                    width: { md: "150px", xs: "90px" },
                     "&:hover": {
                       backgroundColor: "#9277FF",
                       boxShadow: "none",
@@ -167,7 +185,7 @@ export default function Invoices() {
                   variant="contained"
                   startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
                 >
-                  New Invoice
+                  {matchesXS ? "New Invoice" : "New"}
                 </StyledButton>
               </Link>
             </Stack>

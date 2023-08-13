@@ -17,7 +17,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#373B53" }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "#373B53", height: { md: "80px", xs: "72px" } }}
+      >
         <Toolbar
           disableGutters
           sx={{
@@ -33,14 +36,13 @@ export default function NavBar() {
                 flexGrow: 0,
                 background:
                   "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-                width: { xl: 103, md: 80, sm: 72 },
-                height: { xl: 103, md: 80, sm: 72 },
+                width: { md: "80px", sm: "72px" },
+                height: { md: "80px", sm: "72px" },
 
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                borderTopRightRadius: 20,
-                borderBottomRightRadius: 20,
+
                 //   mb: "555.9px",
               }}
             >
@@ -48,8 +50,8 @@ export default function NavBar() {
                 alt="logo"
                 src={Logo}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: "38%",
+                  height: "38%",
                   margin: "0 auto",
                 }}
               />
@@ -65,12 +67,12 @@ export default function NavBar() {
               // backgroundColor: "green",
               alignItems: "center",
               flexWrap: "wrap",
-              pr: "33.1px",
+              pr: { md: "33.1px", xs: "25.1px" },
             }}
           >
             <DarkModeIcon
-              width={20}
-              height={20}
+              width={"20px"}
+              height={"20px"}
               sx={{
                 color: "info.light",
                 "&:hover": {
@@ -102,7 +104,7 @@ export default function NavBar() {
               //   backgroundColor: "red",
               alignItems: "center",
               flexWrap: "wrap",
-              width: "88px",
+              width: { md: "96px", xs: "80px" },
               m: "0",
             }}
           >
@@ -110,8 +112,8 @@ export default function NavBar() {
               alt="avatar"
               src={image}
               sx={{
-                width: "40px",
-                height: "40px",
+                width: { md: "40px", xs: "32px" },
+                height: { md: "40px", xs: "32px" },
               }}
             />
           </Box>

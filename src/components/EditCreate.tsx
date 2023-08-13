@@ -32,9 +32,6 @@ import Drawer from "../components/Drawer";
 import Button from "@mui/material/Button";
 
 export default function EditCreate() {
-  const matches = useMediaQuery("(min-width:992px)");
-  const direction = matches ? "row" : "column";
-
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
@@ -141,6 +138,9 @@ export default function EditCreate() {
     mt: "24px",
     color: "#7C5DFA",
   };
+
+  const matches = useMediaQuery("(min-width:1440px)");
+  const direction = matches ? "row" : "column";
 
   return (
     <Box

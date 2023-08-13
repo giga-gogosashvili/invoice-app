@@ -31,7 +31,6 @@ import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function Invoice() {
-  const matches = useMediaQuery("(min-width:992px)");
 
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
@@ -76,6 +75,7 @@ export default function Invoice() {
         navigate("/invoices");
       });
   };
+  const matches = useMediaQuery("(min-width:1440px)");
   const direction = matches ? "row" : "column";
 
   return (
