@@ -12,6 +12,7 @@ import Drawer from "./Drawer";
 import NavBar from "./NavBar";
 
 import axios from "axios";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export type InvoiceResponse = {
   id: string;
@@ -68,6 +69,7 @@ export const getStatusColor = (
 };
 
 export default function Invoices() {
+  const matches = useMediaQuery("(min-width:992px)");
   const [invoices, setInvoices] = useState<InvoiceResponse[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | undefined>(
     undefined
@@ -94,12 +96,18 @@ export default function Invoices() {
     }
   }, [filterStatus]);
 
+  const direction = matches ? "row" : "column";
+
   return (
     <Box
-      display={"flex"}
-      sx={{ bgcolor: "background.paper", flexDirection: "column" }}
+      display="flex"
+      flexDirection={direction}
+      sx={{
+        bgcolor: "background.paper",
+      }}
     >
-      <NavBar></NavBar>
+      {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
+
       {/* <Drawer></Drawer> */}
 
       <Box sx={{ margin: "0 auto", width: { xl: 730, md: 672, sm: 327 } }}>

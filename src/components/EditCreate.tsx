@@ -18,6 +18,7 @@ import { Item } from "./Invoices";
 import React from "react";
 import { AxiosFunc } from "./AxiosFunc";
 import NavBar from "./NavBar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import {
   StyledItemFields,
@@ -31,6 +32,9 @@ import Drawer from "../components/Drawer";
 import Button from "@mui/material/Button";
 
 export default function EditCreate() {
+  const matches = useMediaQuery("(min-width:992px)");
+  const direction = matches ? "row" : "column";
+
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
@@ -140,14 +144,14 @@ export default function EditCreate() {
 
   return (
     <Box
+      display="flex"
+      flexDirection={direction}
       sx={{
-        display: "flex",
-        flexDirection: "column",
         bgcolor: "background.paper",
       }}
     >
       {/* <Drawer></Drawer> */}
-      <NavBar></NavBar>
+      {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
 
       <Box
         sx={{

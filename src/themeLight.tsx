@@ -1,5 +1,11 @@
-import { createTheme, ThemeOptions, Shadows } from "@mui/material/styles";
-import { PaletteMode } from "@mui/material";
+import {
+  createTheme,
+  ThemeOptions,
+  Shadows,
+  useTheme,
+} from "@mui/material/styles";
+// import { PaletteMode } from "@mui/material";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 
 // const breakpointValues = {
 //   xs: 0,
@@ -187,7 +193,6 @@ const getDesignTokens = (mode: any) => ({
     },
     MuiToolbar: {
       styleOverrides: {
-       
         // root: { pl: 0, pr: 0 },
       },
     },

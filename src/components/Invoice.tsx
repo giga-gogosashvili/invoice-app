@@ -28,8 +28,11 @@ import toggleColorMode from "../App";
 import Button from "@mui/material/Button";
 import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 import NavBar from "./NavBar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function Invoice() {
+  const matches = useMediaQuery("(min-width:992px)");
+
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
     undefined
@@ -73,19 +76,20 @@ export default function Invoice() {
         navigate("/invoices");
       });
   };
+  const direction = matches ? "row" : "column";
 
   return (
     <>
       <Box
+        display="flex"
+        flexDirection={direction}
         sx={{
           flexGrow: 1,
           bgcolor: "background.paper",
-          display: "flex",
-          flexDirection: "column",
         }}
       >
         {/* <Drawer></Drawer> */}
-        <NavBar></NavBar>
+        {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
 
         <Box
           sx={{
