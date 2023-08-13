@@ -31,15 +31,36 @@ export default function InvoiceItem({ data, func }: Props) {
         }}
       >
         <Box sx={{ flexGrow: 1 }}>
-          <Grid
-            container
-            spacing={0}
-            sx={{ flexDirection: { xs: "column", md: "row" } }}
-          >
-            <Grid item xs={10}>
-              <List sx={{ m: 0, p: 0 }}>
+          <Grid container spacing={0}>
+            <Grid
+              item
+              xs={10}
+              sx={
+                {
+                  // flexDirection: { xs: "column", md: "row" },
+                }
+              }
+            >
+              <List
+                sx={{
+                  m: 0,
+                  p: 0,
+                  // flexDirection: { xs: "column", md: "row" },
+                }}
+              >
                 {data.map((invoice, index: number) => (
-                  <StyledListItem key={index} sx={{ bgcolor: "grey.50" }}>
+                  <StyledListItem
+                    key={index}
+                    sx={{
+                      bgcolor: "grey.50",
+                      width: { md: "650px", xs: "327px" },
+                      height: { md: "72px", xs: "134px" },
+                      borderRadius: "8px",
+                      display: { xs: "flex", md: "auto" },
+                      flexDirection: { xs: "column", md: "row" },
+                      flexFlow: { xs: "column wrap", md: "nowrap" },
+                    }}
+                  >
                     <ListItemText>
                       <Typography
                         component="div"
