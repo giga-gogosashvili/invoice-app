@@ -30,6 +30,7 @@ import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GoBackButton from "./GoBackButton";
+import HeaderButtons from "./HeaderButtons";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -75,7 +76,56 @@ export default function Invoice() {
         navigate("/invoices");
       });
   };
+
+  const axiosDisplay = (invoice?: any) => {
+    () => {
+      setStatus("paid");
+      // to do!!!
+      axios
+        .put(`http://localhost:9481/invoices/${id}`, {
+          id: id,
+          senderAddress: {
+            street: invoice.senderAddress.street,
+            city: invoice.senderAddress.city,
+            postCode: invoice.senderAddress.postCode,
+            country: invoice.senderAddress.country,
+          },
+          clientName: invoice.clientName,
+          clientEmail: invoice.clientEmail,
+          clientAddress: {
+            street: invoice.clientAddress.street,
+            city: invoice.clientAddress.city,
+            postCode: invoice.clientAddress.postCode,
+            country: invoice.clientAddress.country,
+          },
+          createdAt: invoice.createdAt,
+          paymentTerms: invoice.paymentTerms,
+          paymentDue: invoice.paymentDue,
+          status: "paid",
+          description: invoice.description,
+          items: invoice.items.map((item: any) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            total: item.total,
+          })),
+        })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+        .then(() => {
+          window.location.reload();
+        });
+    };
+  };
   const matches = useMediaQuery("(min-width:1440px)");
+  const matchesXS = useMediaQuery("(min-width:768px)");
+
   const direction = matches ? "row" : "column";
 
   return (
@@ -159,8 +209,8 @@ export default function Invoice() {
                     bgcolor: "grey.50",
                     mb: "30px",
                     pr: "22px",
-                    width: 730,
-                    height: 88,
+                    width: { md: "730px", xs: "327px" },
+                    height: { md: "88px", xs: "91px" },
                     mt: 0,
                     justifyContent: "space-between",
                     borderadius: "8px",
@@ -174,142 +224,32 @@ export default function Invoice() {
                       alignItems: "center",
                     }}
                   >
-                    <Typography variant="body1" sx={{ ml: "32px", mr: "20px" }}>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        ml: { md: "32px", xs: "16px" },
+                        mr: { md: "20px", xs: "10px" },
+                      }}
+                    >
                       Status{" "}
                     </Typography>
 
                     <Chip
                       label={capitalizeFirstLetter(status)}
                       color={getStatusColor(status)}
-                      sx={{ mr: 5, width: 100 }}
+                      sx={{ mr: "5px", width: "100px" }}
                     />
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Link to={`/invoices/${invoice.id}/edit`}>
-                      <StyledButton
-                        sx={{
-                          mr: 1,
-                          width: "73px",
-                          color: "primary.dark",
-                          bgcolor: "grey.400",
-                          "&:hover": {
-                            bgcolor: "grey.500",
-                            color: "#7E88C3",
-                            boxShadow: "none",
-                          },
-                          "&:active": {
-                            bgcolor: "grey.500",
-                            color: "#7E88C3",
-                            boxShadow: "none",
-                          },
-                        }}
-                        aria-label="add"
-                      >
-                        Edit
-                      </StyledButton>
-                    </Link>
-
-                    <StyledButton
-                      sx={{
-                        mr: 1,
-                        width: "89px",
-                        color: "#fff",
-                        bgcolor: "#EC5757",
-                        "&:hover": {
-                          bgcolor: "#FF9797",
-
-                          boxShadow: "none",
-                        },
-                        "&:active": {
-                          bgcolor: "#FF9797",
-
-                          boxShadow: "none",
-                        },
-                      }}
-                      aria-label="add"
-                      onClick={() => setOpen(true)}
-                    >
-                      Delete
-                    </StyledButton>
-                    {invoice.status !== "paid" && (
-                      <StyledButton
-                        sx={{
-                          width: "131px",
-                          color: "#fff",
-                          bgcolor: "#7C5DFA",
-                          "&:hover": {
-                            bgcolor: "#9277FF",
-
-                            boxShadow: "none",
-                          },
-                          "&:active": {
-                            bgcolor: "#9277FF",
-
-                            boxShadow: "none",
-                          },
-                        }}
-                        aria-label="add"
-                        onClick={() => {
-                          setStatus("paid");
-                          // to do!!!
-                          axios
-                            .put(`http://localhost:9481/invoices/${id}`, {
-                              id: id,
-                              senderAddress: {
-                                street: invoice.senderAddress.street,
-                                city: invoice.senderAddress.city,
-                                postCode: invoice.senderAddress.postCode,
-                                country: invoice.senderAddress.country,
-                              },
-                              clientName: invoice.clientName,
-                              clientEmail: invoice.clientEmail,
-                              clientAddress: {
-                                street: invoice.clientAddress.street,
-                                city: invoice.clientAddress.city,
-                                postCode: invoice.clientAddress.postCode,
-                                country: invoice.clientAddress.country,
-                              },
-                              createdAt: invoice.createdAt,
-                              paymentTerms: invoice.paymentTerms,
-                              paymentDue: invoice.paymentDue,
-                              status: "paid",
-                              description: invoice.description,
-                              items: invoice.items.map((item) => ({
-                                name: item.name,
-                                quantity: item.quantity,
-                                price: item.price,
-                                total: item.total,
-                              })),
-                            })
-                            .then(
-                              (response) => {
-                                console.log(response);
-                              },
-                              (error) => {
-                                console.log(error);
-                              }
-                            )
-                            .then(() => {
-                              window.location.reload();
-                            });
-                        }}
-                      >
-                        <StyledTypoButton>
-                          Mark{" "}
-                          <Box display="inline" textTransform="lowercase">
-                            as
-                          </Box>{" "}
-                          Paid
-                        </StyledTypoButton>
-                      </StyledButton>
-                    )}
-                  </Box>
+                  {matchesXS ? (
+                    <HeaderButtons
+                      id={invoice.id}
+                      status={invoice.status}
+                      clickDelete={() => setOpen(true)}
+                      clickPaid={axiosDisplay(invoice)}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </Stack>
                 <Card
                   sx={{
@@ -536,6 +476,17 @@ export default function Invoice() {
                     </Table>
                   </TableContainer>
                 </Card>
+
+                {!matchesXS ? (
+                  <HeaderButtons
+                    id={invoice.id}
+                    status={invoice.status}
+                    clickDelete={() => setOpen(true)}
+                    clickPaid={axiosDisplay(invoice)}
+                  />
+                ) : (
+                  ""
+                )}
               </Box>
             )}
           </Box>

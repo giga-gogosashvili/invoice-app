@@ -106,6 +106,7 @@ export default function Invoices() {
       flexDirection={direction}
       sx={{
         bgcolor: "background.paper",
+        height: "100%",
       }}
     >
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
