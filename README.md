@@ -24,9 +24,9 @@ UI solutions:
 - JavaScript
 - TypeScript
 - [React](https://reactjs.org/) - JS library
-- [MUI Styled Components](https://mui.com/) - For styles
+- [MUI Styled Components](https://mui.com/) - for styles
 - [Cypress](https://www.cypress.io/) - for end-to-end tests
-- [Go] (https://go.dev/) - for back-end
+- [Go](https://go.dev/) - for back-end
 
 ### Continued development
 
@@ -40,3 +40,7 @@ My plans abut that app:
 ## Author
 
 - LinkedIn - [Giga Gogosashvili](https://www.linkedin.com/in/gigagogosashvili/)
+
+## Acknowledgments
+
+Huge thanks to [Paweł](https://github.com/barfly88) for his invaluable help in the app production process.
