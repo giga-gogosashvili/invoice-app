@@ -209,7 +209,7 @@ export default function Invoice() {
                     bgcolor: "grey.50",
                     mb: "30px",
                     pr: "22px",
-                    width: { md: "730px", xs: "327px" },
+                    width: { xl: "730px", md: "688px", xs: "327px" },
                     height: { md: "88px", xs: "91px" },
                     mt: 0,
                     justifyContent: "space-between",

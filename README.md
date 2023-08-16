@@ -1,6 +1,6 @@
 # Invoice app
 
-Project is inspired by challenge - [Invoice app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl). Design and main concept is taken from the challenge, solutions are mine.
+Project inspired by [Invoice app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl). Design and app concept are taken from the challenge.
 
 ## Overview
 
@@ -30,7 +30,7 @@ UI solutions:
 
 ### Continued development
 
-My plans abut that app:
+Plan for app development:
 
 - fully back-end app,
 - user registration & login,

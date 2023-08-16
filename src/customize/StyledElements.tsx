@@ -6,11 +6,11 @@ import { ListItem } from "@mui/material";
 import { Drawer } from "@mui/material";
 
 export const StyledDrawer = styled(Drawer)(() => ({
-  width: 103,
-  height: 800,
+  width: "103px",
+  height: "800px",
   flexShrink: 0,
   "& .MuiDrawer-paper": {
-    width: 103,
+    width: "103px",
     boxSizing: "border-box",
     backgroundColor: "#373B53",
   },
