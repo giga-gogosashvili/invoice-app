@@ -10,6 +10,7 @@ import NoInvoices from "./NoInvoices";
 import { StyledButton } from "../customize/StyledElements";
 import Drawer from "./Drawer";
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -99,6 +100,7 @@ export default function Invoices() {
   const matchesXS = useMediaQuery("(min-width:768px)");
 
   const direction = matches ? "row" : "column";
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -169,26 +171,27 @@ export default function Invoices() {
                 filterStatus={filterStatus}
                 setFilterStatus={setFilterStatus}
               />
-              <Link to={`/invoices/create`}>
-                <StyledButton
-                  sx={{
-                    bgcolor: "primary.main",
-                    width: { md: "150px", xs: "90px" },
-                    "&:hover": {
-                      backgroundColor: "#9277FF",
-                      boxShadow: "none",
-                    },
-                    "&:active": {
-                      boxShadow: "none",
-                      backgroundColor: "#9277FF",
-                    },
-                  }}
-                  variant="contained"
-                  startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
-                >
-                  {matchesXS ? "New Invoice" : "New"}
-                </StyledButton>
-              </Link>
+              <StyledButton
+                sx={{
+                  bgcolor: "primary.main",
+                  width: { md: "150px", xs: "90px" },
+                  "&:hover": {
+                    backgroundColor: "#9277FF",
+                    boxShadow: "none",
+                  },
+                  "&:active": {
+                    boxShadow: "none",
+                    backgroundColor: "#9277FF",
+                  },
+                }}
+                variant="contained"
+                startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
+                onClick={() => {
+                  navigate(`/invoices/create`);
+                }}
+              >
+                {matchesXS ? "New Invoice" : "New"}
+              </StyledButton>
             </Stack>
           </Box>
           {/* <InvoiceItemMenu invoice={invoices}></InvoiceItemMenu> */}

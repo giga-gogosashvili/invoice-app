@@ -155,7 +155,7 @@ export default function EditCreate() {
     >
       {/* <Drawer></Drawer> */}
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
-      {!matchesXS ? <GoBackButton></GoBackButton> : ""}
+      {!matchesXS ? <GoBackButton color="#fff"></GoBackButton> : ""}
 
       <Box
         sx={{

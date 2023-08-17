@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { ListItem } from "@mui/material";
 import { Drawer } from "@mui/material";
+import { Stack } from "@mui/material";
 
 export const StyledDrawer = styled(Drawer)(() => ({
   width: "103px",
@@ -14,6 +15,8 @@ export const StyledDrawer = styled(Drawer)(() => ({
     boxSizing: "border-box",
     backgroundColor: "#373B53",
   },
+  display: "flex",
+  justifyContent: "space-between",
 }));
 
 export const StyledListItem = styled(ListItem)(({ theme }) => ({
@@ -55,12 +58,12 @@ export const StyledTFLong = styled(TextField)(({ theme }) => ({
   flexShrink: 0,
 }));
 
-export const StyledTFShort = styled(TextField)(() => ({
+export const StyledTFShort = styled(TextField)(({ theme }) => ({
   width: "152px",
   flexShrink: 0,
 }));
 
-export const StatusButton = styled(Button)(() => ({
+export const StatusButton = styled(Button)(({ theme }) => ({
   width: "104px",
   flexShrink: 0,
   borderRadius: "6px",

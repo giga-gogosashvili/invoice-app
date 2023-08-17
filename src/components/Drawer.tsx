@@ -33,86 +33,96 @@ function NavDrawer() {
             background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
             // width: { xl: 103, md: 80, xs: 72 },
             // height: { xl: 103, md: 80, xs: 72 },
-            width: "103px",
+            width: "100%",
             height: "103px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             borderTopRightRadius: "20px",
             borderBottomRightRadius: "20px",
-            mb: "555.9px",
+            // mb: "555.9px",
+            mb: "500%",
           }}
         >
           <img
             alt="logo"
             src={Logo}
             style={{
-              width: "40px",
-              height: "40px",
+              width: 40,
+              height: 40,
               margin: "0 auto",
             }}
           />
         </Box>
         <Box
           sx={{
-            flexGrow: 0,
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            // backgroundColor: "green",
-            alignItems: "center",
-            flexWrap: "wrap",
-            pb: "33.1px",
+            position: "absolute",
+            bottom: "0",
+            width: "100%",
           }}
         >
-          <DarkModeIcon
-            width={"20px"}
-            height={"20px"}
+          <Box
             sx={{
-              color: "info.light",
-              "&:hover": {
-                color: "#DFE3FA",
-                boxShadow: "none",
-              },
-              "&:active": {
-                boxShadow: "none",
-                color: "#DFE3FA",
-              },
+              flexGrow: 0,
+
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              pb: "33.1px",
             }}
-            // onClick={func}
-          ></DarkModeIcon>
-          {/* <Switch
+          >
+            <DarkModeIcon
+              width={"20px"}
+              height={"20px"}
+              sx={{
+                color: "info.light",
+                "&:hover": {
+                  color: "#DFE3FA",
+                  boxShadow: "none",
+                },
+                "&:active": {
+                  boxShadow: "none",
+                  color: "#DFE3FA",
+                },
+                margin: "0 auto",
+              }}
+              // onClick={func}
+            ></DarkModeIcon>
+            {/* <Switch
             checked={checked}
             onChange={onChange}
             inputProps={{ "aria-label": "controlled" }}
           /> */}
-        </Box>
-        <Divider />
+          </Box>
+          <Divider />
 
-        <Box
-          sx={{
-            flexGrow: 0,
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            // backgroundColor: "red",
-            alignItems: "center",
-            flexWrap: "wrap",
-            height: "88px",
-            m: "0",
-          }}
-        >
-          <Avatar
-            alt="avatar"
-            src={image}
+          <Box
             sx={{
-              position: "fixed",
-              width: "40px",
-              height: "40px",
+              flexGrow: 0,
+
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              height: "88px",
+              width: "100%",
+              m: "0",
             }}
-          />
+          >
+            <Avatar
+              alt="avatar"
+              src={image}
+              sx={{
+                // position: "fixed",
+                width: "40px",
+                height: "40px",
+                margin: "0 auto",
+              }}
+            />
+          </Box>
         </Box>
       </Box>
     </StyledDrawer>

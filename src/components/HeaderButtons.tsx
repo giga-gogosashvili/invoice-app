@@ -14,6 +14,8 @@ export default function HeaderButtons({
   clickDelete,
   clickPaid,
 }: Props) {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -22,29 +24,30 @@ export default function HeaderButtons({
         alignItems: "center",
       }}
     >
-      <Link to={`/invoices/${id}/edit`}>
-        <StyledButton
-          sx={{
-            mr: 1,
-            width: "73px",
-            color: "primary.dark",
-            bgcolor: "grey.400",
-            "&:hover": {
-              bgcolor: "grey.500",
-              color: "#7E88C3",
-              boxShadow: "none",
-            },
-            "&:active": {
-              bgcolor: "grey.500",
-              color: "#7E88C3",
-              boxShadow: "none",
-            },
-          }}
-          aria-label="add"
-        >
-          Edit
-        </StyledButton>
-      </Link>
+      <StyledButton
+        sx={{
+          mr: 1,
+          width: "73px",
+          color: "primary.dark",
+          bgcolor: "grey.400",
+          "&:hover": {
+            bgcolor: "grey.500",
+            color: "#7E88C3",
+            boxShadow: "none",
+          },
+          "&:active": {
+            bgcolor: "grey.500",
+            color: "#7E88C3",
+            boxShadow: "none",
+          },
+        }}
+        aria-label="add"
+        onClick={() => {
+          navigate(`/invoices/${id}/edit`);
+        }}
+      >
+        Edit
+      </StyledButton>
 
       <StyledButton
         sx={{
@@ -71,7 +74,7 @@ export default function HeaderButtons({
       {status !== "paid" && (
         <StyledButton
           sx={{
-            width: "131px",
+            width: { md: "131px", xs: "149px" },
             color: "#fff",
             bgcolor: "#7C5DFA",
             "&:hover": {

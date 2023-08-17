@@ -16,17 +16,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import { capitalizeFirstLetter } from "./InvoiceItem";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getStatusColor } from "./Invoices";
 import Drawer from "./Drawer";
 import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
-import toggleColorMode from "../App";
-import Button from "@mui/material/Button";
-import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GoBackButton from "./GoBackButton";
@@ -159,7 +153,7 @@ export default function Invoice() {
               mb: "31px",
             }}
           > */}
-          <GoBackButton></GoBackButton>
+          <GoBackButton color="background.paper"></GoBackButton>
           {/* <BottomNavigation
               sx={{
                 display: "inline",
@@ -208,7 +202,8 @@ export default function Invoice() {
                   sx={{
                     bgcolor: "grey.50",
                     mb: "30px",
-                    pr: "22px",
+                    pr: { md: "22px", xs: 0 },
+                    p: { md: "32px", xs: "24px" },
                     width: { xl: "730px", md: "688px", xs: "327px" },
                     height: { md: "88px", xs: "91px" },
                     mt: 0,
@@ -222,12 +217,13 @@ export default function Invoice() {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
+                      justifyContent: "space-between",
+                      width: { md: "159px", xs: "100%" },
                     }}
                   >
                     <Typography
                       variant="body1"
                       sx={{
-                        ml: { md: "32px", xs: "16px" },
                         mr: { md: "20px", xs: "10px" },
                       }}
                     >
@@ -254,26 +250,31 @@ export default function Invoice() {
                 <Card
                   sx={{
                     display: "block",
-                    width: 730,
+                    width: { xl: "730px", md: "688px", xs: "327px" },
                     // height: 631,
                     borderRadius: "8px",
                     boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
-                    p: "49px",
+                    p: { xl: "49px", md: "32px", xs: "24px" },
                     bgcolor: "grey.50",
-                    mb: "65px",
+                    mb: { md: "65px", xs: "56px" },
                   }}
                 >
                   <Stack
                     direction="row"
                     spacing={2}
-                    sx={{ justifyContent: "space-between" }}
+                    sx={{
+                      justifyContent: "space-between",
+                      display: { xs: "flex", md: "auto" },
+                      flexDirection: { xs: "column", md: "row" },
+                      flexFlow: { xs: "column wrap", md: "nowrap" },
+                    }}
                   >
                     <CardContent>
                       <Typography
                         component="div"
                         variant="h3"
                         color="text.primary"
-                        sx={{ mb: "13px" }}
+                        sx={{ mb: { md: "13px", xs: "4px" } }}
                       >
                         <Box display="inline" color={"#888EB0"}>
                           #
@@ -288,7 +289,7 @@ export default function Invoice() {
                         {invoice.description}
                       </Typography>
                     </CardContent>
-                    <CardContent>
+                    <CardContent sx={{ p: 0 }}>
                       <Typography
                         variant="body1"
                         color="primary.dark"
@@ -304,70 +305,82 @@ export default function Invoice() {
                   <Stack
                     direction="row"
                     spacing={2}
-                    sx={{ justifyContent: "space-between", mr: "109px" }}
+                    sx={{
+                      justifyContent: "space-between",
+                      mr: { md: "109px", xs: 0 },
+                      display: { xs: "flex", md: "auto" },
+                      flexDirection: { xs: "column", md: "row" },
+                      // flexFlow: { xs: "column wrap", md: "nowrap" },
+                    }}
                   >
-                    <CardContent sx={{ justifyContent: "space-between" }}>
-                      <Typography
-                        variant="body1"
-                        color="primary.dark"
-                        gutterBottom
-                        sx={{ mb: "13px" }}
-                      >
-                        Invoice Date
-                      </Typography>
-                      <Typography
-                        color="text.primary"
-                        variant="h3"
-                        component="div"
-                        sx={{ mb: "20px" }}
-                      >
-                        {invoice.createdAt}
-                      </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                      }}
+                    >
+                      <CardContent sx={{ justifyContent: "space-between" }}>
+                        <Typography
+                          variant="body1"
+                          color="primary.dark"
+                          gutterBottom
+                          sx={{ mb: "13px" }}
+                        >
+                          Invoice Date
+                        </Typography>
+                        <Typography
+                          color="text.primary"
+                          variant="h3"
+                          component="div"
+                          sx={{ mb: "20px" }}
+                        >
+                          {invoice.createdAt}
+                        </Typography>
 
-                      <Typography
-                        variant="body1"
-                        color="primary.dark"
-                        gutterBottom
-                        sx={{ mb: "13px" }}
-                      >
-                        Payment Due
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        component="div"
-                        color="text.primary"
-                      >
-                        {invoice.paymentDue}
-                      </Typography>
-                    </CardContent>
-                    <CardContent>
-                      <Typography
-                        variant="body1"
-                        color="primary.dark"
-                        gutterBottom
-                        sx={{ mb: "13px" }}
-                      >
-                        Bill To
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        component="div"
-                        color="text.primary"
-                      >
-                        {invoice.clientName}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="primary.dark"
-                        gutterBottom
-                      >
-                        {invoice.clientAddress.street} <br />
-                        {invoice.clientAddress.city} <br />
-                        {invoice.clientAddress.postCode} <br />
-                        {invoice.clientAddress.country}
-                      </Typography>
-                    </CardContent>
-                    <CardContent>
+                        <Typography
+                          variant="body1"
+                          color="primary.dark"
+                          gutterBottom
+                          sx={{ mb: "13px" }}
+                        >
+                          Payment Due
+                        </Typography>
+                        <Typography
+                          variant="h3"
+                          component="div"
+                          color="text.primary"
+                        >
+                          {invoice.paymentDue}
+                        </Typography>
+                      </CardContent>
+                      <CardContent>
+                        <Typography
+                          variant="body1"
+                          color="primary.dark"
+                          gutterBottom
+                          sx={{ mb: "13px" }}
+                        >
+                          Bill To
+                        </Typography>
+                        <Typography
+                          variant="h3"
+                          component="div"
+                          color="text.primary"
+                        >
+                          {invoice.clientName}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          color="primary.dark"
+                          gutterBottom
+                        >
+                          {invoice.clientAddress.street} <br />
+                          {invoice.clientAddress.city} <br />
+                          {invoice.clientAddress.postCode} <br />
+                          {invoice.clientAddress.country}
+                        </Typography>
+                      </CardContent>
+                    </Box>
+                    <CardContent sx={{ p: 0 }}>
                       <Typography
                         variant="body1"
                         color="primary.dark"
@@ -390,7 +403,7 @@ export default function Invoice() {
                     component={Paper}
                     sx={{
                       bgcolor: "grey.400",
-                      width: "634px",
+                      width: { xl: "634px", md: "624px", xs: "279px" },
                     }}
                   >
                     <Table
@@ -401,48 +414,59 @@ export default function Invoice() {
                       }}
                       aria-label="spanning table"
                     >
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>
-                            <Typography variant="body1" color="primary.dark">
-                              Item Name
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography variant="body1" color="primary.dark">
-                              Qty.
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography variant="body1" color="primary.dark">
-                              Price
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography variant="body1" color="primary.dark">
-                              Total
-                            </Typography>
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
+                      {matchesXS && (
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>
+                              <Typography variant="body1" color="primary.dark">
+                                Item Name
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <Typography variant="body1" color="primary.dark">
+                                Qty.
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <Typography variant="body1" color="primary.dark">
+                                Price
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <Typography variant="body1" color="primary.dark">
+                                Total
+                              </Typography>
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                      )}
                       <TableBody>
                         {invoice.items.map((item, index: number) => (
                           <TableRow key={index}>
-                            <TableCell>
+                            <TableCell sx={{}}>
                               <Typography variant="h4" color="text.primary">
                                 {item.name}
                               </Typography>
+                              {!matchesXS && (
+                                <Typography variant="h4" color="grey.200">
+                                  {item.quantity} x ￡{item.price}
+                                </Typography>
+                              )}
                             </TableCell>
-                            <TableCell align="right">
-                              <Typography variant="h4" color="primary.dark">
-                                {item.quantity}
-                              </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              <Typography variant="h4" color="primary.dark">
-                                {item.price}
-                              </Typography>
-                            </TableCell>
+                            {matchesXS && (
+                              <TableCell align="right">
+                                <Typography variant="h4" color="primary.dark">
+                                  {item.quantity}
+                                </Typography>
+                              </TableCell>
+                            )}
+                            {matchesXS && (
+                              <TableCell align="right">
+                                <Typography variant="h4" color="primary.dark">
+                                  {item.price}
+                                </Typography>
+                              </TableCell>
+                            )}
                             <TableCell align="right">
                               <Typography variant="h4" color="text.primary">
                                 £ {item.total}
@@ -478,12 +502,14 @@ export default function Invoice() {
                 </Card>
 
                 {!matchesXS ? (
-                  <HeaderButtons
-                    id={invoice.id}
-                    status={invoice.status}
-                    clickDelete={() => setOpen(true)}
-                    clickPaid={axiosDisplay(invoice)}
-                  />
+                  <Box sx={{ bgcolor: "#fff", width: "375px" }}>
+                    <HeaderButtons
+                      id={invoice.id}
+                      status={invoice.status}
+                      clickDelete={() => setOpen(true)}
+                      clickPaid={axiosDisplay(invoice)}
+                    />
+                  </Box>
                 ) : (
                   ""
                 )}

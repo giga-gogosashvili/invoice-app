@@ -3,8 +3,11 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+interface Props {
+  color: string;
+}
 
-export default function GoBackButton() {
+export default function GoBackButton({ color }: Props) {
   const navigate = useNavigate();
 
   return (
@@ -25,7 +28,7 @@ export default function GoBackButton() {
         <BottomNavigation
           sx={{
             display: "inline",
-            bgcolor: { md: "background.paper", xs: "#fff" },
+            bgcolor: color,
           }}
           showLabels
           onClick={() => navigate(-1)}
