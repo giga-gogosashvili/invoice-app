@@ -25,6 +25,7 @@ import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GoBackButton from "./GoBackButton";
 import HeaderButtons from "./HeaderButtons";
+import { AxiosPaid } from "./AxiosPaid";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -71,52 +72,6 @@ export default function Invoice() {
       });
   };
 
-  const axiosDisplay = (invoice?: any) => {
-    () => {
-      setStatus("paid");
-      // to do!!!
-      axios
-        .put(`http://localhost:9481/invoices/${id}`, {
-          id: id,
-          senderAddress: {
-            street: invoice.senderAddress.street,
-            city: invoice.senderAddress.city,
-            postCode: invoice.senderAddress.postCode,
-            country: invoice.senderAddress.country,
-          },
-          clientName: invoice.clientName,
-          clientEmail: invoice.clientEmail,
-          clientAddress: {
-            street: invoice.clientAddress.street,
-            city: invoice.clientAddress.city,
-            postCode: invoice.clientAddress.postCode,
-            country: invoice.clientAddress.country,
-          },
-          createdAt: invoice.createdAt,
-          paymentTerms: invoice.paymentTerms,
-          paymentDue: invoice.paymentDue,
-          status: "paid",
-          description: invoice.description,
-          items: invoice.items.map((item: any) => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price,
-            total: item.total,
-          })),
-        })
-        .then(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
-        .then(() => {
-          window.location.reload();
-        });
-    };
-  };
   const matches = useMediaQuery("(min-width:1440px)");
   const matchesXS = useMediaQuery("(min-width:768px)");
 
@@ -241,7 +196,7 @@ export default function Invoice() {
                       id={invoice.id}
                       status={invoice.status}
                       clickDelete={() => setOpen(true)}
-                      clickPaid={axiosDisplay(invoice)}
+                      clickPaid={() => AxiosPaid(setStatus, id, invoice)}
                     />
                   ) : (
                     ""
@@ -501,7 +456,7 @@ export default function Invoice() {
                   </TableContainer>
                 </Card>
 
-                {!matchesXS ? (
+                {/* {!matchesXS ? (
                   <Box sx={{ bgcolor: "#fff", width: "375px" }}>
                     <HeaderButtons
                       id={invoice.id}
@@ -512,12 +467,35 @@ export default function Invoice() {
                   </Box>
                 ) : (
                   ""
-                )}
+                )} */}
               </Box>
             )}
           </Box>
         </Box>
       </Box>
+      {!matchesXS ? (
+        <Box
+          sx={{
+            bgcolor: "#fff",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            height: "91px",
+            width: "100%",
+          }}
+        >
+          {invoice && (
+            <HeaderButtons
+              id={invoice.id}
+              status={invoice.status}
+              clickDelete={() => setOpen(true)}
+              clickPaid={() => AxiosPaid(setStatus, id, invoice)}
+            />
+          )}
+        </Box>
+      ) : (
+        ""
+      )}
       <ConfirmDeletion
         open={open}
         closeDialog={handleClose}
