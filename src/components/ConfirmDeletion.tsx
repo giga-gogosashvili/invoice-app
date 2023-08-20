@@ -24,11 +24,6 @@ export default function ConfirmDeletion({
   id: string | undefined;
   deleteFunction: () => void;
 }) {
-  const fabStyle = {
-    mr: "10px",
-    borderRadius: "24px",
-  };
-
   return (
     <div>
       <Dialog
@@ -42,9 +37,9 @@ export default function ConfirmDeletion({
         aria-describedby="alert-dialog-description"
         sx={{
           "& .MuiDialog-paper": {
-            minWidth: "480px",
-            minHeight: "249px",
-            p: "35px 32px",
+            minWidth: { md: "480px", xs: "327px" },
+            minHeight: { md: "249px", xs: "220px" },
+            p: { md: "35px 32px", xs: "17.5px 16px" },
           },
           // display: "flex",
           // flexDirection: "row",
@@ -67,9 +62,15 @@ export default function ConfirmDeletion({
             variant="extended"
             size="medium"
             aria-label="add"
-            style={fabStyle}
             onClick={closeDialog}
             autoFocus
+            sx={{
+              mr: "10px",
+              borderRadius: "24px",
+              color: "primary.dark",
+              width: "96px",
+              bgcolor: "grey.400",
+            }}
           >
             <Typography variant="h4" sx={{ textTransform: "capitalize" }}>
               Cancel
@@ -80,8 +81,24 @@ export default function ConfirmDeletion({
             size="medium"
             color="error"
             aria-label="add"
-            style={fabStyle}
             onClick={deleteFunction}
+            sx={{
+              mr: "10px",
+              borderRadius: "24px",
+              width: "89px",
+              color: "#fff",
+              bgcolor: "#EC5757",
+              "&:hover": {
+                bgcolor: "#FF9797",
+
+                boxShadow: "none",
+              },
+              "&:active": {
+                bgcolor: "#FF9797",
+
+                boxShadow: "none",
+              },
+            }}
           >
             <Typography variant="h4" sx={{ textTransform: "capitalize" }}>
               Delete
