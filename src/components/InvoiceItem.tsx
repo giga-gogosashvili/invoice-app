@@ -7,6 +7,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: InvoiceResponse[];
@@ -22,6 +23,7 @@ const formatingNumbers = (number: number) => {
 
 export default function InvoiceItem({ data, func }: Props) {
   const matchesXS = useMediaQuery("(min-width:768px)");
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -59,6 +61,9 @@ export default function InvoiceItem({ data, func }: Props) {
                       display: { xs: "flex", md: "auto" },
                       flexDirection: { xs: "column", md: "row" },
                       flexFlow: { xs: "column wrap", md: "nowrap" },
+                    }}
+                    onClick={() => {
+                      navigate(`/invoices/${invoice.id}`);
                     }}
                   >
                     <ListItemText>

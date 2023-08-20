@@ -443,16 +443,7 @@ export default function Invoice() {
                         }}
                       >
                         <TableRow sx={{ width: "100%" }}>
-                          <TableCell
-                            colSpan={spanLeft}
-                            sx={
-                              {
-                                // display: "flex",
-                                // // flexDirection: "column",
-                                // justifyContent: "space-between",
-                              }
-                            }
-                          >
+                          <TableCell colSpan={spanLeft}>
                             {" "}
                             <Typography
                               variant="body1"
