@@ -76,6 +76,8 @@ export default function Invoice() {
   const matchesXS = useMediaQuery("(min-width:768px)");
 
   const direction = matches ? "row" : "column";
+  const spanLeft: number = !matchesXS ? 0 : 3;
+  const spanRight: number = !matchesXS ? 0 : 1;
 
   return (
     <>
@@ -398,7 +400,9 @@ export default function Invoice() {
                       <TableBody>
                         {invoice.items.map((item, index: number) => (
                           <TableRow key={index}>
-                            <TableCell sx={{}}>
+                            <TableCell
+                              sx={{ width: { md: "auto", xs: "50%" } }}
+                            >
                               <Typography variant="h4" color="text.primary">
                                 {item.name}
                               </Typography>
@@ -439,17 +443,40 @@ export default function Invoice() {
                         }}
                       >
                         <TableRow sx={{ width: "100%" }}>
-                          <TableCell colSpan={3}>
+                          <TableCell
+                            colSpan={spanLeft}
+                            sx={
+                              {
+                                // display: "flex",
+                                // // flexDirection: "column",
+                                // justifyContent: "space-between",
+                              }
+                            }
+                          >
                             {" "}
-                            <Typography variant="body1" color={"#fff"}>
+                            <Typography
+                              variant="body1"
+                              color={"#fff"}
+                              // sx={{ width: "50%" }}
+                            >
                               Amount Due
                             </Typography>
                           </TableCell>
-                          <TableCell align="right">
-                            <Typography variant="h2" color={"#fff"}>
+                          <TableCell colSpan={spanRight} align="right">
+                            <Typography
+                              variant="h2"
+                              color={"#fff"}
+                              // sx={{ width: "50%" }}
+                            >
                               £ {invoice.total}
                             </Typography>
                           </TableCell>
+
+                          {/* <TableCell align="right">
+                            <Typography variant="h2" color={"#fff"}>
+                              £ {invoice.total}
+                            </Typography>
+                          </TableCell> */}
                         </TableRow>
                       </TableFooter>
                     </Table>
