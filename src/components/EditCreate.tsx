@@ -150,7 +150,7 @@ export default function EditCreate() {
       display="flex"
       flexDirection={direction}
       sx={{
-        bgcolor: { md: "background.paper", xs: "#fff" },
+        bgcolor: { md: "background.paper", xs: "#fff", height: "100vh" },
       }}
     >
       {/* <Drawer></Drawer> */}

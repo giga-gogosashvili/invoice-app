@@ -87,6 +87,7 @@ export default function Invoice() {
         sx={{
           flexGrow: 1,
           bgcolor: "background.paper",
+          height: "100vh",
         }}
       >
         {/* <Drawer></Drawer> */}
