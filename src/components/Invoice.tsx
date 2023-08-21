@@ -88,7 +88,6 @@ export default function Invoice() {
           flexGrow: 1,
         }}
       >
-        {/* <Drawer></Drawer> */}
         {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
 
         <Box
@@ -273,7 +272,6 @@ export default function Invoice() {
                       mr: { md: "109px", xs: 0 },
                       display: { xs: "flex", md: "auto" },
                       flexDirection: { xs: "column", md: "row" },
-                      // flexFlow: { xs: "column wrap", md: "nowrap" },
                     }}
                   >
                     <Box
@@ -406,9 +404,7 @@ export default function Invoice() {
                       <TableBody>
                         {invoice.items.map((item, index: number) => (
                           <TableRow key={index}>
-                            <TableCell
-                              sx={{ width: { md: "auto", xs: "50%" } }}
-                            >
+                            <TableCell>
                               <Typography variant="h4" color="text.primary">
                                 {item.name}
                               </Typography>
@@ -445,53 +441,25 @@ export default function Invoice() {
                           height: "80px",
                           width: "100%",
                           bgcolor: "grey.600",
-                          // justifyContent: "space-between",
                         }}
                       >
                         <TableRow sx={{ width: "100%" }}>
                           <TableCell colSpan={spanLeft}>
                             {" "}
-                            <Typography
-                              variant="body1"
-                              color={"#fff"}
-                              // sx={{ width: "50%" }}
-                            >
+                            <Typography variant="body1" color={"#fff"}>
                               Amount Due
                             </Typography>
                           </TableCell>
                           <TableCell colSpan={spanRight} align="right">
-                            <Typography
-                              variant="h2"
-                              color={"#fff"}
-                              // sx={{ width: "50%" }}
-                            >
-                              £ {invoice.total}
-                            </Typography>
-                          </TableCell>
-
-                          {/* <TableCell align="right">
                             <Typography variant="h2" color={"#fff"}>
                               £ {invoice.total}
                             </Typography>
-                          </TableCell> */}
+                          </TableCell>
                         </TableRow>
                       </TableFooter>
                     </Table>
                   </TableContainer>
                 </Card>
-
-                {/* {!matchesXS ? (
-                  <Box sx={{ bgcolor: "#fff", width: "375px" }}>
-                    <HeaderButtons
-                      id={invoice.id}
-                      status={invoice.status}
-                      clickDelete={() => setOpen(true)}
-                      clickPaid={axiosDisplay(invoice)}
-                    />
-                  </Box>
-                ) : (
-                  ""
-                )} */}
               </Box>
             )}
           </Box>

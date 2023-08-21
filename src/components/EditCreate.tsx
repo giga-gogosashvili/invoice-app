@@ -27,10 +27,9 @@ import {
   StyledTypoButton,
   StyledTFShort,
   StyledTFLong,
+  StyledTFThird,
 } from "../customize/StyledElements";
 import Drawer from "../components/Drawer";
-
-import Button from "@mui/material/Button";
 
 export default function EditCreate() {
   const { id } = useParams();
@@ -132,7 +131,7 @@ export default function EditCreate() {
     "& .MuiInputBase-input": {
       backgroundColor: "grey.50",
     },
-    width: "240px",
+    width: { md: "240px", xs: "327px" },
   };
   const segmentTitleStyle = {
     mb: "24px",
@@ -169,7 +168,7 @@ export default function EditCreate() {
           pl: { md: "56px", xs: "15px" },
           bgcolor: "info.dark",
           borderRadius: { md: "20px", xs: 0 },
-          margin: { md: "0 auto", xs: 0 },
+          margin: "0 auto",
         }}
       >
         <Typography
@@ -205,7 +204,11 @@ export default function EditCreate() {
           display="flex"
           flexDirection="row"
           justifyContent="space-between"
-          sx={{ width: "504px" }}
+          sx={{
+            width: { md: "504px", xs: "327px" },
+            flexFlow: { xs: "row wrap", md: "nowrap" },
+            // flexWrap: "wrap",
+          }}
 
           // width="100%"
         >
@@ -242,7 +245,7 @@ export default function EditCreate() {
               setSenderPostCode(event.target.value);
             }}
           />
-          <StyledTFShort
+          <StyledTFThird
             required
             error={senderCountryError}
             helperText={senderCountryError ? "Field can not be empty." : ""}
@@ -311,7 +314,10 @@ export default function EditCreate() {
           display="flex"
           flexDirection="row"
           justifyContent="space-between"
-          sx={{ width: "504px" }}
+          sx={{
+            width: { md: "504px", xs: "327px" },
+            flexFlow: { xs: "row wrap", md: "nowrap" },
+          }}
         >
           <StyledTFShort
             required
@@ -345,7 +351,7 @@ export default function EditCreate() {
               setClientPostCode(event.target.value);
             }}
           />
-          <StyledTFShort
+          <StyledTFThird
             required
             error={clientCountryError}
             helperText={clientCountryError ? "Field can not be empty." : ""}
@@ -367,7 +373,10 @@ export default function EditCreate() {
           display="flex"
           flexDirection="row"
           justifyContent="space-between"
-          sx={{ width: "504px" }}
+          sx={{
+            width: { md: "504px", xs: "327px" },
+            flexFlow: { xs: "row wrap", md: "nowrap" },
+          }}
         >
           <DatePicker
             sx={dateStyle}
@@ -418,7 +427,7 @@ export default function EditCreate() {
           </Typography>
           <List
             sx={{
-              width: "504px",
+              width: { md: "504px", xs: "327px" },
               justifyContent: "space-between",
             }}
           >
@@ -429,6 +438,8 @@ export default function EditCreate() {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   p: 0,
+                  // width: { md: "504px", xs: "327px" },
+                  flexFlow: { xs: "row wrap", md: "nowrap" },
                 }}
                 key={index}
                 // secondaryAction={
@@ -442,9 +453,9 @@ export default function EditCreate() {
                   id="form-item-name-1"
                   label={"Item Name"}
                   sx={{
-                    width: "214px",
+                    width: { md: "214px", xs: "327px" },
                     mt: 1,
-                    mb: 1,
+                    mb: 2,
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
                         borderColor: "primary.main",
@@ -478,7 +489,7 @@ export default function EditCreate() {
                   id="form-item-qty-1"
                   label="Qty."
                   sx={{
-                    width: "48px",
+                    width: { md: "48px", xs: "64px" },
                     "& input::-webkit-inner-spin-button": {
                       display: "none",
                     },
@@ -576,7 +587,7 @@ export default function EditCreate() {
                       },
                     },
                   }}
-                  type="number"
+                  // type="number"
                   disabled
                   InputLabelProps={{ shrink: true }}
                   defaultValue={
@@ -606,8 +617,8 @@ export default function EditCreate() {
 
             <StyledButton
               sx={{
-                width: "504px",
-                mt: 1,
+                width: { md: "504px", xs: "327px" },
+                mt: 2,
                 mb: 1,
                 color: "primary.dark",
                 bgcolor: "grey.400",
@@ -627,15 +638,22 @@ export default function EditCreate() {
             </StyledButton>
           </List>
           {/* {items.map((item, index) => ( */}
+
           <Stack
             display="flex"
             flexDirection="row"
             justifyContent="space-between"
-            sx={{ width: "504px" }}
+            alignItems="center"
+            sx={{ width: { md: "504px", xs: "327px" }, height: "91px" }}
           >
             {invoice && (
               <StyledButton
-                sx={{ width: "96px", color: "#7E88C3", bgcolor: "#F9FAFE" }}
+                sx={{
+                  width: { md: "96px", xs: "84px" },
+                  color: "#7E88C3",
+                  bgcolor: "#F9FAFE",
+                  mr: 1,
+                }}
                 aria-label="add"
                 onClick={() => {
                   navigate("/invoices");
@@ -672,7 +690,7 @@ export default function EditCreate() {
                 <StyledButton
                   sx={{
                     mr: 1,
-                    width: "133px",
+                    width: { md: "133px", xs: "117px" },
                     bgcolor: "secondary.main",
                     color: "info.main",
 
@@ -728,7 +746,7 @@ export default function EditCreate() {
               <StyledButton
                 sx={{
                   mr: 1,
-                  width: "128px",
+                  width: { md: "128px", xs: "112px" },
                   color: "#fff",
                   bgcolor: "#7C5DFA",
                   "&:hover": {

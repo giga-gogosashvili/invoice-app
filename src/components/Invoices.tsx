@@ -3,7 +3,6 @@ import InvoiceItem from "./InvoiceItem";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Stack from "@mui/material/Stack";
 import FilterButton from "./FilterButton";
-import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
@@ -14,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React, { useLayoutEffect } from "react";
 
 export type InvoiceResponse = {
   id: string;
@@ -79,7 +77,6 @@ export default function Invoices() {
 
   useEffect(() => {
     axios
-      // ("http://localhost:9481/invoices", { method: "GET", mode: "no-cors" })
       .get("http://localhost:9481/invoices") //    /db/data.json
       .then((res) => {
         setAllInvoices(res.data);
@@ -112,8 +109,6 @@ export default function Invoices() {
       }}
     >
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
-
-      {/* <Drawer></Drawer> */}
 
       <Box
         sx={{
@@ -152,13 +147,11 @@ export default function Invoices() {
             </Typography>{" "}
           </Box>
           <Box
-            // direction="row"
             display={"flex"}
             flexDirection={"row"}
             justifyContent="end"
             sx={{
               flexGrow: 1,
-              // width: 1200,
               alignItems: "flex-end",
             }}
           >
@@ -198,7 +191,6 @@ export default function Invoices() {
               </StyledButton>
             </Stack>
           </Box>
-          {/* <InvoiceItemMenu invoice={invoices}></InvoiceItemMenu> */}
         </Box>
 
         {invoices && <InvoiceItem data={invoices} func={getStatusColor} />}

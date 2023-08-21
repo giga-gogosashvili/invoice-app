@@ -5,26 +5,8 @@ export function AxiosPaid(
 
   id: string | undefined,
   invoice: any
-  //   senderStreet: string | undefined,
-  //   senderCity: string,
-  //   senderPostCode: string,
-  //   senderCountry: string,
-  //   clientName: string,
-  //   clientEmail: string,
-  //   clientStreet: string,
-  //   clientCity: string,
-  //   clientPostCode: string,
-  //   clientCountry: string,
-  //   dateJSON: any,
-  //   paymentTerms: number,
-  //   paymentDue: string,
-  //   status: string,
-  //   description: string,
-  //   items: any,
-  //   navigate: any
 ) {
   setStatus("paid");
-  // to do!!!
   axios
     .put(`http://localhost:9481/invoices/${id}`, {
       id: id,

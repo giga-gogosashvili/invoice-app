@@ -26,9 +26,6 @@ export default function NoInvoices() {
               height: "100%",
               margin: "0 auto",
               alignItems: "center",
-
-              // display: "flex",
-              // alignItems: "center",
             }}
           />
         </Box>

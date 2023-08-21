@@ -54,12 +54,31 @@ export const StyledTypoButton = styled(Typography)(({ theme }) => ({
 }));
 
 export const StyledTFLong = styled(TextField)(({ theme }) => ({
-  width: "504px",
+  [theme.breakpoints.up("xs")]: {
+    width: 327,
+  },
+  [theme.breakpoints.up("md")]: {
+    width: 504,
+  },
+
   flexShrink: 0,
 }));
 
 export const StyledTFShort = styled(TextField)(({ theme }) => ({
   width: "152px",
+
+  flexShrink: 0,
+}));
+
+export const StyledTFThird = styled(TextField)(({ theme }) => ({
+  width: "152px",
+  [theme.breakpoints.up("xs")]: {
+    width: 327,
+  },
+  [theme.breakpoints.up("md")]: {
+    width: 152,
+  },
+
   flexShrink: 0,
 }));
 

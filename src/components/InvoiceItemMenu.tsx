@@ -12,7 +12,6 @@ import Fade from "@mui/material/Fade";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ConfirmDeletion from "./ConfirmDeletion";
 import { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   invoice: InvoiceResponse[];
@@ -43,7 +42,6 @@ export default function InvoiceItemMenu({ invoice }: Props) {
       })
       .then(() => {
         window.location.reload();
-        // navigate("/invoices");
       });
   };
   return (

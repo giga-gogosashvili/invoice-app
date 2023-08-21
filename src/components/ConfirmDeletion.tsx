@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -7,7 +6,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Fade, Typography } from "@mui/material";
 import { forwardRef } from "react";
 import Fab from "@mui/material/Fab";
-import { upperCase } from "cypress/types/lodash";
 
 const Transition = forwardRef(function Transition(props: any, ref: any) {
   return <Fade ref={ref} {...props} />;
@@ -41,10 +39,6 @@ export default function ConfirmDeletion({
             minHeight: { md: "249px", xs: "220px" },
             p: { md: "35px 32px", xs: "17.5px 16px" },
           },
-          // display: "flex",
-          // flexDirection: "row",
-          // justifyContent: "center",
-          // alignItems: "center",
         }}
       >
         <DialogTitle variant="h2" id="alert-dialog-title">

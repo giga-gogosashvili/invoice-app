@@ -5,21 +5,8 @@ import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import themeLight from "../themeLight";
-import React from "react";
-import { useState } from "react";
-import { ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
-import App from "src/App";
-import getDesignTokens from "../themeLight";
-import Switch from "@mui/material/Switch";
 
 function NavDrawer() {
-  // const [checked, setChecked] = React.useState(true);
-
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setChecked(event.target.checked);
-  // };
-
   return (
     <StyledDrawer variant="permanent" anchor="left">
       <Box
@@ -31,8 +18,7 @@ function NavDrawer() {
           sx={{
             flexGrow: 0,
             background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-            // width: { xl: 103, md: 80, xs: 72 },
-            // height: { xl: 103, md: 80, xs: 72 },
+
             width: "100%",
             height: "103px",
             display: "flex",
@@ -40,7 +26,6 @@ function NavDrawer() {
             justifyContent: "center",
             borderTopRightRadius: "20px",
             borderBottomRightRadius: "20px",
-            // mb: "555.9px",
             mb: "500%",
           }}
         >
@@ -88,13 +73,7 @@ function NavDrawer() {
                 },
                 margin: "0 auto",
               }}
-              // onClick={func}
             ></DarkModeIcon>
-            {/* <Switch
-            checked={checked}
-            onChange={onChange}
-            inputProps={{ "aria-label": "controlled" }}
-          /> */}
           </Box>
           <Divider />
 
@@ -116,7 +95,6 @@ function NavDrawer() {
               alt="avatar"
               src={image}
               sx={{
-                // position: "fixed",
                 width: "40px",
                 height: "40px",
                 margin: "0 auto",

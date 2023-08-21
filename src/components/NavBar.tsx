@@ -1,13 +1,6 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-
 import Box from "@mui/material/Box";
-import { StyledDrawer } from "../customize/StyledElements";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
@@ -42,8 +35,6 @@ export default function NavBar() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-
-                //   mb: "555.9px",
               }}
             >
               <img
@@ -64,7 +55,6 @@ export default function NavBar() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              // backgroundColor: "green",
               alignItems: "center",
               flexWrap: "wrap",
               pr: { md: "33.1px", xs: "25.1px" },
@@ -84,13 +74,7 @@ export default function NavBar() {
                   color: "#DFE3FA",
                 },
               }}
-              // onClick={func}
             ></DarkModeIcon>
-            {/* <Switch
-            checked={checked}
-            onChange={onChange}
-            inputProps={{ "aria-label": "controlled" }}
-          /> */}
           </Box>
           <Divider flexItem orientation="vertical" />
 
@@ -101,7 +85,6 @@ export default function NavBar() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              //   backgroundColor: "red",
               alignItems: "center",
               flexWrap: "wrap",
               width: { md: "96px", xs: "80px" },

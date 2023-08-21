@@ -1,5 +1,5 @@
-import { Box, Stack } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
 
 interface Props {

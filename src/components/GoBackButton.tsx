@@ -45,15 +45,6 @@ export default function GoBackButton({ color }: Props) {
             }
             sx={{
               display: "inline",
-              //   color: "text.primary",
-              //   "& label:hover": {
-              //     color: "#grey.200",
-              //     boxShadow: "none",
-              //   },
-              //   "&MuiBottomNavigationAction-label:active": {
-              //     boxShadow: "none",
-              //     color: "#grey.200",
-              //   },
             }}
           />
         </BottomNavigation>

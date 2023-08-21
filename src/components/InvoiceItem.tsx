@@ -1,9 +1,8 @@
-import { Box, List, ListItemText, TextField, Typography } from "@mui/material";
+import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
-import { StyledListItem, StatusButton } from "../customize/StyledElements";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { StyledListItem } from "../customize/StyledElements";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -34,20 +33,11 @@ export default function InvoiceItem({ data, func }: Props) {
       >
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={0}>
-            <Grid
-              item
-              xs={10}
-              sx={
-                {
-                  // flexDirection: { xs: "column", md: "row" },
-                }
-              }
-            >
+            <Grid item xs={10}>
               <List
                 sx={{
                   m: 0,
                   p: 0,
-                  // flexDirection: { xs: "column", md: "row" },
                 }}
               >
                 {data.map((invoice, index: number) => (
@@ -151,89 +141,3 @@ export default function InvoiceItem({ data, func }: Props) {
     </div>
   );
 }
-
-// OLD VERSION
-{
-  /* <List>
-{data.map((invoice, index: number) => (
-  <StyledListItem key={index}>
-    <ListItemText>
-      <Typography component="div" variant="h4">
-        <Box display="inline" color={"#7E88C3"}>
-          #
-        </Box>
-        {invoice.id}
-      </Typography>
-    </ListItemText>
-    <ListItemText>
-      <Typography component="div" variant="body1" color="info.main">
-        Due{" "}
-        <Box display="inline" color={"info.light"}>
-          {invoice.paymentDue}
-        </Box>
-      </Typography>
-    </ListItemText>
-
-    <ListItemText
-      primary={invoice.clientName}
-      sx={{
-        "& .MuiListItemText-primary": {
-          color: "info.main",
-          typography: "body1",
-        },
-      }}
-      color="info"
-    />
-    <ListItemText
-      primary={`£${formatingNumbers(invoice.total)}`}
-      sx={{
-        "& .MuiListItemText-primary": {
-          typography: "h3",
-        },
-      }}
-    />
-
-    <Stack direction="row" spacing={2}>
-      <Chip
-        label={capitalizeFirstLetter(invoice.status)}
-        color={func(invoice.status)}
-        sx={{
-          mr: 5,
-          width: 100,
-          typography: "h4",
-        }}
-        icon={<FiberManualRecordIcon />}
-      ></Chip>
-    </Stack> */
-}
-
-{
-  /* <ConfirmDeletion
-      open={open}
-      closeDialog={handleClose}
-      id={invoice.id}
-      deleteFunction={() => deleteFunction(invoice.id)}
-    /> */
-}
-
-{
-  /* <InvoiceItemMenu invoice={invoice}></InvoiceItemMenu> */
-}
-
-{
-  /* <InvoiceItemMenu invoice={data}></InvoiceItemMenu> */
-}
-//   </StyledListItem>
-// ))}
-{
-  /* <Box
-  sx={{
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "left",
-  }}
->
-  <InvoiceItemMenu invoice={data}></InvoiceItemMenu>
-</Box> */
-}
-// </List>
