@@ -150,20 +150,26 @@ export default function EditCreate() {
       display="flex"
       flexDirection={direction}
       sx={{
-        bgcolor: { md: "background.paper", xs: "#fff", height: "100vh" },
+        bgcolor: { md: "background.paper", xs: "#fff" },
       }}
     >
       {/* <Drawer></Drawer> */}
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
-      {!matchesXS ? <GoBackButton color="#fff"></GoBackButton> : ""}
+      {!matchesXS ? (
+        <Box flexDirection="column">
+          <GoBackButton color="#fff"></GoBackButton>
+        </Box>
+      ) : (
+        ""
+      )}
 
       <Box
         sx={{
           width: { md: "616px", xs: "375px" },
-          pl: { md: "56px", xs: "5px" },
+          pl: { md: "56px", xs: "15px" },
           bgcolor: "info.dark",
-          borderTopRightRadius: { md: "20px", xs: 0 },
-          borderBottomRightRadius: { md: "20px", xs: 0 },
+          borderRadius: { md: "20px", xs: 0 },
+          margin: { md: "0 auto", xs: 0 },
         }}
       >
         <Typography

@@ -16,6 +16,7 @@ import { PaletteMode } from "@mui/material";
 import getDesignTokens from "./themeLight";
 import { useRef } from "react";
 import theme from "./components/Drawer";
+import { useEffect } from "react";
 
 export default function App() {
   const darkModeTheme = createTheme(getDesignTokens("dark"));

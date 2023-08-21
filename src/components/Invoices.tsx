@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import React, { useLayoutEffect } from "react";
 
 export type InvoiceResponse = {
   id: string;
@@ -107,8 +108,7 @@ export default function Invoices() {
       display="flex"
       flexDirection={direction}
       sx={{
-        bgcolor: "background.paper",
-        height: "100vh",
+        justifyContent: "start",
       }}
     >
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
@@ -118,7 +118,11 @@ export default function Invoices() {
       <Box
         sx={{
           margin: "0 auto",
-          width: { xl: "730px", md: "672px", xs: "327px" },
+          width: {
+            xl: "730px",
+            md: "672px",
+            xs: "327px",
+          },
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>

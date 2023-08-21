@@ -39,6 +39,7 @@ const getDesignTokens = (mode: any) => ({
           // 👇 palette values for light mode
           background: {
             paper: "#F8F8FB",
+            default: "#F8F8FB",
           },
           primary: {
             main: "#7C5DFA",
@@ -76,6 +77,7 @@ const getDesignTokens = (mode: any) => ({
           // 👇 palette values for dark mode
           background: {
             paper: "#141625",
+            default: "#141625",
           },
           primary: {
             main: "#252945",

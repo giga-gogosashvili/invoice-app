@@ -86,8 +86,6 @@ export default function Invoice() {
         flexDirection={direction}
         sx={{
           flexGrow: 1,
-          bgcolor: "background.paper",
-          height: "100vh",
         }}
       >
         {/* <Drawer></Drawer> */}
