@@ -189,7 +189,14 @@ export default function Invoice() {
                     <Chip
                       label={capitalizeFirstLetter(status)}
                       color={getStatusColor(status)}
-                      sx={{ mr: "5px", width: "100px" }}
+                      sx={{
+                        mr: "5px",
+                        width: "100px",
+                        typography: "h4",
+                        "& .MuiChip-label": {
+                          color: "white",
+                        },
+                      }}
                     />
                   </Box>
                   {matchesXS ? (

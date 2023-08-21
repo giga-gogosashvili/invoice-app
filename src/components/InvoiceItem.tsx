@@ -1,4 +1,4 @@
-import { Box, List, ListItemText, Typography } from "@mui/material";
+import { Box, List, ListItemText, TextField, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
@@ -128,12 +128,10 @@ export default function InvoiceItem({ data, func }: Props) {
                           mr: 5,
                           width: 100,
                           typography: "h4",
-
                           "& .MuiChip-label": {
-                            opacity: "1!important",
+                            color: "white",
                           },
                         }}
-                        icon={<FiberManualRecordIcon />}
                       ></Chip>
                     </Stack>
                   </StyledListItem>

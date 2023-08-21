@@ -65,7 +65,7 @@ export const getStatusColor = (
     case "pending":
       return "warning";
     case "draft":
-      return "secondary";
+      return "error";
   }
   return "info";
 };

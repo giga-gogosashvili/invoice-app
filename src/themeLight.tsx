@@ -72,6 +72,15 @@ const getDesignTokens = (mode: any) => ({
             primary: "#0C0E16",
             secondary: "#1E2139",
           },
+          success: {
+            main: "#33D69F",
+          },
+          warning: {
+            main: "#FF8F00",
+          },
+          error: {
+            main: "#373B53",
+          },
         }
       : {
           // 👇 palette values for dark mode
@@ -109,6 +118,15 @@ const getDesignTokens = (mode: any) => ({
           text: {
             primary: "#FFFFFF",
             secondary: "#FFFFFF",
+          },
+          success: {
+            main: "#33D69F",
+          },
+          warning: {
+            main: "#FF8F00",
+          },
+          error: {
+            main: "#373B53",
           },
         }),
   },

@@ -36,8 +36,8 @@ export default function NavBar() {
                 flexGrow: 0,
                 background:
                   "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-                width: { md: "80px", sm: "72px" },
-                height: { md: "80px", sm: "72px" },
+                width: { md: "80px", xs: "72px" },
+                height: { md: "80px", xs: "72px" },
 
                 display: "flex",
                 flexDirection: "column",
