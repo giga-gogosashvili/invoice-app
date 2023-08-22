@@ -1,8 +1,14 @@
+import React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useEffect } from "react";
-import { useState } from "react";
-import { InvoiceResponse } from "./Invoices";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { InvoiceResponse } from "./Invoices";
+import { Item } from "./Invoices";
+import { AxiosFunc } from "./AxiosFunc";
+import NavBar from "./NavBar";
+import GoBackButton from "./GoBackButton";
+import Drawer from "../components/Drawer";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -13,23 +19,19 @@ import NativeSelect from "@mui/material/NativeSelect";
 import { List, ListItem, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from "react-router-dom";
-import { Item } from "./Invoices";
-import React from "react";
-import { AxiosFunc } from "./AxiosFunc";
-import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import GoBackButton from "./GoBackButton";
-
 import {
   StyledItemFields,
-  StyledButton,
-  StyledTypoButton,
-  StyledTFShort,
-  StyledTFLong,
-  StyledTFThird,
-} from "../customize/StyledElements";
-import Drawer from "../components/Drawer";
+  StyledEditFields,
+  dateStyle,
+} from "../customize/StyledTextFields";
+import {
+  StyledNewItemButton,
+  StyledDiscardButton,
+  StyledCancelButton,
+  StyledDraftButton,
+  StyledSaveButton,
+} from "../customize/StyledButtons";
 
 export default function EditCreate() {
   const { id } = useParams();
@@ -99,40 +101,10 @@ export default function EditCreate() {
   const [clientCountryError, setClientCountryError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
 
-  const StyleTF = {
-    mt: 1,
-    mb: 1,
+  const longFieldWidth = { width: { md: "504px", xs: "327px" } };
+  const shortFieldWidth = { width: "152px" };
+  const thirdFieldWidth = { width: { md: "152px", xs: "327px" } };
 
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "primary.main",
-      },
-      "&:hover fieldset": {
-        borderColor: "grey.700",
-      },
-    },
-    "& .MuiInputBase-input": {
-      backgroundColor: "grey.50",
-    },
-  };
-
-  const dateStyle = {
-    mt: 1,
-    mb: 1,
-
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "primary.main",
-      },
-      "&:hover fieldset": {
-        borderColor: "grey.700",
-      },
-    },
-    "& .MuiInputBase-input": {
-      backgroundColor: "grey.50",
-    },
-    width: { md: "240px", xs: "327px" },
-  };
   const segmentTitleStyle = {
     mb: "24px",
     mt: "24px",
@@ -181,13 +153,13 @@ export default function EditCreate() {
 
         {/* <Box sx={{ display: "flex", flexWrap: "wrap" }}> */}
         <Typography sx={segmentTitleStyle}>Bill From</Typography>
-        <StyledTFLong
+        <StyledEditFields
           required
           error={senderStreetError}
           helperText={senderStreetError ? "Field can not be empty." : ""}
           fullWidth
-          sx={StyleTF}
           InputLabelProps={{ shrink: true }}
+          sx={longFieldWidth}
           id="form-street-from"
           label="Street Address"
           type="text"
@@ -212,14 +184,14 @@ export default function EditCreate() {
 
           // width="100%"
         >
-          <StyledTFShort
+          <StyledEditFields
             required
-            sx={StyleTF}
             error={senderCityError}
             helperText={senderCityError ? "Field can not be empty." : ""}
             id="form-city"
             label="City"
             InputLabelProps={{ shrink: true }}
+            sx={{ width: 152 }}
             value={
               invoice ? senderCity || invoice.senderAddress.city : senderCity
             }
@@ -228,14 +200,14 @@ export default function EditCreate() {
             }}
           />
 
-          <StyledTFShort
+          <StyledEditFields
             required
             error={senderPostCodeError}
             helperText={senderPostCodeError ? "Field can not be empty." : ""}
             id="form-postcode-from"
             label="Post Code"
-            sx={StyleTF}
             InputLabelProps={{ shrink: true }}
+            sx={shortFieldWidth}
             value={
               invoice
                 ? senderPostCode || invoice.senderAddress.postCode
@@ -245,14 +217,14 @@ export default function EditCreate() {
               setSenderPostCode(event.target.value);
             }}
           />
-          <StyledTFThird
+          <StyledEditFields
             required
             error={senderCountryError}
             helperText={senderCountryError ? "Field can not be empty." : ""}
             id="form-country"
             label="Country"
-            sx={StyleTF}
             InputLabelProps={{ shrink: true }}
+            sx={thirdFieldWidth}
             value={
               invoice
                 ? senderCountry || invoice.senderAddress.country
@@ -264,13 +236,13 @@ export default function EditCreate() {
           />
         </Stack>
         <Typography sx={segmentTitleStyle}>Bill To</Typography>
-        <StyledTFLong
+        <StyledEditFields
           required
           error={clientNameError}
           helperText={clientNameError ? "Field can not be empty." : ""}
           fullWidth
-          sx={StyleTF}
           InputLabelProps={{ shrink: true }}
+          sx={longFieldWidth}
           id="form-name-to"
           label="Client's Name"
           value={invoice ? clientName || invoice.clientName : clientName}
@@ -278,13 +250,13 @@ export default function EditCreate() {
             setClientName(event.target.value);
           }}
         />
-        <StyledTFLong
+        <StyledEditFields
           required
           error={clientEmailError}
           helperText={clientEmailError ? "Field can not be empty." : ""}
           fullWidth
-          sx={StyleTF}
           InputLabelProps={{ shrink: true }}
+          sx={longFieldWidth}
           id="form-email-to"
           label="Client's Email"
           value={invoice ? clientEmail || invoice.clientEmail : clientEmail}
@@ -292,13 +264,13 @@ export default function EditCreate() {
             setClientEmail(event.target.value);
           }}
         />
-        <StyledTFLong
+        <StyledEditFields
           required
           error={clientStreetError}
           helperText={clientStreetError ? "Field can not be empty." : ""}
           fullWidth
-          sx={StyleTF}
           InputLabelProps={{ shrink: true }}
+          sx={longFieldWidth}
           id="form-street-to"
           label="Street Address"
           value={
@@ -319,14 +291,14 @@ export default function EditCreate() {
             flexFlow: { xs: "row wrap", md: "nowrap" },
           }}
         >
-          <StyledTFShort
+          <StyledEditFields
             required
             error={clientCityError}
             helperText={clientCityError ? "Field can not be empty." : ""}
             id="form-city-to"
             label="City"
-            sx={StyleTF}
             InputLabelProps={{ shrink: true }}
+            sx={shortFieldWidth}
             value={
               invoice ? clientCity || invoice.clientAddress.city : clientCity
             }
@@ -334,14 +306,14 @@ export default function EditCreate() {
               setClientCity(event.target.value);
             }}
           />
-          <StyledTFShort
+          <StyledEditFields
             required
             error={clientPostCodeError}
             helperText={clientPostCodeError ? "Field can not be empty." : ""}
             id="form-postcode-to"
             label="Post Code"
-            sx={StyleTF}
             InputLabelProps={{ shrink: true }}
+            sx={shortFieldWidth}
             value={
               invoice
                 ? clientPostCode || invoice.clientAddress.postCode
@@ -351,14 +323,14 @@ export default function EditCreate() {
               setClientPostCode(event.target.value);
             }}
           />
-          <StyledTFThird
+          <StyledEditFields
             required
             error={clientCountryError}
             helperText={clientCountryError ? "Field can not be empty." : ""}
             id="form-country-to"
             label="Country"
-            sx={StyleTF}
             InputLabelProps={{ shrink: true }}
+            sx={thirdFieldWidth}
             value={
               invoice
                 ? clientCountry || invoice.clientAddress.country
@@ -407,13 +379,13 @@ export default function EditCreate() {
             </NativeSelect>
           </FormControl>
         </Stack>
-        <StyledTFLong
+        <StyledEditFields
           required
           error={descriptionError}
           helperText={descriptionError ? "Field can not be empty." : ""}
           fullWidth
-          sx={StyleTF}
           InputLabelProps={{ shrink: true }}
+          sx={longFieldWidth}
           id="form-description"
           label="Project Description"
           value={invoice ? description || invoice.description : description}
@@ -615,13 +587,9 @@ export default function EditCreate() {
               </ListItem>
             ))}
 
-            <StyledButton
+            <StyledNewItemButton
               sx={{
-                width: { md: "504px", xs: "327px" },
-                mt: 2,
-                mb: 1,
-                color: "primary.dark",
-                bgcolor: "grey.400",
+                typography: "h4",
               }}
               onClick={() => {
                 const withNewItem = items.concat({
@@ -635,7 +603,7 @@ export default function EditCreate() {
             >
               <AddIcon sx={{ mr: 1 }} />
               Add New Item
-            </StyledButton>
+            </StyledNewItemButton>
           </List>
           {/* {items.map((item, index) => ( */}
 
@@ -647,12 +615,9 @@ export default function EditCreate() {
             sx={{ width: { md: "504px", xs: "327px" }, height: "91px" }}
           >
             {invoice && (
-              <StyledButton
+              <StyledDiscardButton
                 sx={{
-                  width: { md: "96px", xs: "84px" },
-                  color: "#7E88C3",
-                  bgcolor: "#F9FAFE",
-                  mr: 1,
+                  typography: "h4",
                 }}
                 aria-label="add"
                 onClick={() => {
@@ -660,7 +625,7 @@ export default function EditCreate() {
                 }}
               >
                 Discard
-              </StyledButton>
+              </StyledDiscardButton>
             )}
             <Stack
               sx={{
@@ -670,12 +635,9 @@ export default function EditCreate() {
               }}
             >
               {!invoice && (
-                <StyledButton
+                <StyledCancelButton
                   sx={{
-                    mr: 1,
-                    color: "primary.dark",
-                    width: "96px",
-                    bgcolor: "grey.400",
+                    typography: "h4",
                   }}
                   aria-label="add"
                   onClick={() => {
@@ -683,28 +645,15 @@ export default function EditCreate() {
                   }}
                 >
                   Cancel
-                </StyledButton>
+                </StyledCancelButton>
               )}
 
               {invoice && (
-                <StyledButton
+                <StyledDraftButton
                   sx={{
-                    mr: 1,
-                    width: { md: "133px", xs: "117px" },
-                    bgcolor: "secondary.main",
-                    color: "info.main",
-
-                    "&:hover": {
-                      bgcolor: "secondary.dark",
-                      boxShadow: "none",
-                    },
-                    "&:active": {
-                      boxShadow: "none",
-                      bgcolor: "secondary.dark",
-                    },
+                    typography: "h4",
                   }}
                   size="small"
-                  color="primary"
                   aria-label="add"
                   type="submit"
                   onClick={
@@ -734,29 +683,18 @@ export default function EditCreate() {
                     }
                   }
                 >
-                  <StyledTypoButton>
+                  <Typography variant="h4">
                     Save{" "}
                     <Box display="inline" textTransform="lowercase">
                       as
                     </Box>{" "}
                     Draft
-                  </StyledTypoButton>
-                </StyledButton>
+                  </Typography>
+                </StyledDraftButton>
               )}
-              <StyledButton
+              <StyledSaveButton
                 sx={{
-                  mr: 1,
-                  width: { md: "128px", xs: "112px" },
-                  color: "#fff",
-                  bgcolor: "#7C5DFA",
-                  "&:hover": {
-                    bgcolor: "#9277FF",
-                    boxShadow: "none",
-                  },
-                  "&:active": {
-                    boxShadow: "none",
-                    bgcolor: "#9277FF",
-                  },
+                  typography: "h4",
                 }}
                 size="small"
                 color="primary"
@@ -837,7 +775,7 @@ export default function EditCreate() {
                 }
               >
                 {invoice ? `Save & Send` : `Save Changes`}
-              </StyledButton>
+              </StyledSaveButton>
             </Stack>
           </Stack>
           {/* ))} */}

@@ -1,6 +1,12 @@
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { StyledButton, StyledTypoButton } from "../customize/StyledElements";
+
+import {
+  StyledEditButton,
+  StyledDeleteButton,
+  StyledPaidButton,
+} from "src/customize/StyledButtons";
+import { Typography } from "@mui/material";
 
 interface Props {
   id: any;
@@ -24,22 +30,9 @@ export default function HeaderButtons({
         alignItems: "center",
       }}
     >
-      <StyledButton
+      <StyledEditButton
         sx={{
-          mr: 1,
-          width: "73px",
-          color: "primary.dark",
-          bgcolor: "grey.400",
-          "&:hover": {
-            bgcolor: "grey.500",
-            color: "#7E88C3",
-            boxShadow: "none",
-          },
-          "&:active": {
-            bgcolor: "grey.500",
-            color: "#7E88C3",
-            boxShadow: "none",
-          },
+          typography: "h4",
         }}
         aria-label="add"
         onClick={() => {
@@ -47,58 +40,33 @@ export default function HeaderButtons({
         }}
       >
         Edit
-      </StyledButton>
+      </StyledEditButton>
 
-      <StyledButton
+      <StyledDeleteButton
         sx={{
-          mr: 1,
-          width: "89px",
-          color: "#fff",
-          bgcolor: "#EC5757",
-          "&:hover": {
-            bgcolor: "#FF9797",
-
-            boxShadow: "none",
-          },
-          "&:active": {
-            bgcolor: "#FF9797",
-
-            boxShadow: "none",
-          },
+          typography: "h4",
         }}
         aria-label="add"
         onClick={clickDelete}
       >
         Delete
-      </StyledButton>
+      </StyledDeleteButton>
       {status !== "paid" && (
-        <StyledButton
+        <StyledPaidButton
           sx={{
-            width: { md: "131px", xs: "149px" },
-            color: "#fff",
-            bgcolor: "#7C5DFA",
-            "&:hover": {
-              bgcolor: "#9277FF",
-
-              boxShadow: "none",
-            },
-            "&:active": {
-              bgcolor: "#9277FF",
-
-              boxShadow: "none",
-            },
+            typography: "h4",
           }}
           aria-label="add"
           onClick={clickPaid}
         >
-          <StyledTypoButton>
+          <Typography variant="h4">
             Mark{" "}
             <Box display="inline" textTransform="lowercase">
               as
             </Box>{" "}
             Paid
-          </StyledTypoButton>
-        </StyledButton>
+          </Typography>
+        </StyledPaidButton>
       )}
     </Box>
   );

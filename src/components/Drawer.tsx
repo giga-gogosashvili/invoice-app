@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import { StyledDrawer } from "../customize/StyledElements";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import StyledDrawer from "src/customize/StyledDrawer";
 
 function NavDrawer() {
   return (

@@ -6,10 +6,10 @@ import FilterButton from "./FilterButton";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
-import { StyledButton } from "../customize/StyledElements";
 import Drawer from "./Drawer";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
+import { StyledNewButton } from "src/customize/StyledButtons";
 
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -168,18 +168,9 @@ export default function Invoices() {
                 filterStatus={filterStatus}
                 setFilterStatus={setFilterStatus}
               />
-              <StyledButton
+              <StyledNewButton
                 sx={{
-                  bgcolor: "primary.main",
-                  width: { md: "150px", xs: "90px" },
-                  "&:hover": {
-                    backgroundColor: "#9277FF",
-                    boxShadow: "none",
-                  },
-                  "&:active": {
-                    boxShadow: "none",
-                    backgroundColor: "#9277FF",
-                  },
+                  typography: "h4",
                 }}
                 variant="contained"
                 startIcon={<AddCircleIcon style={{ fontSize: "28px" }} />}
@@ -188,7 +179,7 @@ export default function Invoices() {
                 }}
               >
                 {matchesXS ? "New Invoice" : "New"}
-              </StyledButton>
+              </StyledNewButton>
             </Stack>
           </Box>
         </Box>

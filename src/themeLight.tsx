@@ -177,8 +177,8 @@ const getDesignTokens = (mode: any) => ({
         root: {
           borderRadius: "24px !important",
           height: "48px",
-
           size: "medium",
+          p: 24,
         },
       },
     },
@@ -217,6 +217,12 @@ const getDesignTokens = (mode: any) => ({
         // root: { pl: 0, pr: 0 },
       },
     },
+
+    // typography: {
+    //   button: {
+    //     textTransform: "capitalize",
+    //   },
+    // },
 
     // MuiTextField: {
     //   styleOverrides: {

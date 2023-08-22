@@ -2,7 +2,7 @@ import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
 import Chip from "@mui/material/Chip";
-import { StyledListItem } from "../customize/StyledElements";
+import StyledInvoicesRow from "src/customize/StyledInvoicesRow";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -41,17 +41,8 @@ export default function InvoiceItem({ data, func }: Props) {
                 }}
               >
                 {data.map((invoice, index: number) => (
-                  <StyledListItem
+                  <StyledInvoicesRow
                     key={index}
-                    sx={{
-                      bgcolor: "grey.50",
-                      width: { md: "650px", xs: "327px" },
-                      height: { md: "72px", xs: "134px" },
-                      borderRadius: "8px",
-                      display: { xs: "flex", md: "auto" },
-                      flexDirection: { xs: "column", md: "row" },
-                      flexFlow: { xs: "column wrap", md: "nowrap" },
-                    }}
                     onClick={() => {
                       navigate(`/invoices/${invoice.id}`);
                     }}
@@ -121,10 +112,13 @@ export default function InvoiceItem({ data, func }: Props) {
                           "& .MuiChip-label": {
                             color: "white",
                           },
+                          "&::first-letter": {
+                            textTransform: "capitalize",
+                          },
                         }}
                       ></Chip>
                     </Stack>
-                  </StyledListItem>
+                  </StyledInvoicesRow>
                 ))}
               </List>
             </Grid>
