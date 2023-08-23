@@ -13,12 +13,6 @@ export const StyledItemFields = styled(TextField)(({ theme }) => ({
 }));
 
 export const StyledEditFields = styled(TextField)(({ theme }) => ({
-  [theme.breakpoints.up("xs")]: {
-    width: 327,
-  },
-  [theme.breakpoints.up("md")]: {
-    width: 504,
-  },
   margin: "10px 0",
   flexShrink: 0,
   "& .MuiOutlinedInput-root": {
@@ -31,48 +25,6 @@ export const StyledEditFields = styled(TextField)(({ theme }) => ({
   },
   "& .MuiInputBase-input": {
     backgroundColor: theme.palette.grey[50],
-  },
-}));
-
-export const StyledDate = styled(DatePicker)(({ theme }) => ({
-  margin: "10px 0",
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
-    "&:hover fieldset": {
-      borderColor: theme.palette.grey[700],
-    },
-  },
-  "& .MuiInputBase-input": {
-    backgroundColor: theme.palette.grey[50],
-  },
-  [theme.breakpoints.up("xs")]: {
-    width: 327,
-  },
-  [theme.breakpoints.up("md")]: {
-    width: 240,
-  },
-}));
-
-export const StyledPayment = styled(FormControl)(({ theme }) => ({
-  margin: "10px 0",
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
-    "&:hover fieldset": {
-      borderColor: theme.palette.grey[700],
-    },
-  },
-  "& .MuiInputBase-input": {
-    backgroundColor: theme.palette.grey[50],
-  },
-  [theme.breakpoints.up("xs")]: {
-    width: 327,
-  },
-  [theme.breakpoints.up("md")]: {
-    width: 240,
   },
 }));
 

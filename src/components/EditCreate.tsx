@@ -191,7 +191,7 @@ export default function EditCreate() {
             id="form-city"
             label="City"
             InputLabelProps={{ shrink: true }}
-            sx={{ width: 152 }}
+            sx={shortFieldWidth}
             value={
               invoice ? senderCity || invoice.senderAddress.city : senderCity
             }

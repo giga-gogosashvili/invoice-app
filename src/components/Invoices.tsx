@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import InvoiceItem from "./InvoiceItem";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Stack from "@mui/material/Stack";
 import FilterButton from "./FilterButton";
-import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
 import Drawer from "./Drawer";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { StyledNewButton } from "src/customize/StyledButtons";
-
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  StyledBox1,
+  StyledBox2,
+  StyledBox3,
+  StyledBox4,
+} from "src/customize/StyledBoxes";
+import {
+  StyledTypography1,
+  StyledTypography2,
+} from "src/customize/StyledTypographys";
+import { StyledStack1 } from "src/customize/StyledStacks";
 
 export type InvoiceResponse = {
   id: string;
@@ -101,69 +109,29 @@ export default function Invoices() {
   const navigate = useNavigate();
 
   return (
-    <Box
-      display="flex"
-      flexDirection={direction}
-      sx={{
-        justifyContent: "start",
-      }}
-    >
+    <StyledBox1 flexDirection={direction}>
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
 
-      <Box
-        sx={{
-          margin: "0 auto",
-          width: {
-            xl: "730px",
-            md: "672px",
-            xs: "327px",
-          },
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+      <StyledBox2>
+        <StyledBox3>
           <Box>
-            <Typography
-              color="text.primary"
+            <StyledTypography1
               sx={{
-                mt: { xl: "78px", md: "62px", xs: "36px" },
                 typography: { md: "h1", xs: "h2" },
               }}
             >
               Invoices{" "}
-            </Typography>{" "}
-            <Typography
-              color="info.main"
-              variant="body1"
-              sx={{
-                mt: { md: "16px", xs: "8px" },
-                mb: { md: "64px", xs: "32px" },
-              }}
-            >
+            </StyledTypography1>{" "}
+            <StyledTypography2 variant="body1">
               {(invoices.length > 0 &&
                 (matchesXS
                   ? `There are ${invoices.length} total invoices`
                   : `${invoices.length} invoices`)) ||
                 "No invoices"}
-            </Typography>{" "}
+            </StyledTypography2>{" "}
           </Box>
-          <Box
-            display={"flex"}
-            flexDirection={"row"}
-            justifyContent="end"
-            sx={{
-              flexGrow: 1,
-              alignItems: "flex-end",
-            }}
-          >
-            <Stack
-              direction="row"
-              display={"flex"}
-              flexDirection={"row"}
-              justifyContent="end"
-              sx={{
-                flexGrow: 1,
-              }}
-            >
+          <StyledBox4>
+            <StyledStack1>
               <FilterButton
                 filterStatus={filterStatus}
                 setFilterStatus={setFilterStatus}
@@ -180,13 +148,13 @@ export default function Invoices() {
               >
                 {matchesXS ? "New Invoice" : "New"}
               </StyledNewButton>
-            </Stack>
-          </Box>
-        </Box>
+            </StyledStack1>
+          </StyledBox4>
+        </StyledBox3>
 
         {invoices && <InvoiceItem data={invoices} func={getStatusColor} />}
         {invoices.length === 0 && <NoInvoices />}
-      </Box>
-    </Box>
+      </StyledBox2>
+    </StyledBox1>
   );
 }
