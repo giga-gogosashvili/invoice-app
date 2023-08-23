@@ -24,6 +24,7 @@ import {
   StyledItemFields,
   StyledEditFields,
   dateStyle,
+  segmentTitleStyle,
 } from "../customize/StyledTextFields";
 import {
   StyledNewItemButton,
@@ -81,8 +82,6 @@ export default function EditCreate() {
     { name: "", quantity: 0, price: 0, total: 0 },
   ]);
 
-  const [status, setStatus] = useState<string>("");
-
   const paymentDue = addDays(date, paymentTerms).toISOString().split("T")[0];
 
   // VALIDATION
@@ -105,11 +104,11 @@ export default function EditCreate() {
   const shortFieldWidth = { width: "152px" };
   const thirdFieldWidth = { width: { md: "152px", xs: "327px" } };
 
-  const segmentTitleStyle = {
-    mb: "24px",
-    mt: "24px",
-    color: "#7C5DFA",
-  };
+  // const segmentTitleStyle = {
+  //   mb: "24px",
+  //   mt: "24px",
+  //   color: "#7C5DFA",
+  // };
 
   const matches = useMediaQuery("(min-width:1440px)");
   const matchesXS = useMediaQuery("(min-width:768px)");

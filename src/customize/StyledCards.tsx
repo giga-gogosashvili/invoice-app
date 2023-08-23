@@ -17,6 +17,7 @@ export const StyledCard1 = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up("xl")]: {
     width: 730,
     padding: "49px",
+    marginBottom: "0px",
   },
   borderRadius: "8px",
   boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",

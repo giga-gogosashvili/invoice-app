@@ -5,30 +5,17 @@ import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import StyledDrawer from "src/customize/StyledDrawer";
+import {
+  StyledBox11,
+  StyledBox12,
+  StyledBox13,
+} from "src/customize/StyledBoxes";
 
 function NavDrawer() {
   return (
     <StyledDrawer variant="permanent" anchor="left">
-      <Box
-        sx={{
-          flexGrow: 0,
-        }}
-      >
-        <Box
-          sx={{
-            flexGrow: 0,
-            background: "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-
-            width: "100%",
-            height: "103px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            borderTopRightRadius: "20px",
-            borderBottomRightRadius: "20px",
-            mb: "500%",
-          }}
-        >
+      <Box>
+        <StyledBox11>
           <img
             alt="logo"
             src={Logo}
@@ -38,26 +25,9 @@ function NavDrawer() {
               margin: "0 auto",
             }}
           />
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "0",
-            width: "100%",
-          }}
-        >
-          <Box
-            sx={{
-              flexGrow: 0,
-
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              pb: "33.1px",
-            }}
-          >
+        </StyledBox11>
+        <StyledBox12>
+          <StyledBox13 sx={{ pb: "33.1px" }}>
             <DarkModeIcon
               width={"20px"}
               height={"20px"}
@@ -74,7 +44,7 @@ function NavDrawer() {
                 margin: "0 auto",
               }}
             ></DarkModeIcon>
-          </Box>
+          </StyledBox13>
           <Divider />
 
           <Box
@@ -101,7 +71,7 @@ function NavDrawer() {
               }}
             />
           </Box>
-        </Box>
+        </StyledBox12>
       </Box>
     </StyledDrawer>
   );

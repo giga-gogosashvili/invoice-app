@@ -6,10 +6,11 @@ import image from "../assets/image-avatar.jpg";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { StyledBox11, StyledBox13 } from "src/customize/StyledBoxes";
 
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar
         position="static"
         sx={{ backgroundColor: "#373B53", height: { md: "80px", xs: "72px" } }}
@@ -24,19 +25,7 @@ export default function NavBar() {
           }}
         >
           <Box display="flex" flexGrow={1}>
-            <Box
-              sx={{
-                flexGrow: 0,
-                background:
-                  "linear-gradient(to bottom , #7C5DFA 50%, #9277FF 50%)",
-                width: { md: "80px", xs: "72px" },
-                height: { md: "80px", xs: "72px" },
-
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
+            <StyledBox11>
               <img
                 alt="logo"
                 src={Logo}
@@ -46,17 +35,10 @@ export default function NavBar() {
                   margin: "0 auto",
                 }}
               />
-            </Box>
+            </StyledBox11>
           </Box>
-          <Box
+          <StyledBox13
             sx={{
-              flexGrow: 0,
-
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
               pr: { md: "33.1px", xs: "25.1px" },
             }}
           >
@@ -75,7 +57,7 @@ export default function NavBar() {
                 },
               }}
             ></DarkModeIcon>
-          </Box>
+          </StyledBox13>
           <Divider flexItem orientation="vertical" />
 
           <Box

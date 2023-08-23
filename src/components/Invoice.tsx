@@ -299,6 +299,7 @@ export default function Invoice() {
       ) : (
         ""
       )}
+
       <ConfirmDeletion
         open={open}
         closeDialog={handleClose}

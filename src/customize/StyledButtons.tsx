@@ -38,7 +38,7 @@ export const StyledEditButton = styled(Button)(({ theme }) => ({
     boxShadow: "none",
   },
 }));
-export const StyledDeleteButton = styled(Button)(({ theme }) => ({
+export const StyledDeleteButton = styled(Button)(() => ({
   marginRight: "10px",
   textTransform: "capitalize",
   width: "89px",

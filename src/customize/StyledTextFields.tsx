@@ -1,9 +1,7 @@
 import { styled } from "@mui/system";
 import { TextField } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
-import FormControl from "@mui/material/FormControl";
 
-export const StyledItemFields = styled(TextField)(({ theme }) => ({
+export const StyledItemFields = styled(TextField)(() => ({
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
     display: "none",
   },
@@ -45,7 +43,7 @@ export const dateStyle = {
   },
   width: { md: "240px", xs: "327px" },
 };
-const segmentTitleStyle = {
+export const segmentTitleStyle = {
   mb: "24px",
   mt: "24px",
   color: "#7C5DFA",
