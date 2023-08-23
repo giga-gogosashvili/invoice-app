@@ -1,5 +1,3 @@
-import { Box } from "@mui/material";
-import { InvoiceResponse } from "./Invoices";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -10,10 +8,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ConfirmDeletion from "./ConfirmDeletion";
 import { useState } from "react";
 import axios from "axios";
-
-// interface Props {
-//   invoice: InvoiceResponse[];
-// }
+import { StyledBox5 } from "src/customize/StyledBoxes";
 
 export default function IsolatedMenu({ id }: any) {
   const navigate = useNavigate();
@@ -32,10 +27,10 @@ export default function IsolatedMenu({ id }: any) {
     setOpen(false);
   };
 
-  const deleteFunction = (id: string) => {
+  const deleteFunc = () => {
     axios
       .delete(`http://localhost:9481/invoices/${id}`)
-      .then((error) => {
+      .then((error: any) => {
         console.log(error);
       })
       .then(() => {
@@ -44,15 +39,7 @@ export default function IsolatedMenu({ id }: any) {
   };
   return (
     <>
-      <Box
-        sx={{
-          height: "72px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          margin: "8px 0",
-        }}
-      >
+      <StyledBox5>
         <Button
           id="fade-button"
           aria-controls={openMenu ? "fade-menu" : undefined}
@@ -99,9 +86,9 @@ export default function IsolatedMenu({ id }: any) {
           open={open}
           closeDialog={handleClose}
           id={id}
-          deleteFunction={() => deleteFunction(id)}
+          deleteFunction={deleteFunc}
         />
-      </Box>
+      </StyledBox5>
     </>
   );
 }

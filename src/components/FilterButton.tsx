@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { StyledFormControl1 } from "src/customize/StyledFormControls";
 
 interface Props {
   setFilterStatus: (a: string) => void;
@@ -18,15 +18,7 @@ export default function FilterButton(props: Props) {
 
   return (
     <Box>
-      <FormControl
-        sx={{
-          width: { md: "140.46px", xs: "79.5px" },
-          height: "15px",
-          border: "none",
-          "& fieldset": { border: "none" },
-        }}
-        fullWidth
-      >
+      <StyledFormControl1 fullWidth>
         <InputLabel id="demo-simple-select-label">
           <Typography variant="h4" color="text.primary">
             {" "}
@@ -46,7 +38,7 @@ export default function FilterButton(props: Props) {
           <MenuItem value={"pending"}>Pending</MenuItem>
           <MenuItem value={"paid"}>Paid</MenuItem>
         </Select>
-      </FormControl>
+      </StyledFormControl1>
     </Box>
   );
 }

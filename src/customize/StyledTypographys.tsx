@@ -25,3 +25,41 @@ export const StyledTypography2 = styled(Typography)(({ theme }) => ({
     marginBottom: "64px",
   },
 }));
+
+export const StyledTypography3 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.info.main,
+  [theme.breakpoints.up("xs")]: {
+    marginRight: "10px",
+  },
+  [theme.breakpoints.up("md")]: {
+    marginRight: "20px",
+  },
+}));
+
+export const StyledTypography4 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  [theme.breakpoints.up("xs")]: {
+    marginBottom: "4px",
+  },
+  [theme.breakpoints.up("md")]: {
+    marginBottom: "13px",
+  },
+}));
+
+export const StyledTypography5 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.dark,
+  marginBottom: "13px",
+}));
+
+export const StyledTypography6 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  marginBottom: "20px",
+}));
+
+export const StyledTypography7 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.dark,
+}));
+
+export const StyledTypography8 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+}));

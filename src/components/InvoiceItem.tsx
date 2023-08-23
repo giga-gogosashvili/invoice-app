@@ -1,12 +1,13 @@
 import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { InvoiceResponse } from "./Invoices";
-import Chip from "@mui/material/Chip";
 import StyledInvoicesRow from "src/customize/StyledInvoicesRow";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useNavigate } from "react-router-dom";
+import { StyledBox6 } from "src/customize/StyledBoxes";
+import { StyledChip1 } from "src/customize/StyledChips";
 
 interface Props {
   data: InvoiceResponse[];
@@ -26,20 +27,11 @@ export default function InvoiceItem({ data, func }: Props) {
 
   return (
     <div>
-      <Box
-        sx={{
-          flexGrow: 1,
-        }}
-      >
-        <Box sx={{ flexGrow: 1 }}>
+      <Box>
+        <Box>
           <Grid container spacing={0}>
             <Grid item xs={10}>
-              <List
-                sx={{
-                  m: 0,
-                  p: 0,
-                }}
-              >
+              <List>
                 {data.map((invoice, index: number) => (
                   <StyledInvoicesRow
                     key={index}
@@ -48,11 +40,7 @@ export default function InvoiceItem({ data, func }: Props) {
                     }}
                   >
                     <ListItemText>
-                      <Typography
-                        component="div"
-                        variant="h4"
-                        color="text.primary"
-                      >
+                      <Typography variant="h4" color="text.primary">
                         <Box display="inline" color={"#7E88C3"}>
                           #
                         </Box>
@@ -60,24 +48,8 @@ export default function InvoiceItem({ data, func }: Props) {
                       </Typography>
                     </ListItemText>
                     <ListItemText>
-                      <Typography
-                        component="div"
-                        variant="body1"
-                        color="info.main"
-                      >
-                        Due{" "}
-                        <Box
-                          display="inline"
-                          color={"primary.dark"}
-                          sx={{
-                            fontWeight: 500,
-                            fontSize: "13px",
-                            lineHeight: "18px",
-                            letterSpacing: -0.1,
-                          }}
-                        >
-                          {invoice.paymentDue}
-                        </Box>
+                      <Typography variant="body1" color="info.main">
+                        Due <StyledBox6>{invoice.paymentDue}</StyledBox6>
                       </Typography>
                     </ListItemText>
 
@@ -89,7 +61,6 @@ export default function InvoiceItem({ data, func }: Props) {
                           typography: "body1",
                         },
                       }}
-                      color="info"
                     />
                     <ListItemText
                       primary={`£${formatingNumbers(invoice.total)}`}
@@ -102,21 +73,13 @@ export default function InvoiceItem({ data, func }: Props) {
                     />
 
                     <Stack direction="row" spacing={2}>
-                      <Chip
+                      <StyledChip1
                         label={capitalizeFirstLetter(invoice.status)}
                         color={func(invoice.status)}
                         sx={{
-                          mr: 5,
-                          width: 100,
                           typography: "h4",
-                          "& .MuiChip-label": {
-                            color: "white",
-                          },
-                          "&::first-letter": {
-                            textTransform: "capitalize",
-                          },
                         }}
-                      ></Chip>
+                      ></StyledChip1>
                     </Stack>
                   </StyledInvoicesRow>
                 ))}
