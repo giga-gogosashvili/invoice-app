@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { InvoiceResponse } from "./Invoices";
+import { InvoiceResponse } from "./InvoiceResponse";
 import IsolatedMenu from "./IsolatedMenu";
 
 interface Props {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { useState } from "react";
-import { InvoiceResponse } from "./Invoices";
+import { InvoiceResponse } from "./InvoiceResponse";
 import axios from "axios";
 import { Box } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
@@ -15,7 +15,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { capitalizeFirstLetter } from "./InvoiceItem";
 import { useNavigate } from "react-router-dom";
-import { getStatusColor } from "./Invoices";
+import GetStatusColor from "./GetStatusColor";
 import Drawer from "./Drawer";
 import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
@@ -118,7 +118,7 @@ export default function Invoice() {
 
                     <StyledChip1
                       label={capitalizeFirstLetter(status)}
-                      color={getStatusColor(status)}
+                      color={GetStatusColor(status)}
                       sx={{
                         typography: "h4",
                       }}

@@ -1,6 +1,6 @@
 import { Box, List, ListItemText, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { InvoiceResponse } from "./Invoices";
+import { InvoiceResponse } from "./InvoiceResponse";
 import StyledInvoicesRow from "src/customize/StyledInvoicesRow";
 import InvoiceItemMenu from "./InvoiceItemMenu";
 import Grid from "@mui/material/Grid";
@@ -27,16 +27,8 @@ export default function InvoiceItem({ data, func }: Props) {
 
   return (
     <div>
-      <Box
-        sx={{
-          flexGrow: 1,
-        }}
-      >
-        <Box
-          sx={{
-            flexGrow: 1,
-          }}
-        >
+      <Box>
+        <Box>
           <Grid container spacing={0}>
             <Grid item xs={10}>
               <List
@@ -84,7 +76,6 @@ export default function InvoiceItem({ data, func }: Props) {
                         },
                       }}
                     />
-
                     <Stack direction="row" spacing={2}>
                       <StyledChip1
                         label={capitalizeFirstLetter(invoice.status)}

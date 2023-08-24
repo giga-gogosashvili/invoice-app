@@ -21,60 +21,8 @@ import {
   StyledTypography2,
 } from "src/customize/StyledTypographys";
 import { StyledStack1 } from "src/customize/StyledStacks";
-
-export type InvoiceResponse = {
-  id: string;
-  createdAt: string;
-  paymentDue: string;
-  description: string;
-  paymentTerms: number;
-  clientName: string;
-  clientEmail: string;
-  status: string;
-  senderAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  clientAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  items: Item[];
-  total: number;
-};
-
-export type Item = {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-};
-
-export const getStatusColor = (
-  status: string
-):
-  | "success"
-  | "error"
-  | "primary"
-  | "default"
-  | "secondary"
-  | "info"
-  | "warning"
-  | undefined => {
-  switch (status) {
-    case "paid":
-      return "success";
-    case "pending":
-      return "warning";
-    case "draft":
-      return "error";
-  }
-  return "info";
-};
+import GetStatusColor from "./GetStatusColor";
+import { InvoiceResponse } from "./InvoiceResponse";
 
 export default function Invoices() {
   const [invoices, setInvoices] = useState<InvoiceResponse[]>([]);
@@ -152,7 +100,7 @@ export default function Invoices() {
           </StyledBox4>
         </StyledBox3>
 
-        {invoices && <InvoiceItem data={invoices} func={getStatusColor} />}
+        {invoices && <InvoiceItem data={invoices} func={GetStatusColor} />}
         {invoices.length === 0 && <NoInvoices />}
       </StyledBox2>
     </StyledBox1>
