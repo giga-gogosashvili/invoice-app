@@ -1,5 +1,6 @@
 import { styled } from "@mui/system";
 import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 export const StyledCard1 = styled(Card)(({ theme }) => ({
   display: "block",
@@ -21,4 +22,14 @@ export const StyledCard1 = styled(Card)(({ theme }) => ({
   },
   borderRadius: "8px",
   boxShadow: "0px 10px 10px -10px rgb(72 84 159 / 10%)",
+}));
+
+export const StyledCardContent1 = styled(CardContent)(({ theme }) => ({
+  padding: 0,
+  [theme.breakpoints.up("xs")]: {
+    paddingLeft: "34px",
+  },
+  [theme.breakpoints.up("md")]: {
+    paddingLeft: "64px",
+  },
 }));

@@ -5,19 +5,10 @@ import { InvoiceResponse } from "./InvoiceResponse";
 import axios from "axios";
 import { Box } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { capitalizeFirstLetter } from "./InvoiceItem";
 import { useNavigate } from "react-router-dom";
 import GetStatusColor from "./GetStatusColor";
 import Drawer from "./Drawer";
-import TableFooter from "@mui/material/TableFooter";
 import ConfirmDeletion from "./ConfirmDeletion";
 import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -39,13 +30,9 @@ import {
   StyledTypography8,
 } from "src/customize/StyledTypographys";
 import { StyledChip1 } from "src/customize/StyledChips";
-import { StyledCard1 } from "src/customize/StyledCards";
-import {
-  TableContainStyle,
-  TableStyle,
-  TableFooterStyle,
-} from "src/customize/StyledTable";
+import { StyledCard1, StyledCardContent1 } from "src/customize/StyledCards";
 import { StyledBox10 } from "src/customize/StyledBoxes";
+import InvoiceTable from "./InvoiceTable";
 
 export default function Invoice() {
   const { id } = useParams();
@@ -91,13 +78,9 @@ export default function Invoice() {
         navigate("/invoices");
       });
   };
-
   const matches = useMediaQuery("(min-width:1440px)");
   const matchesXS = useMediaQuery("(min-width:768px)");
-
   const direction = matches ? "row" : "column";
-  const spanLeft: number = !matchesXS ? 0 : 3;
-  const spanRight: number = !matchesXS ? 0 : 1;
 
   return (
     <>
@@ -137,7 +120,7 @@ export default function Invoice() {
                 </StyledStack2>
                 <StyledCard1>
                   <StyledStack3 spacing={2}>
-                    <CardContent>
+                    <CardContent sx={{ p: 0 }}>
                       <StyledTypography4 variant="h3">
                         <Box display="inline" color={"#888EB0"}>
                           #
@@ -159,7 +142,9 @@ export default function Invoice() {
                   </StyledStack3>
                   <StyledStack4 spacing={2}>
                     <Box sx={{ display: "flex" }}>
-                      <CardContent sx={{ justifyContent: "space-between" }}>
+                      <CardContent
+                        sx={{ justifyContent: "space-between", p: 0 }}
+                      >
                         <StyledTypography5 variant="body1">
                           Invoice Date
                         </StyledTypography5>
@@ -174,7 +159,7 @@ export default function Invoice() {
                           {invoice.paymentDue}
                         </StyledTypography8>
                       </CardContent>
-                      <CardContent>
+                      <StyledCardContent1>
                         <StyledTypography5 variant="body1">
                           Bill To
                         </StyledTypography5>
@@ -187,7 +172,7 @@ export default function Invoice() {
                           {invoice.clientAddress.postCode} <br />
                           {invoice.clientAddress.country}
                         </StyledTypography7>
-                      </CardContent>
+                      </StyledCardContent1>
                     </Box>
                     <CardContent sx={{ p: 0 }}>
                       <StyledTypography5 variant="body1">
@@ -198,87 +183,7 @@ export default function Invoice() {
                       </StyledTypography8>
                     </CardContent>
                   </StyledStack4>
-
-                  <TableContainer component={Paper} sx={TableContainStyle}>
-                    <Table sx={TableStyle} aria-label="spanning table">
-                      {matchesXS && (
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>
-                              <StyledTypography7 variant="body1">
-                                Item Name
-                              </StyledTypography7>
-                            </TableCell>
-                            <TableCell align="right">
-                              <StyledTypography7 variant="body1">
-                                Qty.
-                              </StyledTypography7>
-                            </TableCell>
-                            <TableCell align="right">
-                              <StyledTypography7 variant="body1">
-                                Price
-                              </StyledTypography7>
-                            </TableCell>
-                            <TableCell align="right">
-                              <StyledTypography7 variant="body1">
-                                Total
-                              </StyledTypography7>
-                            </TableCell>
-                          </TableRow>
-                        </TableHead>
-                      )}
-                      <TableBody>
-                        {invoice.items.map((item, index: number) => (
-                          <TableRow key={index}>
-                            <TableCell>
-                              <StyledTypography8 variant="h4">
-                                {item.name}
-                              </StyledTypography8>
-                              {!matchesXS && (
-                                <Typography variant="h4" color="grey.200">
-                                  {item.quantity} x ￡{item.price}
-                                </Typography>
-                              )}
-                            </TableCell>
-                            {matchesXS && (
-                              <TableCell align="right">
-                                <StyledTypography7 variant="h4">
-                                  {item.quantity}
-                                </StyledTypography7>
-                              </TableCell>
-                            )}
-                            {matchesXS && (
-                              <TableCell align="right">
-                                <StyledTypography7 variant="h4">
-                                  {item.price}
-                                </StyledTypography7>
-                              </TableCell>
-                            )}
-                            <TableCell align="right">
-                              <StyledTypography8 variant="h4">
-                                £ {item.total}
-                              </StyledTypography8>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                      <TableFooter sx={TableFooterStyle}>
-                        <TableRow sx={{ width: "100%" }}>
-                          <TableCell colSpan={spanLeft}>
-                            {" "}
-                            <Typography variant="body1" color={"#fff"}>
-                              Amount Due
-                            </Typography>
-                          </TableCell>
-                          <TableCell colSpan={spanRight} align="right">
-                            <Typography variant="h2" color={"#fff"}>
-                              £ {invoice.total}
-                            </Typography>
-                          </TableCell>
-                        </TableRow>
-                      </TableFooter>
-                    </Table>
-                  </TableContainer>
+                  <InvoiceTable matchesXS={matchesXS} invoice={invoice} />
                 </StyledCard1>
               </Box>
             )}
