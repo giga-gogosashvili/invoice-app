@@ -16,15 +16,13 @@ import dayjs, { Dayjs } from "dayjs";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
-import { List, ListItem, IconButton, Stack, Typography } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton, Stack, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   StyledItemFields,
   StyledEditFields,
   dateStyle,
-  segmentTitleStyle,
 } from "../customize/StyledTextFields";
 import {
   StyledNewItemButton,
@@ -34,6 +32,15 @@ import {
   StyledSaveButton,
 } from "../customize/StyledButtons";
 
+import { StyledBox15, StyledBox16 } from "src/customize/StyledBoxes";
+import {
+  StyledTypography9,
+  StyledTypography10,
+} from "src/customize/StyledTypographys";
+import { StyledStack5, StyledStack6 } from "src/customize/StyledStacks";
+import { StyledList, StyledListItem } from "src/customize/StyledList";
+import { StyledDeleteIcon } from "src/customize/StyledIcons";
+
 export default function EditCreate() {
   const { id } = useParams();
   const [invoice, setInvoice] = useState<InvoiceResponse | undefined>(
@@ -42,7 +49,7 @@ export default function EditCreate() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9481/invoices/${id}`) //   "/db/data.json"
+      .get(`http://localhost:9481/invoices/${id}`)
       .then((res) => {
         setInvoice(res.data);
       })
@@ -104,26 +111,13 @@ export default function EditCreate() {
   const shortFieldWidth = { width: "152px" };
   const thirdFieldWidth = { width: { md: "152px", xs: "327px" } };
 
-  // const segmentTitleStyle = {
-  //   mb: "24px",
-  //   mt: "24px",
-  //   color: "#7C5DFA",
-  // };
-
   const matches = useMediaQuery("(min-width:1440px)");
   const matchesXS = useMediaQuery("(min-width:768px)");
 
   const direction = matches ? "row" : "column";
 
   return (
-    <Box
-      display="flex"
-      flexDirection={direction}
-      sx={{
-        bgcolor: { md: "background.paper", xs: "#fff" },
-      }}
-    >
-      {/* <Drawer></Drawer> */}
+    <StyledBox15 flexDirection={direction}>
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
       {!matchesXS ? (
         <Box flexDirection="column">
@@ -132,26 +126,11 @@ export default function EditCreate() {
       ) : (
         ""
       )}
-
-      <Box
-        sx={{
-          width: { md: "616px", xs: "375px" },
-          pl: { md: "56px", xs: "15px" },
-          bgcolor: "info.dark",
-          borderRadius: { md: "20px", xs: 0 },
-          margin: "0 auto",
-        }}
-      >
-        <Typography
-          color="text.primary"
-          variant="h2"
-          sx={{ mt: { md: "59px", xs: 0 } }}
-        >
+      <StyledBox16>
+        <StyledTypography9 variant="h2">
           {invoice ? `Edit ${id}` : "New Envoice"}
-        </Typography>
-
-        {/* <Box sx={{ display: "flex", flexWrap: "wrap" }}> */}
-        <Typography sx={segmentTitleStyle}>Bill From</Typography>
+        </StyledTypography9>
+        <StyledTypography10>Bill From</StyledTypography10>
         <StyledEditFields
           required
           error={senderStreetError}
@@ -171,17 +150,10 @@ export default function EditCreate() {
             setSenderStreet(event.target.value);
           }}
         />
-        <Stack
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
+        <StyledStack5
           sx={{
-            width: { md: "504px", xs: "327px" },
             flexFlow: { xs: "row wrap", md: "nowrap" },
-            // flexWrap: "wrap",
           }}
-
-          // width="100%"
         >
           <StyledEditFields
             required
@@ -233,8 +205,8 @@ export default function EditCreate() {
               setSenderCountry(event.target.value);
             }}
           />
-        </Stack>
-        <Typography sx={segmentTitleStyle}>Bill To</Typography>
+        </StyledStack5>
+        <StyledTypography10>Bill To</StyledTypography10>
         <StyledEditFields
           required
           error={clientNameError}
@@ -340,18 +312,9 @@ export default function EditCreate() {
             }}
           />
         </Stack>
-        <Stack
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          sx={{
-            width: { md: "504px", xs: "327px" },
-            flexFlow: { xs: "row wrap", md: "nowrap" },
-          }}
-        >
+        <StyledStack5>
           <DatePicker
             sx={dateStyle}
-            //DO NAPRAWY
             value={invoice ? createdAt || invoice.createdAt : createdAt}
             onChange={(newValue) => setCreatedAt(newValue)}
           />
@@ -377,7 +340,7 @@ export default function EditCreate() {
               <option value={30}>Net 30 days</option>
             </NativeSelect>
           </FormControl>
-        </Stack>
+        </StyledStack5>
         <StyledEditFields
           required
           error={descriptionError}
@@ -396,48 +359,17 @@ export default function EditCreate() {
           <Typography color="#777F98" variant="h3">
             Item List
           </Typography>
-          <List
-            sx={{
-              width: { md: "504px", xs: "327px" },
-              justifyContent: "space-between",
-            }}
-          >
+          <StyledList>
             {items.map((item, index) => (
-              <ListItem
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  p: 0,
-                  // width: { md: "504px", xs: "327px" },
-                  flexFlow: { xs: "row wrap", md: "nowrap" },
-                }}
-                key={index}
-                // secondaryAction={
-                //   <IconButton edge="end" aria-label="delete">
-                //     <DeleteIcon />
-                //   </IconButton>
-                // }
-              >
+              <StyledListItem key={index}>
                 <StyledItemFields
                   required
                   id="form-item-name-1"
                   label={"Item Name"}
                   sx={{
                     width: { md: "214px", xs: "327px" },
-                    mt: 1,
-                    mb: 2,
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "primary.main",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "grey.700",
-                      },
-                    },
-                    "& .MuiInputBase-input": {
-                      backgroundColor: "grey.50",
-                    },
+                    mt: { md: 0, xs: 1 },
+                    mb: { md: 0, xs: 2 },
                   }}
                   InputLabelProps={{ shrink: true }}
                   value={
@@ -459,32 +391,9 @@ export default function EditCreate() {
                   required
                   id="form-item-qty-1"
                   label="Qty."
-                  sx={{
-                    width: { md: "48px", xs: "64px" },
-                    "& input::-webkit-inner-spin-button": {
-                      display: "none",
-                    },
-                    "& input[type=number]": {
-                      MozAppearance: "textfield",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "primary.main",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "grey.700",
-                      },
-                    },
-                    "& .MuiInputBase-input": {
-                      backgroundColor: "grey.50",
-                    },
-                  }}
+                  sx={{ width: { md: "48px", xs: "64px" } }}
                   type="number"
                   InputLabelProps={{ shrink: true }}
-                  // InputLabelProps={{
-                  //   shrink: true,
-                  // }}
-                  // variant="filled"
                   value={
                     invoice
                       ? item.quantity || invoice.items[index].quantity
@@ -508,26 +417,7 @@ export default function EditCreate() {
                   label="Price"
                   type="number"
                   InputLabelProps={{ shrink: true }}
-                  sx={{
-                    width: "100px",
-                    "& input::-webkit-inner-spin-button": {
-                      display: "none",
-                    },
-                    "& input[type=number]": {
-                      MozAppearance: "textfield",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "primary.main",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "grey.700",
-                      },
-                    },
-                    "& .MuiInputBase-input": {
-                      backgroundColor: "grey.50",
-                    },
-                  }}
+                  sx={{ width: "100px" }}
                   value={
                     invoice
                       ? item.price || invoice.items[index].price
@@ -553,12 +443,10 @@ export default function EditCreate() {
                     width: "52px",
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
-                        // borderColor: "primary.main",
                         border: 0,
                       },
                     },
                   }}
-                  // type="number"
                   disabled
                   InputLabelProps={{ shrink: true }}
                   defaultValue={
@@ -570,20 +458,9 @@ export default function EditCreate() {
                   }
                 />
                 <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon
-                    sx={{
-                      "&:hover": {
-                        color: "#EC5757",
-                        boxShadow: "none",
-                      },
-                      "&:active": {
-                        boxShadow: "none",
-                        color: "#EC5757",
-                      },
-                    }}
-                  />
+                  <StyledDeleteIcon />
                 </IconButton>
-              </ListItem>
+              </StyledListItem>
             ))}
 
             <StyledNewItemButton
@@ -603,16 +480,8 @@ export default function EditCreate() {
               <AddIcon sx={{ mr: 1 }} />
               Add New Item
             </StyledNewItemButton>
-          </List>
-          {/* {items.map((item, index) => ( */}
-
-          <Stack
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ width: { md: "504px", xs: "327px" }, height: "91px" }}
-          >
+          </StyledList>
+          <StyledStack5 alignItems="center" sx={{ height: "91px" }}>
             {invoice && (
               <StyledDiscardButton
                 sx={{
@@ -626,13 +495,7 @@ export default function EditCreate() {
                 Discard
               </StyledDiscardButton>
             )}
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                ml: "auto",
-              }}
-            >
+            <StyledStack6>
               {!invoice && (
                 <StyledCancelButton
                   sx={{
@@ -775,12 +638,10 @@ export default function EditCreate() {
               >
                 {invoice ? `Save & Send` : `Save Changes`}
               </StyledSaveButton>
-            </Stack>
-          </Stack>
-          {/* ))} */}
+            </StyledStack6>
+          </StyledStack5>
         </div>
-        {/* </Box> */}
-      </Box>
-    </Box>
+      </StyledBox16>
+    </StyledBox15>
   );
 }

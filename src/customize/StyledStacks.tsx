@@ -61,3 +61,21 @@ export const StyledStack4 = styled(Stack)(({ theme }) => ({
     marginRight: "109px",
   },
 }));
+
+export const StyledStack5 = styled(Stack)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  [theme.breakpoints.up("xs")]: {
+    width: "327px",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "504px",
+  },
+}));
+
+export const StyledStack6 = styled(Stack)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  marginLeft: "auto",
+}));

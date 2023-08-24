@@ -139,3 +139,29 @@ export const StyledBox14 = styled(Box)(({ theme }) => ({
     height: "88px",
   },
 }));
+
+export const StyledBox15 = styled(Box)(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.up("xs")]: {
+    backgroundColor: "#fff",
+  },
+  [theme.breakpoints.up("md")]: {
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export const StyledBox16 = styled(Box)(({ theme }) => ({
+  margin: "0 auto",
+  backgroundColor: theme.palette.info.dark,
+
+  [theme.breakpoints.up("xs")]: {
+    width: "375px",
+    paddingLeft: "15px",
+    borderRadius: 0,
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "616px",
+    paddingLeft: "56px",
+    borderRadius: "20px",
+  },
+}));

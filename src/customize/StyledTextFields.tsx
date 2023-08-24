@@ -1,12 +1,23 @@
 import { styled } from "@mui/system";
 import { TextField } from "@mui/material";
 
-export const StyledItemFields = styled(TextField)(() => ({
+export const StyledItemFields = styled(TextField)(({ theme }) => ({
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
     display: "none",
   },
   "& input[type=number]": {
     MozAppearance: "textfield",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: theme.palette.primary.main,
+    },
+    "&:hover fieldset": {
+      borderColor: theme.palette.grey[700],
+    },
+  },
+  "& .MuiInputBase-input": {
+    backgroundColor: theme.palette.grey[50],
   },
 }));
 
@@ -42,9 +53,4 @@ export const dateStyle = {
     backgroundColor: "grey.50",
   },
   width: { md: "240px", xs: "327px" },
-};
-export const segmentTitleStyle = {
-  mb: "24px",
-  mt: "24px",
-  color: "#7C5DFA",
 };

@@ -63,3 +63,18 @@ export const StyledTypography7 = styled(Typography)(({ theme }) => ({
 export const StyledTypography8 = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
+
+export const StyledTypography9 = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  [theme.breakpoints.up("xs")]: {
+    marginTop: 0,
+  },
+  [theme.breakpoints.up("md")]: {
+    marginTop: "59px",
+  },
+}));
+
+export const StyledTypography10 = styled(Typography)(({ theme }) => ({
+  color: "#7C5DFA",
+  margin: "24px 0",
+}));
