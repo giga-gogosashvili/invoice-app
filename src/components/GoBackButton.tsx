@@ -35,6 +35,7 @@ export default function GoBackButton({ color }: Props) {
         >
           <BottomNavigationAction
             label="Go back"
+            disableRipple
             icon={
               <ArrowBackIosIcon
                 sx={{

@@ -41,7 +41,11 @@ export default function IsolatedMenu({ id }: any) {
     <>
       <StyledBox5>
         <Button
+          style={{ backgroundColor: "transparent" }}
           id="fade-button"
+          disableElevation
+          disableRipple
+          size="small"
           aria-controls={openMenu ? "fade-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={openMenu ? "true" : undefined}

@@ -27,11 +27,24 @@ export default function InvoiceItem({ data, func }: Props) {
 
   return (
     <div>
-      <Box>
-        <Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      >
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           <Grid container spacing={0}>
             <Grid item xs={10}>
-              <List>
+              <List
+                sx={{
+                  m: 0,
+                  p: 0,
+                }}
+              >
                 {data.map((invoice, index: number) => (
                   <StyledInvoicesRow
                     key={index}

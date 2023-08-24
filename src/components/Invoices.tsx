@@ -113,7 +113,7 @@ export default function Invoices() {
       {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
 
       <StyledBox2>
-        <StyledBox3>
+        <StyledBox3 sx={{ display: "flex", alignItems: "center" }}>
           <Box>
             <StyledTypography1
               sx={{

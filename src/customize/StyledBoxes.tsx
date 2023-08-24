@@ -12,11 +12,11 @@ export const StyledBox2 = styled(Box)(({ theme }) => ({
     width: 327,
   },
   [theme.breakpoints.up("md")]: {
-    width: 672,
-  },
-  [theme.breakpoints.up("xl")]: {
     width: 730,
   },
+  // [theme.breakpoints.up("xl")]: {
+  //   width: 730,
+  // },
 }));
 
 export const StyledBox3 = styled(Box)(() => ({
@@ -34,10 +34,11 @@ export const StyledBox4 = styled(Box)(() => ({
 
 export const StyledBox5 = styled(Box)(() => ({
   height: "72px",
+  width: "20px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  margin: "8px 0",
+  margin: "8px 30px",
 }));
 
 export const StyledBox6 = styled(Box)(({ theme }) => ({
