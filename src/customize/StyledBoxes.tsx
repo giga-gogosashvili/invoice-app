@@ -117,3 +117,24 @@ export const StyledBox13 = styled(Box)(() => ({
   alignItems: "center",
   flexWrap: "wrap",
 }));
+
+export const StyledBox14 = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  flexWrap: "wrap",
+  margin: 0,
+  [theme.breakpoints.up("xs")]: {
+    width: "80px",
+    height: "auto",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "96px",
+    height: "auto",
+  },
+  [theme.breakpoints.up("xl")]: {
+    width: "100%",
+    height: "88px",
+  },
+}));

@@ -3,10 +3,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Logo from "../assets/logo.svg";
 import image from "../assets/image-avatar.jpg";
-import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { StyledBox11, StyledBox13 } from "src/customize/StyledBoxes";
+import {
+  StyledBox11,
+  StyledBox13,
+  StyledBox14,
+} from "src/customize/StyledBoxes";
+import { StyledDarkModeIcon, StyledAvatar } from "src/customize/StyledIcons";
 
 export default function NavBar() {
   return (
@@ -42,46 +45,13 @@ export default function NavBar() {
               pr: { md: "33.1px", xs: "25.1px" },
             }}
           >
-            <DarkModeIcon
-              width={"20px"}
-              height={"20px"}
-              sx={{
-                color: "info.light",
-                "&:hover": {
-                  color: "#DFE3FA",
-                  boxShadow: "none",
-                },
-                "&:active": {
-                  boxShadow: "none",
-                  color: "#DFE3FA",
-                },
-              }}
-            ></DarkModeIcon>
+            <StyledDarkModeIcon />
           </StyledBox13>
           <Divider flexItem orientation="vertical" />
 
-          <Box
-            sx={{
-              flexGrow: 0,
-
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              width: { md: "96px", xs: "80px" },
-              m: "0",
-            }}
-          >
-            <Avatar
-              alt="avatar"
-              src={image}
-              sx={{
-                width: { md: "40px", xs: "32px" },
-                height: { md: "40px", xs: "32px" },
-              }}
-            />
-          </Box>
+          <StyledBox14>
+            <StyledAvatar alt="avatar" src={image} />
+          </StyledBox14>
         </Toolbar>
       </AppBar>
     </Box>
