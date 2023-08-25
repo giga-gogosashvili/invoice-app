@@ -10,6 +10,7 @@ import {
   StyledBox14,
 } from "src/customize/StyledBoxes";
 import { StyledDarkModeIcon, StyledAvatar } from "src/customize/StyledIcons";
+import DarkButton from "./DarkButton";
 
 export default function NavBar() {
   return (
@@ -45,7 +46,8 @@ export default function NavBar() {
               pr: { md: "33.1px", xs: "25.1px" },
             }}
           >
-            <StyledDarkModeIcon />
+            {/* <StyledDarkModeIcon /> */}
+            <DarkButton />
           </StyledBox13>
           <Divider flexItem orientation="vertical" />
 

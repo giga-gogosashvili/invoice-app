@@ -40,6 +40,7 @@ import {
 import { StyledStack5, StyledStack6 } from "src/customize/StyledStacks";
 import { StyledList, StyledListItem } from "src/customize/StyledList";
 import { StyledDeleteIcon } from "src/customize/StyledIcons";
+import FooterButtons from "./FooterButtons";
 
 export default function EditCreate() {
   const { id } = useParams();
@@ -481,165 +482,103 @@ export default function EditCreate() {
               Add New Item
             </StyledNewItemButton>
           </StyledList>
-          <StyledStack5 alignItems="center" sx={{ height: "91px" }}>
-            {invoice && (
-              <StyledDiscardButton
-                sx={{
-                  typography: "h4",
-                }}
-                aria-label="add"
-                onClick={() => {
-                  navigate("/invoices");
-                }}
-              >
-                Discard
-              </StyledDiscardButton>
-            )}
-            <StyledStack6>
-              {!invoice && (
-                <StyledCancelButton
-                  sx={{
-                    typography: "h4",
-                  }}
-                  aria-label="add"
-                  onClick={() => {
-                    navigate("/invoices");
-                  }}
-                >
-                  Cancel
-                </StyledCancelButton>
-              )}
-
-              {invoice && (
-                <StyledDraftButton
-                  sx={{
-                    typography: "h4",
-                  }}
-                  size="small"
-                  aria-label="add"
-                  type="submit"
-                  onClick={
-                    // updateInvoice
-                    () => {
-                      AxiosFunc(
-                        id,
-                        invoice,
-                        senderStreet,
-                        senderCity,
-                        senderPostCode,
-                        senderCountry,
-                        clientName,
-                        clientEmail,
-                        clientStreet,
-                        clientCity,
-                        clientPostCode,
-                        clientCountry,
-                        dateJSON,
-                        paymentTerms,
-                        paymentDue,
-                        "draft",
-                        description,
-                        items,
-                        navigate
-                      );
-                    }
-                  }
-                >
-                  <Typography variant="h4">
-                    Save{" "}
-                    <Box display="inline" textTransform="lowercase">
-                      as
-                    </Box>{" "}
-                    Draft
-                  </Typography>
-                </StyledDraftButton>
-              )}
-              <StyledSaveButton
-                sx={{
-                  typography: "h4",
-                }}
-                size="small"
-                color="primary"
-                aria-label="add"
-                onClick={
-                  // updateInvoice
-                  () => {
-                    if (!invoice) {
-                      if (senderStreet == "") {
-                        setSenderStreetError(true);
-                      } else if (senderCity == "") {
-                        setSenderCityError(true);
-                      } else if (senderPostCode == "") {
-                        setSenderPostCodeError(true);
-                      } else if (senderCountry == "") {
-                        setSenderCountryError(true);
-                      } else if (clientName == "") {
-                        setClientNameError(true);
-                      } else if (clientEmail == "") {
-                        setClientEmailError(true);
-                      } else if (clientStreet == "") {
-                        setClientStreetError(true);
-                      } else if (clientCity == "") {
-                        setClientCityError(true);
-                      } else if (clientPostCode == "") {
-                        setClientPostCodeError(true);
-                      } else if (clientCountry == "") {
-                        setClientCountryError(true);
-                      } else if (description == "") {
-                        setDescriptionError(true);
-                      } else {
-                        AxiosFunc(
-                          id,
-                          invoice,
-                          senderStreet,
-                          senderCity,
-                          senderPostCode,
-                          senderCountry,
-                          clientName,
-                          clientEmail,
-                          clientStreet,
-                          clientCity,
-                          clientPostCode,
-                          clientCountry,
-                          dateJSON,
-                          paymentTerms,
-                          paymentDue,
-                          "pending",
-                          description,
-                          items,
-                          navigate
-                        );
-                      }
-                    } else {
-                      AxiosFunc(
-                        id,
-                        invoice,
-                        senderStreet,
-                        senderCity,
-                        senderPostCode,
-                        senderCountry,
-                        clientName,
-                        clientEmail,
-                        clientStreet,
-                        clientCity,
-                        clientPostCode,
-                        clientCountry,
-                        dateJSON,
-                        paymentTerms,
-                        paymentDue,
-                        "pending",
-                        description,
-                        items,
-                        navigate
-                      );
-                    }
-                  }
+          <FooterButtons
+            invoice={invoice}
+            draftFunc={() => {
+              AxiosFunc(
+                id,
+                invoice,
+                senderStreet,
+                senderCity,
+                senderPostCode,
+                senderCountry,
+                clientName,
+                clientEmail,
+                clientStreet,
+                clientCity,
+                clientPostCode,
+                clientCountry,
+                dateJSON,
+                paymentTerms,
+                paymentDue,
+                "draft",
+                description,
+                items,
+                navigate
+              );
+            }}
+            saveFunc={() => {
+              if (!invoice) {
+                if (senderStreet == "") {
+                  setSenderStreetError(true);
+                } else if (senderCity == "") {
+                  setSenderCityError(true);
+                } else if (senderPostCode == "") {
+                  setSenderPostCodeError(true);
+                } else if (senderCountry == "") {
+                  setSenderCountryError(true);
+                } else if (clientName == "") {
+                  setClientNameError(true);
+                } else if (clientEmail == "") {
+                  setClientEmailError(true);
+                } else if (clientStreet == "") {
+                  setClientStreetError(true);
+                } else if (clientCity == "") {
+                  setClientCityError(true);
+                } else if (clientPostCode == "") {
+                  setClientPostCodeError(true);
+                } else if (clientCountry == "") {
+                  setClientCountryError(true);
+                } else if (description == "") {
+                  setDescriptionError(true);
+                } else {
+                  AxiosFunc(
+                    id,
+                    invoice,
+                    senderStreet,
+                    senderCity,
+                    senderPostCode,
+                    senderCountry,
+                    clientName,
+                    clientEmail,
+                    clientStreet,
+                    clientCity,
+                    clientPostCode,
+                    clientCountry,
+                    dateJSON,
+                    paymentTerms,
+                    paymentDue,
+                    "pending",
+                    description,
+                    items,
+                    navigate
+                  );
                 }
-              >
-                {invoice ? `Save & Send` : `Save Changes`}
-              </StyledSaveButton>
-            </StyledStack6>
-          </StyledStack5>
+              } else {
+                AxiosFunc(
+                  id,
+                  invoice,
+                  senderStreet,
+                  senderCity,
+                  senderPostCode,
+                  senderCountry,
+                  clientName,
+                  clientEmail,
+                  clientStreet,
+                  clientCity,
+                  clientPostCode,
+                  clientCountry,
+                  dateJSON,
+                  paymentTerms,
+                  paymentDue,
+                  "pending",
+                  description,
+                  items,
+                  navigate
+                );
+              }
+            }}
+          />
         </div>
       </StyledBox16>
     </StyledBox15>

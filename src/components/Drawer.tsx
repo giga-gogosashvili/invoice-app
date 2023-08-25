@@ -10,7 +10,10 @@ import {
   StyledBox14,
 } from "src/customize/StyledBoxes";
 import { StyledDarkModeIcon, StyledAvatar } from "src/customize/StyledIcons";
-
+import DarkButton from "./DarkButton";
+// interface Prop {
+//   func?: any;
+// }
 function NavDrawer() {
   return (
     <StyledDrawer variant="permanent" anchor="left">
@@ -28,7 +31,8 @@ function NavDrawer() {
         </StyledBox11>
         <StyledBox12>
           <StyledBox13 sx={{ pb: "33.1px" }}>
-            <StyledDarkModeIcon />
+            {/* <StyledDarkModeIcon /> */}
+            <DarkButton></DarkButton>
           </StyledBox13>
           <Divider />
 

@@ -1,10 +1,13 @@
 import { createTheme, ThemeOptions, Shadows } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 const defaultShadows: ThemeOptions["shadows"] = [...defaultTheme.shadows];
 
-const getDesignTokens = (mode: any) => ({
+
+
+const getDesignTokens = (mode: PaletteMode) => ({
   breakpoints: {
     values: {
       xs: 0,
