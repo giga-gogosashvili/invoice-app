@@ -54,3 +54,7 @@ export const dateStyle = {
   },
   width: { md: "240px", xs: "327px" },
 };
+
+export const longFieldWidth = { width: { md: "504px", xs: "327px" } };
+export const shortFieldWidth = { width: "152px" };
+export const thirdFieldWidth = { width: { md: "152px", xs: "327px" } };
