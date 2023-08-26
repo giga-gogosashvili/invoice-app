@@ -4,73 +4,35 @@ import Invoice from "./components/Invoice";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
-import themeLight from "./themeLight";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import EditCreate from "./components/EditCreate";
-import { useState } from "react";
 import React from "react";
-import { Drawer } from "@mui/material";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { PaletteMode } from "@mui/material";
 import getDesignTokens from "./themeLight";
-import { useRef } from "react";
-import theme from "./components/Drawer";
-import { useEffect } from "react";
-import DarkButton from "./components/DarkButton";
-import { StyledDarkModeIcon } from "src/customize/StyledIcons";
-import { useMemo } from "react";
-
-// const ColorModeContext = React.createContext({
-//   toggleColorMode: () => {
-//     setMode((prevMode: PaletteMode) =>
-//       prevMode === "light" ? "dark" : "light"
-//     );
-//   },
-// });
+import useMediaQuery from "@mui/material/useMediaQuery";
+import NavBar from "./components/NavBar";
+import { StyledBox1 } from "./customize/StyledBoxes";
 
 export default function App() {
-  // const [mode, setMode] = React.useState<PaletteMode>("light");
+  const matches = useMediaQuery("(min-width:1440px)");
 
-  // const toggleColorMode = () => {
-  //   setMode((prevMode: PaletteMode) =>
-  //     prevMode === "light" ? "dark" : "light"
-  //   );
-  // };
+  const [mode, setMode] = React.useState<PaletteMode>("light");
 
-  const darkModeTheme = createTheme(getDesignTokens("dark"));
-  const lightModeTheme = createTheme(getDesignTokens("light"));
-  // const [mode, setMode] = React.useState<PaletteMode>("light");
-  // const toggleColorMode = () => {
-  //   setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-  // };
+  const toggleColorMode = () => {
+    setMode((prevMode: PaletteMode) =>
+      prevMode === "light" ? "dark" : "light"
+    );
+  };
 
-  // const colorMode = React.useMemo(
-  //   () => ({
-  //     // The dark mode switch would invoke this method
-  //     toggleColorMode: () => {
-  //       setMode((prevMode: PaletteMode) =>
-  //         prevMode === "light" ? "dark" : "light"
-  //       );
-  //     },
-  //   }),
-  //   []
-  // );
-  // const testfunc = () => {
-  //   alert("Hello");
-  // };
-
-  // const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  // const theme = useTheme();
-  // const colorMode = React.useContext(ColorModeContext);
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const direction = matches ? "row" : "column";
 
   return (
-    <>
-      <ThemeProvider theme={lightModeTheme}>
+    <StyledBox1 flexDirection={direction}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
-        {/* <Drawer func={toggleColorMode}></Drawer> */}
-        {/* <DarkButton></DarkButton> */}
-
+        <NavBar func={toggleColorMode} />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <BrowserRouter>
             <Routes>
@@ -78,12 +40,11 @@ export default function App() {
               <Route path="invoices/:id" element={<Invoice />} />
               <Route path="invoices/create" element={<EditCreate />} />
               <Route path="invoices/:id/edit" element={<EditCreate />} />
-
               <Route path="*" element={<p>Path not resolved</p>} />
             </Routes>
           </BrowserRouter>
         </LocalizationProvider>
       </ThemeProvider>
-    </>
+    </StyledBox1>
   );
 }

@@ -4,8 +4,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FilterButton from "./FilterButton";
 import { Box } from "@mui/material";
 import NoInvoices from "./NoInvoices";
-import Drawer from "./Drawer";
-import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { StyledNewButton } from "src/customize/StyledButtons";
 import axios from "axios";
@@ -57,9 +55,7 @@ export default function Invoices() {
   const navigate = useNavigate();
 
   return (
-    <StyledBox1 flexDirection={direction}>
-      {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
-
+    <StyledBox1 flexDirection={direction} sx={{}}>
       <StyledBox2>
         <StyledBox3 sx={{ display: "flex", alignItems: "center" }}>
           <Box>

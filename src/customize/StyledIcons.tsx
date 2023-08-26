@@ -2,11 +2,12 @@ import { styled } from "@mui/system";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Avatar } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CircleIcon from "@mui/icons-material/Circle";
 
 export const StyledDarkModeIcon = styled(DarkModeIcon)(({ theme }) => ({
   width: "20px",
   height: "20px",
-  color: theme.palette.info.light,
+  color: "#7E88C3",
   "&:hover": {
     color: "#DFE3FA",
     boxShadow: "none",
@@ -17,6 +18,18 @@ export const StyledDarkModeIcon = styled(DarkModeIcon)(({ theme }) => ({
   },
 }));
 
+export const StyledLightModeIcon = styled(CircleIcon)(({ theme }) => ({
+  fontSize: "small",
+  color: "#7E88C3",
+  "&:hover": {
+    color: "#DFE3FA",
+    boxShadow: "none",
+  },
+  "&:active": {
+    color: "#DFE3FA",
+    boxShadow: "none",
+  },
+}));
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   [theme.breakpoints.up("xs")]: {
     width: "32px",

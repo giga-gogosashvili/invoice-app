@@ -5,8 +5,6 @@ const defaultTheme = createTheme();
 
 const defaultShadows: ThemeOptions["shadows"] = [...defaultTheme.shadows];
 
-
-
 const getDesignTokens = (mode: PaletteMode) => ({
   breakpoints: {
     values: {
@@ -182,17 +180,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
         },
         "& .MuiChip-label": {
           opacity: 1,
-        },
-      },
-    },
-    MuiDrawer: {
-      styleOverrides: {
-        root: {
-          display: "flex",
-        },
-        paperAnchorLeft: {
-          borderTopRightRadius: 20,
-          borderBottomRightRadius: 20,
         },
       },
     },

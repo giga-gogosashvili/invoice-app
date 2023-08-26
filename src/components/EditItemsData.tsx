@@ -115,7 +115,7 @@ export default function EditItemsData({ invoice, items, setItems }: Props) {
                   : ""
               }
             />
-            <IconButton edge="end" aria-label="delete">
+            <IconButton edge="end" aria-label="delete" disableRipple>
               <StyledDeleteIcon />
             </IconButton>
           </StyledListItem>

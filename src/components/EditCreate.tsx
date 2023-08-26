@@ -6,9 +6,7 @@ import axios from "axios";
 import { InvoiceResponse } from "./InvoiceResponse";
 import { Item } from "./InvoiceResponse";
 import { AxiosFunc } from "./AxiosFunc";
-import NavBar from "./NavBar";
 import GoBackButton from "./GoBackButton";
-import Drawer from "../components/Drawer";
 import Box from "@mui/material/Box";
 import dayjs, { Dayjs } from "dayjs";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -92,10 +90,9 @@ export default function EditCreate() {
   const direction = matches ? "row" : "column";
   return (
     <StyledBox15 flexDirection={direction}>
-      {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
       {!matchesXS ? (
         <Box flexDirection="column">
-          <GoBackButton color="#fff"></GoBackButton>
+          <GoBackButton color="info.dark"></GoBackButton>
         </Box>
       ) : (
         ""

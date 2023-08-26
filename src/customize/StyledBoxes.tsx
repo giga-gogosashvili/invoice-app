@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 
 export const StyledBox1 = styled(Box)(() => ({
   display: "flex",
-  justifyContent: "start",
+  justifyContent: "center",
 }));
 
 export const StyledBox2 = styled(Box)(({ theme }) => ({
@@ -143,7 +143,7 @@ export const StyledBox14 = styled(Box)(({ theme }) => ({
 export const StyledBox15 = styled(Box)(({ theme }) => ({
   display: "flex",
   [theme.breakpoints.up("xs")]: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.palette.info.dark,
   },
   [theme.breakpoints.up("md")]: {
     backgroundColor: theme.palette.background.paper,

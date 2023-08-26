@@ -8,9 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import { capitalizeFirstLetter } from "./InvoiceItem";
 import { useNavigate } from "react-router-dom";
 import GetStatusColor from "./GetStatusColor";
-import Drawer from "./Drawer";
 import ConfirmDeletion from "./ConfirmDeletion";
-import NavBar from "./NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GoBackButton from "./GoBackButton";
 import HeaderButtons from "./HeaderButtons";
@@ -85,8 +83,6 @@ export default function Invoice() {
   return (
     <>
       <Box display="flex" flexDirection={direction}>
-        {matches ? <Drawer></Drawer> : <NavBar></NavBar>}
-
         <StyledBox7>
           <GoBackButton color="background.paper"></GoBackButton>
 
