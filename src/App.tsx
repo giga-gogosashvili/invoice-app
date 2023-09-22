@@ -9,7 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import EditCreate from "./components/EditCreate";
 import React from "react";
 import { PaletteMode } from "@mui/material";
-import getDesignTokens from "./themeLight";
+import getDesignTokens from "./theme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NavBar from "./components/NavBar";
 import { StyledBox1 } from "./customize/StyledBoxes";

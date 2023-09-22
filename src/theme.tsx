@@ -61,9 +61,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
           warning: {
             main: "#FF8F00",
           },
-          error: {
-            main: "#373B53",
-          },
         }
       : {
           background: {
@@ -106,9 +103,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
           },
           warning: {
             main: "#FF8F00",
-          },
-          error: {
-            main: "#373B53",
           },
         }),
   },

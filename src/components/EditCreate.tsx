@@ -88,6 +88,10 @@ export default function EditCreate() {
   const matchesXS = useMediaQuery("(min-width:768px)");
 
   const direction = matches ? "row" : "column";
+
+  const itemDelete = () => {
+    setItems([{ name: "", quantity: 0, price: 0, total: 0 }]);
+  };
   return (
     <StyledBox15 flexDirection={direction}>
       {!matchesXS ? (
@@ -147,7 +151,12 @@ export default function EditCreate() {
           setDescription={setDescription}
           descriptionError={descriptionError}
         />
-        <EditItemsData invoice={invoice} items={items} setItems={setItems} />
+        <EditItemsData
+          invoice={invoice}
+          items={items}
+          setItems={setItems}
+          itemDelete={itemDelete}
+        />
         <FooterButtons
           invoice={invoice}
           draftFunc={() => {

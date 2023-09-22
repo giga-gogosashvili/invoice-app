@@ -12,9 +12,15 @@ interface Props {
   invoice: any;
   items: ItemProps[];
   setItems: (a: ItemProps[]) => void;
+  itemDelete: () => void | undefined;
 }
 
-export default function EditItemsData({ invoice, items, setItems }: Props) {
+export default function EditItemsData({
+  invoice,
+  items,
+  setItems,
+  itemDelete,
+}: Props) {
   return (
     <div>
       <Typography color="#777F98" variant="h3">
@@ -115,7 +121,12 @@ export default function EditItemsData({ invoice, items, setItems }: Props) {
                   : ""
               }
             />
-            <IconButton edge="end" aria-label="delete" disableRipple>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              disableRipple
+              onClick={itemDelete}
+            >
               <StyledDeleteIcon />
             </IconButton>
           </StyledListItem>
