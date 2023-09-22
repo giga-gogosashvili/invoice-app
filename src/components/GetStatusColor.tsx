@@ -14,8 +14,8 @@ const GetStatusColor = (
       return "success";
     case "pending":
       return "warning";
-    case "draft":
-      return "error";
+    case "info":
+      return "primary";
   }
   return "info";
 };

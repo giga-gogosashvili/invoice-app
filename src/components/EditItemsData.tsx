@@ -9,18 +9,12 @@ import { StyledDeleteIcon } from "src/customize/StyledIcons";
 import { Item as ItemProps } from "./InvoiceResponse";
 
 interface Props {
-  invoice: any;
   items: ItemProps[];
   setItems: (a: ItemProps[]) => void;
   itemDelete: () => void | undefined;
 }
 
-export default function EditItemsData({
-  invoice,
-  items,
-  setItems,
-  itemDelete,
-}: Props) {
+export default function EditItemsData({ items, setItems, itemDelete }: Props) {
   return (
     <div>
       <Typography color="#777F98" variant="h3">
@@ -35,18 +29,20 @@ export default function EditItemsData({
               label={"Item Name"}
               sx={{
                 width: { md: "214px", xs: "327px" },
-                mt: { md: 0, xs: 1 },
-                mb: { md: 0, xs: 2 },
+                mt: { md: 1, xs: 1 },
+                mb: { md: 1, xs: 2 },
               }}
               InputLabelProps={{ shrink: true }}
               value={
-                invoice ? item.name || invoice.items[index].name : item.name
+                item.name
+                // invoice ? item.name || invoice.items[index].name : item.name
               }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const before = items.slice(0, index);
                 const after = items.slice(index + 1, items.length);
                 const changed = {
                   name: event.target.value,
+                  // to change!!!
                   quantity: item.quantity,
                   price: item.price,
                   total: item.total,
@@ -62,9 +58,10 @@ export default function EditItemsData({
               type="number"
               InputLabelProps={{ shrink: true }}
               value={
-                invoice
-                  ? item.quantity || invoice.items[index].quantity
-                  : item.quantity
+                item.quantity
+                // invoice
+                //   ? item.quantity || invoice.items[index].quantity
+                //   : item.quantity
               }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const before = items.slice(0, index);
@@ -86,7 +83,9 @@ export default function EditItemsData({
               InputLabelProps={{ shrink: true }}
               sx={{ width: "100px" }}
               value={
-                invoice ? item.price || invoice.items[index].price : item.price
+                item.price
+
+                // invoice ? item.price || invoice.items[index].price : item.price
               }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const before = items.slice(0, index);
@@ -97,6 +96,7 @@ export default function EditItemsData({
                   price: event.target.valueAsNumber,
                   total: item.total,
                 };
+
                 setItems(before.concat(changed).concat(after));
               }}
             />
@@ -115,10 +115,11 @@ export default function EditItemsData({
               disabled
               InputLabelProps={{ shrink: true }}
               defaultValue={
-                invoice
-                  ? item.quantity * item.price ||
-                    invoice.items[index].price * invoice.items[index].quantity
-                  : ""
+                item.quantity * item.price
+                // invoice
+                //   ? item.quantity * item.price ||
+                //     invoice.items[index].price * invoice.items[index].quantity
+                //   : ""
               }
             />
             <IconButton

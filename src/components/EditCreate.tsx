@@ -152,9 +152,11 @@ export default function EditCreate() {
           descriptionError={descriptionError}
         />
         <EditItemsData
-          invoice={invoice}
-          items={items}
-          setItems={setItems}
+          // invoice={invoice}
+          items={invoice ? invoice.items : items}
+          setItems={(items) =>
+            invoice ? setInvoice({ ...invoice, items: items }) : setItems(items)
+          }
           itemDelete={itemDelete}
         />
         <FooterButtons
