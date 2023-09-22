@@ -154,10 +154,20 @@ export default function EditCreate() {
         <EditItemsData
           // invoice={invoice}
           items={invoice ? invoice.items : items}
-          setItems={(items) =>
-            invoice ? setInvoice({ ...invoice, items: items }) : setItems(items)
+          setItems={(items) => {
+            // invoice ? setInvoice({ ...invoice, items: items }) : setItems(items)
+            if (invoice) {
+              setInvoice({ ...invoice, items: items });
+            }
+            setItems(items);
+          }}
+          itemDelete={
+            //   invoice? setInvoice(
+            //   //Bez itema ktory usuwam
+            //   { ...invoice, items: items }
+            // ):
+            itemDelete
           }
-          itemDelete={itemDelete}
         />
         <FooterButtons
           invoice={invoice}
